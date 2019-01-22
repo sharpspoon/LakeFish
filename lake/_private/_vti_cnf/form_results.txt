@@ -1,0 +1,9 @@
+vti_encoding:SR|utf8-nl
+vti_author:SR|LAKEFISHDOM\\Zhao
+vti_timecreated:TR|07 May 2000 00:44:56 -0500
+vti_modifiedby:SR|LAKEFISHDOM\\Zhao
+vti_backlinkinfo:VX|
+vti_nexttolasttimemodified:TR|07 May 2000 00:44:56 -0500
+vti_extenderversion:SR|3.0.2.1105
+vti_nosourcecontrol:SR|True
+vti_timelastmodified:TR|07 May 2000 00:44:56 -0500

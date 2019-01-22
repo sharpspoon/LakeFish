@@ -1,0 +1,46 @@
+ Month  Day  Year  Parameter  DepthEmax  |Error|max  DepthEmin  |Error|min  |Error|mean
+    6     3  1973    TEMP       4.000      10.956       1.000       7.956       9.456
+    6     3  1973    DO         4.000       6.602       1.000       3.891       5.247
+    6    10  1973    TEMP       4.000      17.604       1.000      14.604      16.104
+    6    10  1973    DO         4.000       4.431       1.000       1.892       3.162
+
+
+
+ ANALYSIS OF ERRORS BETWEEN DATA AND MODEL
+
+                                     TEMP       DO
+ MAXIMUM ABSOLUTE ERROR             17.60     6.60
+ SLOPE: MODEL TO DATA REGRESSION    -0.18    -0.35
+ REGRESSION COEFFICIENT (R**2)    -116.07   -12.26
+ STANDARD ERROR OF ESTIMATE         13.25     4.46
+
+ TOTAL NUMBER OF FIELD DATA IS:         8
+
+
+
+
+ ANALYSIS OF ERRORS BETWEEN DATA AND MODEL AT CERTAIN DEPTHS
+
+
+                                     WATER TEMPERATURES
+
+ DEPTHS (M) FOR ERROR ANALYSIS       1.00     1.67     2.35     3.02     3.70
+ SLOPE: MODEL TO DATA REGRESSION     0.00     0.00     0.00     0.00     0.00
+ REGRESSION COEFFICIENT (R**2)       0.00     0.00     0.00     0.00     0.00
+ STANDARD ERROR OF ESTIMATE          0.00     0.00     0.00     0.00     0.00
+ TOTAL NUMBER OF DATA POINTS            2        2        2        2        2
+
+
+
+
+                                     DISSOLVED OXYGEN
+
+ DEPTHS (M) FOR ERROR ANALYSIS       1.00     1.67     2.35     3.02     3.70
+ SLOPE: MODEL TO DATA REGRESSION     0.00     0.00     0.00     0.00     0.00
+ REGRESSION COEFFICIENT (R**2)       0.00     0.00     0.00     0.00     0.00
+ STANDARD ERROR OF ESTIMATE          0.00     0.00     0.00     0.00     0.00
+ TOTAL NUMBER OF DATA POINTS            2        2        2        2        2
+
+
+
+ MAXIMUM CHLOROPHYLL-A  :           1-31-1993          0.000  (mg/l)

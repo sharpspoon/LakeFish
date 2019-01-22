@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<title>Home Page</title>
+</head>
+
+<body background="file:///D:/Inetpub/wwwroot/images/lake/wallpaper1.jpg">
+
+<p>&nbsp;</p>
+
+<table border="0" cellpadding="0" width="680" cellspacing="0">
+  <tr>
+    <td width="192"></td>
+    <td width="468"><big><big><strong>Select one of options to continue</strong></big></big></td>
+    <td width="20"></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<form method="POST" action>
+  <p><select name="selection" size="1">
+    <option VALUE="new-run">run </option>
+    <option VALUE="re-run">re-run the previous modeling</option>
+    <option VALUE="review">review the previous results</option>
+  </select><input type="submit" value="Submit" name="submit"></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</form>
+</body>
+</html>
