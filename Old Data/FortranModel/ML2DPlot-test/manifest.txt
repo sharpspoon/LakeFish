@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: ML2DPlot.class
+Created-By: Longjiang Ding (CS Dept. of Lamar University, 7/18/2000)
+

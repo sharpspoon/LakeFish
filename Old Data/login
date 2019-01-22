@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<title>Home Page</title>
+</head>
+
+<body background="wallpaper1.jpg">
+
+<p>&nbsp;</p>
+
+<p align="center"><big><big><font face="Arial" color="#400040">Water Quality and Fish
+Habitat Simulation System </font></big></big></p>
+
+<hr width="90%" color="#000000">
+
+<form method="post" action="http://140.158.209.81:8080/servlet/login">
+  <div align="center"><center><h3><marquee border="0"
+  style="color: rgb(255,0,0); font-size: large" direction="right" scrolldelay="75"
+  scrollamount="3">welcome to the simulation model</marquee></h3>
+  </center></div><div align="center"><center><p><strong><big><big>The system creates a user
+  ID for every new user&nbsp; </big></big></strong><font color="#800040"><input
+  type="submit" value="new user" name="newuser"
+  style="color: rgb(255,255,255); background-color: rgb(128,0,0); font-size: larger; border: medium none rgb(0,128,0)"></font></p>
+  </center></div>
+</form>
+
+<form method="get" action="http://140.158.209.81:8080/servlet/login">
+  <div align="center"><center><p>&nbsp;</p>
+  </center></div><div align="center"><center><h3><big>If you have a user ID, you can login
+  the system to access the data</big></h3>
+  </center></div><div align="center"><center><p><strong><big><big>you inputed previously and
+  to rerun the model.</big></big></strong></p>
+  </center></div><div align="center"><center><table border="0" cellpadding="0" width="300">
+    <tr>
+      <td width="224"><big><big><font color="#000000">userID </font></big></big><input
+      type="text" name="uid" size="12"></td>
+      <td width="54"><input type="submit" value="login" name="B1"></td>
+    </tr>
+  </table>
+  </center></div>
+</form>
+</body>
+</html>

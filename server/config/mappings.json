@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "cloud_object_storage_apikey": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:apikey",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.apikey",
+      "env:service_cloud_object_storage:$.apikey",
+      "env:cloud_object_storage_apikey",
+      "file:/server/localdev-config.json:$.cloud_object_storage_apikey"
+    ]
+  },
+  "cloud_object_storage": {
+    "credentials": {
+      "searchPatterns": [
+        "user-provided:Cloud Object Storage-8i:resource_instance_id",
+        "cloudfoundry:cloud_object_storage",
+        "env:cloud_object_storage_credentials",
+        "file:/server/localdev-config.json:cloud_object_storage_credentials"
+      ]
+    }
+  },
+  "cloud_object_storage_endpoints": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:endpoints",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.endpoints",
+      "env:service_cloud_object_storage:$.endpoints",
+      "env:cloud_object_storage_endpoints",
+      "file:/server/localdev-config.json:$.cloud_object_storage_endpoints"
+    ]
+  },
+  "cloud_object_storage_iam_apikey_description": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:iam_apikey_description",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.iam_apikey_description",
+      "env:service_cloud_object_storage:$.iam_apikey_description",
+      "env:cloud_object_storage_iam_apikey_description",
+      "file:/server/localdev-config.json:$.cloud_object_storage_iam_apikey_description"
+    ]
+  },
+  "cloud_object_storage_iam_apikey_name": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:iam_apikey_name",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.iam_apikey_name",
+      "env:service_cloud_object_storage:$.iam_apikey_name",
+      "env:cloud_object_storage_iam_apikey_name",
+      "file:/server/localdev-config.json:$.cloud_object_storage_iam_apikey_name"
+    ]
+  },
+  "cloud_object_storage_iam_role_crn": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:iam_role_crn",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.iam_role_crn",
+      "env:service_cloud_object_storage:$.iam_role_crn",
+      "env:cloud_object_storage_iam_role_crn",
+      "file:/server/localdev-config.json:$.cloud_object_storage_iam_role_crn"
+    ]
+  },
+  "cloud_object_storage_iam_serviceid_crn": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:iam_serviceid_crn",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.iam_serviceid_crn",
+      "env:service_cloud_object_storage:$.iam_serviceid_crn",
+      "env:cloud_object_storage_iam_serviceid_crn",
+      "file:/server/localdev-config.json:$.cloud_object_storage_iam_serviceid_crn"
+    ]
+  },
+  "cloud_object_storage_resource_instance_id": {
+    "searchPatterns": [
+      "user-provided:Cloud Object Storage-8i:resource_instance_id",
+      "cloudfoundry:$['dff97f5c-bc5e-4455-b470-411c3edbe49c'].credentials.resource_instance_id",
+      "env:service_cloud_object_storage:$.resource_instance_id",
+      "env:cloud_object_storage_resource_instance_id",
+      "file:/server/localdev-config.json:$.cloud_object_storage_resource_instance_id"
+    ]
+  }
+}

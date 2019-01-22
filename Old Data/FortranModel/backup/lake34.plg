@@ -1,0 +1,488 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: lake34 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSP1AA.tmp" with contents
+[
+/check:bounds /compile_only /debug:full /nologo /traceback /warn:argument_checking /warn:nofileopt /module:"Debug/" /object:"Debug/" /pdbfile:"Debug/DF60.PDB" 
+"D:\Inetpub\wwwroot\lake\FortranModel\lake34.for"
+]
+Creating command line "link.exe kernel32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/lake34.pdb" /debug /machine:I386 /out:"Debug/lake34.exe" /pdbtype:sept  .\Debug\lake34.obj "
+<h3>Output Window</h3>
+Compiling Fortran...
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(12) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,SVOL,RHO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(12) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,SVOL,RHO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(12) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,SVOL,RHO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(12) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,SVOL,RHO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(878) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,DUM
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(878) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,DUM
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(878) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,DUM
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(878) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,DUM
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1150) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1150) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1150) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1150) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1327) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1327) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1327) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1327) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1884) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,ADUM
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1884) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,ADUM
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1884) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,ADUM
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1884) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,ADUM
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1910) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,ZERO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1910) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,ZERO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1910) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,ZERO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(1910) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,ZERO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2026) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,ADUM
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2026) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,ADUM
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2026) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,ADUM
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2026) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,ADUM
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2055) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2055) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2055) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2055) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2119) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2119) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2119) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2119) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2152) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,RHOT,RHODUM,RHO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2152) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,RHOT,RHODUM,RHO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2152) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,RHOT,RHODUM,RHO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2152) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,RHOT,RHODUM,RHO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2212) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2212) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2212) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2212) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2305) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2305) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2305) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2305) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,AK,BK,CK,DK
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2616) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2616) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2616) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2616) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2676) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,RHO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2676) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,RHO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2676) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,RHO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2676) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,RHO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2853) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 FAO,A,V,TV,ATOP,AK,BK,CK,DK,SVOL
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2853) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 FAO,A,V,TV,ATOP,AK,BK,CK,DK,SVOL
+-------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2853) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 FAO,A,V,TV,ATOP,AK,BK,CK,DK,SVOL
+---------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(2853) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 FAO,A,V,TV,ATOP,AK,BK,CK,DK,SVOL
+------------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3231) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3231) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3231) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3231) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3269) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,VDUM
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3269) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,VDUM
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3269) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,VDUM
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3269) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,VDUM
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3322) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3322) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3322) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3322) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3371) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3371) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3371) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3371) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3459) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3459) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3459) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3459) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4193) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,AVOL
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4193) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,AVOL
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4193) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,AVOL
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4193) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,AVOL
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4216) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,SUM
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4216) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,SUM
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4216) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,SUM
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4216) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,SUM
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4237) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,RHO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4237) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,RHO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4237) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,RHO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4237) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,RHO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4353) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,RHO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4353) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,RHO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4353) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,RHO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4353) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,RHO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4465) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,VDUM,VZ
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4465) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,VDUM,VZ
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4465) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,VDUM,VZ
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4465) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,VDUM,VZ
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4491) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4491) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4491) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4491) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4693) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4693) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4693) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4693) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4810) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,VDUM,TOV,SVOL
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4810) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,VDUM,TOV,SVOL
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4810) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,VDUM,TOV,SVOL
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4810) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,VDUM,TOV,SVOL
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4867) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4867) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4867) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4867) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4907) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,RHO
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4907) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,RHO
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4907) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,RHO
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(4907) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,RHO
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5041) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP,SVOL
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5041) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP,SVOL
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5041) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP,SVOL
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5041) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP,SVOL
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5080) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+       REAL*8 A,V,TV,ATOP,SVOL
+--------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5080) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+       REAL*8 A,V,TV,ATOP,SVOL
+----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5080) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+       REAL*8 A,V,TV,ATOP,SVOL
+------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5080) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+       REAL*8 A,V,TV,ATOP,SVOL
+---------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5140) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5140) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5140) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5140) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5307) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+      REAL*8 A,V,TV,ATOP
+-------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5307) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+      REAL*8 A,V,TV,ATOP
+---------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5307) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+      REAL*8 A,V,TV,ATOP
+-----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5307) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+      REAL*8 A,V,TV,ATOP
+--------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5384) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+       REAL*8 A,V,TV,ATOP
+--------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5384) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+       REAL*8 A,V,TV,ATOP
+----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5384) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+       REAL*8 A,V,TV,ATOP
+------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5384) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+       REAL*8 A,V,TV,ATOP
+---------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5470) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [A]
+       REAL*8 A,V,TV,ATOP,RHO
+--------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5470) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [V]
+       REAL*8 A,V,TV,ATOP,RHO
+----------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5470) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [TV]
+       REAL*8 A,V,TV,ATOP,RHO
+------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5470) : Warning: Because of COMMON, the alignment of object is inconsistent with its type   [ATOP]
+       REAL*8 A,V,TV,ATOP,RHO
+---------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(301) : Warning: In the call to LAKE, actual argument #2 does not match the type and kind of the corresponding dummy argument.
+      CALL LAKE(0.,0.,0,12)
+------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(451) : Warning: In the call to LAKE, actual argument #2 does not match the type and kind of the corresponding dummy argument.
+          CALL LAKE(0.,0.,0,5)
+----------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(456) : Warning: In the call to LAKE, actual argument #2 does not match the type and kind of the corresponding dummy argument.
+          CALL LAKE(0.,0.,0,14)
+----------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(637) : Warning: In the call to LAKE, actual argument #2 does not match the type and kind of the corresponding dummy argument.
+            CALL LAKE(0.0,0.0,0,11)
+------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(648) : Warning: In the call to LAKE, actual argument #2 does not match the type and kind of the corresponding dummy argument.
+ 35       CALL LAKE(0.,0.,0,13)
+-^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3888) : Warning: In the call to LAKE, actual argument #2 does not match the type and kind of the corresponding dummy argument.
+ CALL LAKE(ZMAX,ASX,0.,1)
+--------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3888) : Warning: In the call to LAKE, actual argument #3 does not match the type and kind of the corresponding dummy argument.
+ CALL LAKE(ZMAX,ASX,0.,1)
+--------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(3975) : Warning: Variable YTAIR is used before its value has been defined
+         TSLMN = YRAIR(ISTATE,ISTATION)+YTAIR
+----------------------------------------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5162) : Warning: Variable IFIELD is used before its value has been defined
+      IF (IFIELD.EQ.1) THEN
+----------^
+D:\Inetpub\wwwroot\lake\FortranModel\lake34.for(5276) : Warning: Variable CHMEAN is used before its value has been defined
+       CHLATOT(1)=(1.0+RATIO)*CHMEAN
+------------------------------^
+Linking...
+
+
+
+<h3>Results</h3>
+lake34.exe - 0 error(s), 154 warning(s)
+</pre>
+</body>
+</html>

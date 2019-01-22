@@ -1,0 +1,165 @@
+// Decompiled by DJ v3.0.0.63 Copyright 2002 Atanas Neshkov  Date: 11/8/02 12:21:12 AM
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   FishApplet.java
+
+import java.applet.Applet;
+import java.awt.*;
+
+public class FishApplet extends Applet
+{
+
+    public FishApplet()
+    {
+    }
+
+    public void destroy()
+    {
+    }
+
+    public void init()
+    {
+    }
+
+    public void paint(Graphics g)
+    {
+        char c = '\u0302';
+        char c1 = '\u01F4';
+        char c2 = '\u02D5';
+        char c3 = '\u01CC';
+        float f = 23F;
+        byte byte0 = 23;
+        float af[] = new float[365];
+        float af1[] = new float[365];
+        float af2[] = new float[365];
+        float af3[] = new float[365];
+        boolean flag = false;
+        char c4 = c3;
+        int ai[] = new int[366];
+        int ai1[] = new int[368];
+        int ai2[] = new int[366];
+        int ai3[] = new int[368];
+        int ai4[] = new int[366];
+        int ai5[] = new int[368];
+        int ai6[] = new int[366];
+        int ai7[] = new int[368];
+        int ai8[] = new int[366];
+        int ai9[] = new int[368];
+        int ai10[] = {
+            0, c2, c2, 0, 0
+        };
+        int ai11[] = {
+            0, 0, c3, c3, 0
+        };
+        for(int i = 0; i < 365; i++)
+        {
+            af[i] = Float.parseFloat(getParameter("lggt[" + i + "]"));
+            af1[i] = Float.parseFloat(getParameter("uggt[" + i + "]"));
+            af2[i] = Float.parseFloat(getParameter("ltt[" + i + "]"));
+            af3[i] = Float.parseFloat(getParameter("dox[" + i + "]"));
+            ai[i] = (int)(f * af[i]);
+            ai1[i] = ai[i];
+            ai2[i] = (int)(f * af1[i]);
+            ai3[i] = ai2[i];
+            ai4[i] = (int)(f * af2[i]);
+            ai5[i] = ai4[i];
+            ai6[i] = (int)(f * af3[i]);
+            ai7[i] = ai6[i];
+            ai8[i] = 2 * i;
+            ai9[i] = ai8[i];
+        }
+
+        ai[365] = ai[0];
+        ai2[365] = ai2[0];
+        ai4[365] = ai4[0];
+        ai6[365] = ai6[0];
+        ai5[365] = c4;
+        ai5[366] = c4;
+        ai5[367] = ai5[0];
+        ai3[365] = c4;
+        ai3[366] = c4;
+        ai3[367] = ai3[0];
+        ai1[365] = c4;
+        ai1[366] = c4;
+        ai1[367] = ai1[0];
+        ai7[365] = c4;
+        ai7[366] = c4;
+        ai7[367] = ai7[0];
+        ai8[365] = ai8[0];
+        ai9[365] = ai9[364];
+        ai9[366] = ai9[0];
+        ai9[367] = ai9[0];
+        setBackground(Color.white);
+        Polygon polygon = new Polygon(ai10, ai11, ai10.length);
+        g.setColor(Color.red);
+        g.fillPolygon(polygon);
+        Polygon polygon1 = new Polygon(ai9, ai5, ai9.length);
+        g.setColor(Color.yellow);
+        g.fillPolygon(polygon1);
+        Polygon polygon2 = new Polygon(ai9, ai3, ai9.length);
+        g.setColor(Color.green);
+        g.fillPolygon(polygon2);
+        Polygon polygon3 = new Polygon(ai9, ai1, ai9.length);
+        g.setColor(Color.yellow);
+        g.fillPolygon(polygon3);
+        Polygon polygon4 = new Polygon(ai9, ai7, ai9.length);
+        g.setColor(Color.red);
+        g.fillPolygon(polygon4);
+        g.setColor(Color.blue);
+        g.drawLine(0, 0, c2 + 3, 0);
+        g.drawLine(0, 0, 0, c3);
+        g.drawLine(0, c3, c2 + 3, c3);
+        g.drawLine(c2 + 3, 0, c2 + 3, c3);
+        g.setColor(Color.black);
+        int j = Integer.parseInt(String.valueOf(c2 / 12));
+        for(int k = 0; k < 12; k++)
+            if(k == 0)
+                g.drawString("Jan", k * j, c3 + 15);
+            else
+            if(k == 1)
+                g.drawString("Feb", k * j, c3 + 15);
+            else
+            if(k == 2)
+                g.drawString("Mar", k * j, c3 + 15);
+            else
+            if(k == 3)
+                g.drawString("Apr", k * j, c3 + 15);
+            else
+            if(k == 4)
+                g.drawString("May", k * j, c3 + 15);
+            else
+            if(k == 5)
+                g.drawString("Jun", k * j, c3 + 15);
+            else
+            if(k == 6)
+                g.drawString("Jul", k * j, c3 + 15);
+            else
+            if(k == 7)
+                g.drawString("Aug", k * j, c3 + 15);
+            else
+            if(k == 8)
+                g.drawString("Sep", k * j, c3 + 15);
+            else
+            if(k == 9)
+                g.drawString("Oct", k * j, c3 + 15);
+            else
+            if(k == 10)
+                g.drawString("Nov", k * j, c3 + 15);
+            else
+                g.drawString("Dec", k * j, c3 + 15);
+
+        byte byte1 = 20;
+        for(int l = 0; l <= byte1; l++)
+            if(l != 0)
+                g.drawString("_" + l + "m", c2 + 5, l * byte0);
+
+    }
+
+    public void start()
+    {
+    }
+
+    public void stop()
+    {
+    }
+}
