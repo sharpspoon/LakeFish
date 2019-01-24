@@ -1,6 +1,6 @@
 # Code Adapted From No Starch's "Automate Boring Stuff" https://automatetheboringstuff.com/chapter11/
 
-import requests, bs4, os
+import requests, bs4
 from geopy.geocoders import Nominatim
 
 # Asks user location and then prints elements with class myforecast-current-lrg
