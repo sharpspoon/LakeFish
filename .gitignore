@@ -3,3 +3,5 @@ localdev-config.json
 server/localdev-config.json
 .vscode/settings.json
 Weather/geckodriver.log
+*.iml
+*.xml

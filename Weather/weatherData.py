@@ -1,7 +1,8 @@
-import requests, bs4, os, time
+from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim
+from requests import get
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.firefox.options import Options
 
 # Asks user location and then prints elements with class myforecast-current-lrg
 # i am not sure exactly how the geolocater works...i have been doing CITY, STATE i.e. Mobile Alabama and it works
@@ -27,28 +28,39 @@ lng = str(location.longitude)
 
 print((location.latitude, location.longitude))
 
-
-
-airportURL = "https://airport.globefeed.com/US_Nearest_Airport_Result.asp?lat=" + lat +"&lng=" +lng #"&place=Mobile,%20AL,%20USA
+airportURL = "https://airport.globefeed.com/US_Nearest_Airport_Result.asp?lat=" + lat + "&lng=" + lng  # "&place=Mobile,%20AL,%20USA
 print(airportURL)
-res = requests.get(airportURL)
+res = get(airportURL)
 res.raise_for_status()
-airport = bs4.BeautifulSoup(res.text, features="html.parser")
+airport = BeautifulSoup(res.text, features="html.parser")
 airportCells = airport.select('td')
 airportCode = airportCells[9].getText()
 
-
-
 weatherURL = "https://www.wunderground.com/history/monthly/" + airportCode + "/date/" + year + "-" + month
-              
-print(weatherURL)
 
-browser = webdriver.Firefox()
+print(weatherURL)
+options = Options()
+options.headless = True
+browser = webdriver.Firefox(options=options)
 browser.get(weatherURL)
 try:
-    wait = WebDriverWait(webdriver, 10)
-    temp = browser.find_element_by_class_name('days')
-    print(temp.text)
-    print(len(temp.text))
+    # wait = WebDriverWait(webdriver, 2)
+    weatherHTML = browser.page_source
+    weather = BeautifulSoup(weatherHTML, features='html.parser')
+    print(type(weather))
+    days = weather.find("table", {"class": "days"})
+    cells = days.findChildren("td", recursive=True)
+    data = []
+    for cell in cells:
+        data.append(cell.text.strip())
+
+    with open('output.txt', 'w') as f:
+        for d in data:
+            f.write(d)
+
+
+
 finally:
     browser.quit()
+
+print("done")
