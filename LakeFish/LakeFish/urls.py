@@ -31,18 +31,22 @@ urlpatterns = [
             }
         },
         name='login'),
-    #url(r'^register/$',
-    #django.contrib.auth.views.register,
-    #{
-    #    'template_name': 'app/register.html',
-    #    'authentication_form': app.forms.BootstrapAuthenticationForm,
-    #    'extra_context':
-    #    {
-    #        'title': 'Log in',
-    #        'year': datetime.now().year,
-    #    }
-    #},
-    #name='register'),
+
+
+    url(r'^register/$',
+    django.contrib.auth.views.login,
+    {
+        'template_name': 'app/register.html',
+        'authentication_form': app.forms.BootstrapAuthenticationForm,
+        'extra_context':
+        {
+            'title': 'Register',
+            'year': datetime.now().year,
+        }
+    },
+    name='register'),
+
+
     url(r'^logout$',
         django.contrib.auth.views.logout,
         {
