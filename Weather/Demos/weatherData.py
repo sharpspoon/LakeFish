@@ -112,7 +112,7 @@ else:
     day = maxDays
 
 # sets up a dictionary to hold the needed data from the weather site
-dataset = [
+self.dataset = [
     {'name': data[0]},  # day
     {'name': data[1]},  # temp
     {'name': data[2]},  # dew
@@ -123,9 +123,9 @@ dataset = [
 
 data = data[8:]
 
-for column in dataset:
+for column in self.dataset:
 
-    if column == dataset[0]:      # time column only has one header where as the other columns have max,avg, and min
+    if column == self.dataset[0]:      # time column only has one header where as the other columns have max,avg, and min
         section = day
         column['data'] = data[:section]
         data = data[section:]
@@ -163,31 +163,31 @@ with open(filename, 'a+', newline='') as f:
     writer = csv.writer(f, delimiter='\t')
 
     final = zip(
-        # dataset[0]['data'],         # time
+        # self.dataset[0]['data'],         # time
 
-        # dataset[1]['data']['Max'],
-        dataset[1]['data']['Avg'],  # Temp
-        # dataset[1]['data']['Min'],
+        # self.dataset[1]['data']['Max'],
+        self.dataset[1]['data']['Avg'],  # Temp
+        # self.dataset[1]['data']['Min'],
 
-        # dataset[2]['data']['Max'],
-        dataset[2]['data']['Avg'],  # Dew
-        # dataset[2]['data']['Min'],
+        # self.dataset[2]['data']['Max'],
+        self.dataset[2]['data']['Avg'],  # Dew
+        # self.dataset[2]['data']['Min'],
 
-        # dataset[3]['data']['Max'],
-        dataset[3]['data']['Avg'],  # Hum
-        # dataset[3]['data']['Min'],
+        # self.dataset[3]['data']['Max'],
+        self.dataset[3]['data']['Avg'],  # Hum
+        # self.dataset[3]['data']['Min'],
 
-        # dataset[4]['data']['Max'],
-        dataset[4]['data']['Avg'],  # Wind
-        # dataset[4]['data']['Min'],
+        # self.dataset[4]['data']['Max'],
+        self.dataset[4]['data']['Avg'],  # Wind
+        # self.dataset[4]['data']['Min'],
 
-        # dataset[5]['data']['Max'],
-        dataset[5]['data']['Avg'],  # Pressure
-        # dataset[5]['data']['Min'],
+        # self.dataset[5]['data']['Max'],
+        self.dataset[5]['data']['Avg'],  # Pressure
+        # self.dataset[5]['data']['Min'],
 
-        # dataset[6]['data']['Max'],
-        dataset[6]['data']['Avg'],  # Precipitation
-        # dataset[6]['data']['Min'],
+        # self.dataset[6]['data']['Max'],
+        self.dataset[6]['data']['Avg'],  # Precipitation
+        # self.dataset[6]['data']['Min'],
     )
     writer.writerows(final)
 
