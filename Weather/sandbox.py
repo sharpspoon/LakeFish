@@ -1,15 +1,6 @@
 import os
 import errno
+import state_to_abbrev
+test = state_to_abbrev.state_to_abbrev('Alabama')
 
-filename = "./foo/bar/baz.txt"
-if not os.path.exists(os.path.dirname(filename)):
-    try:
-        os.makedirs(os.path.dirname(filename))
-    except OSError as exc: # Guard against race condition
-        if exc.errno != errno.EEXIST:
-            raise
-
-with open(filename, "w") as f:
-    f.write("FOOBAR")
-    f.write("FOOBAR")
-    print("DONE")
+print(test)

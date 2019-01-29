@@ -6,3 +6,4 @@ Weather/geckodriver.log
 *.iml
 *.xml
 .DS_Store
+*.json

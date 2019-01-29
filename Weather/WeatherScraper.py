@@ -9,7 +9,7 @@ from geopy.geocoders import Nominatim
 from requests import get
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-
+from state_to_abbrev import state_to_abbrev
 """
     WeatherScraper.py
     
@@ -27,10 +27,16 @@ from selenium.webdriver.firefox.options import Options
 
 
 class WeatherScraper:
-    def __init__(self, user_loc="Auburn Alabama", month=datetime.datetime.now().month,
+    def __init__(self, user_input="Auburn Alabama", month=datetime.datetime.now().month,
                  year=datetime.datetime.now().year):
-        self.city, self.state = user_loc.split()
-
+        self.city, self.state = user_input.split(',')
+        self.city = self.city.strip()
+        self.state = self.state.strip()
+        if len(self.state) != 2:
+            self.state_abbrev = state_to_abbrev(self.state)
+        else:
+            self.state_abbrev = self.state
+        user_loc = self.city + "," + self.state_abbrev
         geolocator = Nominatim(user_agent="weatherApp")
         self.location = geolocator.geocode(user_loc)
         # gets users location's latitude and longitude
@@ -41,7 +47,7 @@ class WeatherScraper:
         self.weather_page = None
         self.airport_code = None
         self.max_days = None
-        self.self.dataset = None
+        self.dataset = None
 
     def _pull_data(self):
         """
@@ -51,6 +57,7 @@ class WeatherScraper:
 
         self._get_airport_code()
         self._get_weather_data()
+        #self.check_airport_code()
 
     def _get_airport_code(self):
         """
@@ -67,6 +74,15 @@ class WeatherScraper:
         airport_cells = airport_parsed.select('td')
         # inside the 9th td element contains the nearest airport's code to the users provided location
         self.airport_code = airport_cells[9].getText()
+
+    def check_airport_code(self):
+        heading = self.weather_page.find_all("h1")
+        location = heading[0].text
+        state = location.split(',')[1].strip()
+        if self.state_abbrev == state:
+            return True
+        else:
+            return False
 
     def _get_weather_data(self):
         """
@@ -146,20 +162,20 @@ class WeatherScraper:
         ##########################################################################
         #                        Outputs User Data                               #
         ##########################################################################
-        state_abbrv = self.state[:2].upper()
-        city_abbrv = self.city[:3].upper()
+        
+        city_abbrv = self.city[:4].upper()
         year_abbrv = self.year[2:]
-        directory = "./Data/" + state_abbrv + "/"
-        file = state_abbrv + city_abbrv + year_abbrv + ".dat"
+        directory = "./Data/" + self.state_abbrev + "/"
+        file = self.state_abbrev + city_abbrv + year_abbrv + ".dat"
         filename = directory + file
         check_for_path(filename)
         with open(filename, 'a+', newline='') as f:
-            header = str(self.month) + " " + str(self.maxDays) + " " + str(self.year) + "\n"
+            header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
             f.write(header)
             writer = csv.writer(f, delimiter='\t')
 
             final = zip(
-                self.self.dataset[1]['data']['Avg'],  # Temp
+                self.dataset[1]['data']['Avg'],  # Temp
                 self.dataset[2]['data']['Avg'],  # Dew
                 self.dataset[3]['data']['Avg'],  # Hum
                 self.dataset[4]['data']['Avg'],  # Wind
@@ -170,8 +186,11 @@ class WeatherScraper:
         print("done")
 
     def run(self):
+        print("Pulling Data...")
         self._pull_data()
+        print("Formatting Data...")
         self._format_data()
+        print("Outputting Data...")
         self._output_data()
 
 
