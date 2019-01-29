@@ -54,12 +54,15 @@ class WeatherScraper:
             First finds airport code based on location's lng and lat. Airport code is used to find the correct URL
             to pull the historical weather data
         """
+        data_verified = False 
+        index = 0
+        while(not data_verified):
+            self._get_airport_code(index)
+            self._get_weather_data()
+            data_verified = self.check_airport_code()
+            index += 1
 
-        self._get_airport_code()
-        self._get_weather_data()
-        #self.check_airport_code()
-
-    def _get_airport_code(self):
+    def _get_airport_code(self, index):
         """
             Finds airport code based on lng and lat provided by geopy
         """
@@ -73,7 +76,8 @@ class WeatherScraper:
         airport_parsed = BeautifulSoup(airport_page.text, features="html.parser")
         airport_cells = airport_parsed.select('td')
         # inside the 9th td element contains the nearest airport's code to the users provided location
-        self.airport_code = airport_cells[9].getText()
+        element = (index * 6) + 9
+        self.airport_code = airport_cells[element].getText()
 
     def check_airport_code(self):
         heading = self.weather_page.find_all("h1")
@@ -95,9 +99,10 @@ class WeatherScraper:
 
         # run selenium browser headless
         options = Options()
-        options.headless = True
+        #options.headless = True
 
-        browser = webdriver.Firefox(options=options)
+        #browser = webdriver.Firefox(options=options)
+        browser = webdriver.Firefox()
         browser.get(weather_url)
 
         # selenium was used instead of requests due to the fact that the wunderground site is javascript heavy and
