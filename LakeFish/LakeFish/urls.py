@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),
     url(r'^login/$',
-        django.contrib.auth.views.login,
+        django.contrib.auth.views.LoginView,
         {
             'template_name': 'app/login.html',
             'authentication_form': app.forms.BootstrapAuthenticationForm,
@@ -34,21 +34,21 @@ urlpatterns = [
 
 
     url(r'^register/$',
-    django.contrib.auth.views.login,
-    {
-        'template_name': 'app/register.html',
-        'authentication_form': app.forms.BootstrapAuthenticationForm,
-        'extra_context':
+        django.contrib.auth.views.LoginView,
         {
-            'title': 'Register',
-            'year': datetime.now().year,
-        }
-    },
-    name='register'),
+            'template_name': 'app/register.html',
+            'authentication_form': app.forms.BootstrapAuthenticationForm,
+            'extra_context':
+            {
+                'title': 'Register',
+                'year': datetime.now().year,
+            }
+        },
+        name='register'),
 
 
     url(r'^logout$',
-        django.contrib.auth.views.logout,
+        django.contrib.auth.views.LogoutView,
         {
             'next_page': '/',
         },
