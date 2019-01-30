@@ -3,19 +3,52 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h1>LakeFish</h1>
-    <p class="lead">An Auburn University Fisheries Application</p>
-    <p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+  <h1 id="homeTitle">LakeFish <i class="fas fa-fish"></i></h1>
+  <p class="lead">A System for Lake and Environmental Modeling</p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+<div class="row equal">
+  <div class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Getting Started</h2>
         <p>
+<<<<<<< HEAD
+          Django gives you a powerful, patterns-based way to build dynamic websites that
+          enables a clean separation of concerns and gives you full control over markup
+          for enjoyable, agile development.
+=======
             Information on how to get started with this application.
+>>>>>>> cbbd40eca68505705150fd78c35358088c2a1144
         </p>
-        <p><a class="btn btn-default" href="http://www.djangobook.com/en/2.0/index.html">Learn more &raquo;</a></p>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#gettingStartedModal">
+          Learn More &raquo;
+        </button>
+      </div>
     </div>
+<<<<<<< HEAD
+  </div>
+  <div class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Models</h2>
+        <p>The Python Package Index is a repository of software for the Python programming language.</p>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modelsModal">
+          Learn More &raquo;
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Project Information & Research Team</h2>
+        <p>You can easily publish to Microsoft Azure using Python Tools for Visual Studio. Find out how you can host your application using a free trial today.</p>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#projectAndTeamModal">
+          Learn More &raquo;
+        </button>
+      </div>
+=======
     <div class="col-md-4">
         <h2>Get more data</h2>
         <p>Information on data.</p>
@@ -25,7 +58,71 @@
         <h2>Another front end</h2>
         <p>information</p>
         <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
+>>>>>>> cbbd40eca68505705150fd78c35358088c2a1144
     </div>
+  </div>
+</div>
+
+
+
+<!-- Getting Started Modal -->
+<div class="modal fade" id="gettingStartedModal" tabindex="-1" role="dialog" aria-labelledby="gettingStartedModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="gettingStartedModalLabel">Getting Started</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Woohoo, you're reading this text in a modal!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Models Modal -->
+<div class="modal fade" id="modelsModal" tabindex="-1" role="dialog" aria-labelledby="modelsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modelsModalLabel">Models</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Woohoo, you're reading this text in a modal!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project Info & Research Team Modal -->
+<div class="modal fade" id="projectAndTeamModal" tabindex="-1" role="dialog" aria-labelledby="projectAndTeamModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="projectAndTeamModalLabel">Project Information and Research Team</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Woohoo, you're reading this text in a modal!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
