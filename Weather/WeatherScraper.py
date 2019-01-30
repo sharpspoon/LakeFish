@@ -48,6 +48,10 @@ class WeatherScraper:
         self.airport_code = None
         self.max_days = None
         self.dataset = None
+        city_abbrv = self.city[:4].upper()
+        year_abbrv = self.year[2:]
+        self.directory = "./Data/" + self.state_abbrev + "/"
+        self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
 
     def _pull_data(self):
         """
@@ -168,13 +172,9 @@ class WeatherScraper:
         #                        Outputs User Data                               #
         ##########################################################################
         
-        city_abbrv = self.city[:4].upper()
-        year_abbrv = self.year[2:]
-        directory = "./Data/" + self.state_abbrev + "/"
-        file = self.state_abbrev + city_abbrv + year_abbrv + ".dat"
-        filename = directory + file
-        check_for_path(filename)
-        with open(filename, 'a+', newline='') as f:
+        print(self.filename)
+        check_for_path(self.filename)
+        with open(self.filename, 'a+', newline='') as f:
             header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
             f.write(header)
             writer = csv.writer(f, delimiter='\t')
@@ -190,13 +190,42 @@ class WeatherScraper:
             writer.writerows(final)
         print("done")
 
+    def _data_already_retrieved(self):
+        if (not os.path.isfile(self.filename)):
+            print("No such file.")
+            return False
+        
+        with open(self.filename, "r") as datafile:
+            lines = datafile.readlines()
+        
+        daysToSkip = 0
+        for line in lines:
+            if daysToSkip > 0:
+                daysToSkip = daysToSkip - 1
+                continue
+
+            date = line.split()
+            if date[0] == self.month:
+                print("Matching month found.")
+                return True
+            else:
+                print(f"Skipping month {date[1]}")
+                daysToSkip = int(date[1])
+
+        return False
+        
+
     def run(self):
-        print("Pulling Data...")
-        self._pull_data()
-        print("Formatting Data...")
-        self._format_data()
-        print("Outputting Data...")
-        self._output_data()
+        if (self._data_already_retrieved()):
+            print("Data already retrieved.")
+        else:
+            print("Pulling Data...")
+            self._pull_data()
+            print("Formatting Data...")
+            self._format_data()
+            print("Outputting Data...")
+            self._output_data()
+        
 
 
 def check_for_path(filename):
