@@ -16,18 +16,19 @@ from state_to_abbrev import state_to_abbrev
     Script will pull weather data based on the location and time provided by the user.
     After data is pulled it will store it in a file located in the under the data directory and under its state
     The file name will be named after the state, city and year that the data is pulled for
-    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data\AL
+    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data/AL
     
     Created on 1/20/2019
     Edited on 1/25/2019 Data outputs neatly to file
     Edited on 1/28/2019 Refactored code into classical approach
+    Edited on 1/29/2019 Added code to see if file was in database
     @author Jordan Sosnowski, Jack Mullins
     
 """
 
 
 class WeatherScraper:
-    def __init__(self, user_input="Auburn Alabama", month=datetime.datetime.now().month,
+    def __init__(self, user_input="Auburn, Alabama", month=datetime.datetime.now().month,
                  year=datetime.datetime.now().year):
         self.city, self.state = user_input.split(',')
         self.city = self.city.strip()
@@ -102,7 +103,7 @@ class WeatherScraper:
                       + self.month
 
         # run selenium browser headless
-        options = Options()
+        #options = Options()
         #options.headless = True
 
         #browser = webdriver.Firefox(options=options)

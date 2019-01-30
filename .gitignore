@@ -7,3 +7,5 @@ Weather/geckodriver.log
 *.xml
 .DS_Store
 *.json
+Weather/.vscode/.ropeproject/objectdb
+Weather/.vscode/.ropeproject/config.py
