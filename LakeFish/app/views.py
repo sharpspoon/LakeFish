@@ -7,6 +7,11 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -44,3 +49,17 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'app/register.html', {'form': form})

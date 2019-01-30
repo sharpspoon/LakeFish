@@ -6,6 +6,10 @@ from datetime import datetime
 from django.conf.urls import url
 import django.contrib.auth.views
 
+from django.conf.urls import url
+import app.views as core_views
+
+
 import app.forms
 import app.views
 
@@ -33,18 +37,21 @@ urlpatterns = [
         name='login'),
 
 
-    url(r'^register/$',
-    django.contrib.auth.views.login,
-    {
-        'template_name': 'app/register.html',
-        'authentication_form': app.forms.BootstrapAuthenticationForm,
-        'extra_context':
-        {
-            'title': 'Register',
-            'year': datetime.now().year,
-        }
-    },
-    name='register'),
+
+    url(r'^register/$', core_views.signup, name='register'),
+
+    #url(r'^register/$',
+    #django.contrib.auth.views.login,
+    #{
+    #    'template_name': 'app/register.html',
+    #    'authentication_form': app.forms.BootstrapAuthenticationForm,
+    #    'extra_context':
+    #    {
+    #        'title': 'Register',
+    #        'year': datetime.now().year,
+    #    }
+    #},
+    #name='register'),
 
 
     url(r'^logout$',
