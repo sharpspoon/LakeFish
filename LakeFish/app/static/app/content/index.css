@@ -14,7 +14,7 @@ div[class*='col-'] {
   flex:1 1 auto;
   display: flex;
 }
-.panel {
+.homePanels {
   flex:1 0 100%;
   background-color: #5B79E8;
   color: white;

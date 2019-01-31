@@ -2,9 +2,27 @@
 
 {% block content %}
 
-<div class="jumbotron">
-  <h1 id="homeTitle">Weather Data <i class="fas fa-cloud-sun-rain"></i></h1>
-  <p class="lead">Display Weather Data for Lake</p>
+<div class="row">
+  <h1>Weather Data <i class="fas fa-cloud-sun-rain"></i></h1>
+  <h2>Display Weather Data for Lake</h2>
+
+  <br>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>Enter Your Information</h3>
+      <form>
+        <div class="form-group">
+          <label class="control-label">
+            What is your location?
+          </label>
+          <input class="form-control" type="text" placeholder="Enter city">
+          <small class="form-text text-muted">Auburn, AL as default for demo.</small>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
