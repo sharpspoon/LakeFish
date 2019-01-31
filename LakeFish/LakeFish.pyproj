@@ -4,6 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>LakeFish</Name>
     <RootNamespace>LakeFish</RootNamespace>
+    <NameOfLastUsedPublishProfile>au</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\register.html" />
+    <None Include="au.pubxml" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
