@@ -3,6 +3,7 @@ import csv
 import datetime
 import errno
 import os
+import time
 
 from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim
@@ -61,12 +62,13 @@ class WeatherScraper:
         """
         data_verified = False 
         index = 0
+        start = time.time()
         while(not data_verified):
             self._get_airport_code(index)
             self._get_weather_data()
             data_verified = self.check_airport_code()
             index += 1
-
+        print("Took ", time.time() - start, " to run")
     def _get_airport_code(self, index):
         """
             Finds airport code based on lng and lat provided by geopy
@@ -103,11 +105,11 @@ class WeatherScraper:
                       + self.month
 
         # run selenium browser headless
-        #options = Options()
-        #options.headless = True
+        options = Options()
+        options.headless = True
 
-        #browser = webdriver.Firefox(options=options)
-        browser = webdriver.Firefox()
+        browser = webdriver.Firefox(options=options)
+        
         browser.get(weather_url)
 
         # selenium was used instead of requests due to the fact that the wunderground site is javascript heavy and
