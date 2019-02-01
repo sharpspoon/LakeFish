@@ -11,7 +11,8 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h3>Enter Your Information</h3>
-      <form>
+      <form action='displayweather' method='post'>
+        {% csrf_token %}
         <div class="form-group">
           <label class="control-label">
             What is your location?
@@ -19,7 +20,7 @@
           <input class="form-control" type="text" placeholder="Enter city">
           <small class="form-text text-muted">Auburn, AL as default for demo.</small>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <input type="submit" class="btn btn-success" value='Submit' name='submitbtn' />
       </form>
     </div>
   </div>

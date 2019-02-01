@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
+import csv
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import login as auth_login
@@ -80,3 +81,26 @@ def weather(request):
             'year': datetime.now().year
         }
     )
+
+
+def displayWeather(request):
+    if (request.method == 'POST'):
+        weatherData = []
+        with open('./Weather/Data/AL/ALAUBU98.dat', newline='') as weatherFile:
+            header_line = next(weatherFile)
+            weatherFileReader = csv.reader(weatherFile, delimiter='\t')
+            for data in weatherFileReader:
+                weatherData.append(data)
+
+            testFileContent = weatherData
+        return render(
+            request,
+            'app/displayweather.html',
+            {
+                'title': 'Display Weather Data',
+                'message': 'Display Weather Data page.',
+                'year': datetime.now().year,
+                'file_content': testFileContent,
+                'header_line': header_line
+            }
+        )

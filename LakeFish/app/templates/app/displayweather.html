@@ -1,0 +1,14 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<h1>
+  Display Weather Data from File for {{ header_line }}
+  <ul>
+    {% for entry in file_content %}
+    <li>
+      {{ entry }}
+    </li>
+    {% endfor %}
+  </ul>
+</h1>
+{% endblock %}
