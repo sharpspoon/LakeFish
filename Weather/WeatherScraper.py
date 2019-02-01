@@ -100,6 +100,9 @@ class WeatherScraper:
             self.weather_headers.append(weather_response.headers)
 
     def _format_data(self):
+        """
+            Pulls data needed for lakefish application from the json objects provided by Dark Sky
+        """
         days = []
         for day in self.weather_jsons:
             info = day['daily']['data'][0]
@@ -120,6 +123,9 @@ class WeatherScraper:
         return days
 
     def _output_data(self, days):
+        """
+            Outputs the data to a .dat file with the notation of STATECITYYEAR i.e ALMOBI99
+        """
         check_for_path(self.filename)
         with open(self.filename, 'w+', newline='') as f:
             self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
@@ -134,6 +140,9 @@ class WeatherScraper:
                 f.write("\n")
 
     def _data_already_retrieved(self):
+        """
+            Checks to make sure data is not already stored
+        """
         if not os.path.isfile(self.filename):
             print("No such file.")
             return False
@@ -159,6 +168,9 @@ class WeatherScraper:
 
 
 def check_for_path(filename):
+    """
+        Checks to see if path exists for new file, if not create needed directories
+    """
     if not os.path.exists(os.path.dirname(filename)):
         try:
             os.makedirs(os.path.dirname(filename))
