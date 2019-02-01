@@ -1,3 +1,11 @@
+"""
+    StateToAbbrev.py
+
+    Utitlitiy script, allows a conversion between state and its abbreviation
+
+    Created 1/29/19
+    @author Jordan Sosnowksi 
+"""
 def state_to_abbrev(state):
     us_state_abbrev = {
         'Alabama': 'AL',
