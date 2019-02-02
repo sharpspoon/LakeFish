@@ -92,8 +92,8 @@ class WeatherScraper:
         """
             Grabs the weather data of the specified location for a whole month using Dark Sky's API
         """
-        for t in self.times:
-            weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (self.key, self.lat, self.lng, t)
+        for time in self.times:
+            weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (self.key, self.lat, self.lng, time)
             print(weather_url)
             weather_response = get(weather_url)
             self.weather_responses.append(weather_response)
