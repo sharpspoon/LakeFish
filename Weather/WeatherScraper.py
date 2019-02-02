@@ -107,7 +107,7 @@ class WeatherScraper:
         days = []
         for day in self.weather_jsons:
             info = day['daily']['data'][0]
-            keys = ['temperatureMax', 'dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
+            keys = ['temperatureHigh', 'dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
                     'precipIntensity', 'precipAccumulation']
             data = []
             for key in keys:
