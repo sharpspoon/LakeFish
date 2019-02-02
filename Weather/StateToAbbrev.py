@@ -1,7 +1,7 @@
 """
     StateToAbbrev.py
 
-    Utitlitiy script, allows a conversion between state and its abbreviation
+    Utitlity script, allows a conversion between state and its abbreviation
 
     Created 1/29/19
     @author Jordan Sosnowksi 

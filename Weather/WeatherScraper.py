@@ -7,7 +7,7 @@ import time
 from geopy.geocoders import Nominatim
 from requests import get
 
-from Weather.StateToAbbrev import state_to_abbrev
+from StateToAbbrev import state_to_abbrev
 
 """
     WeatherScraper.py
@@ -86,7 +86,7 @@ class WeatherScraper:
         for day in range(1, self.max_days):
             dt = datetime.datetime(int(self.year), int(self.month),
                                    day)  # creates a datetime object for the users specific month and year
-            self.times.append(str(time.mktime(dt.timetuple())))  # converts the datetime object into the UNIX format
+            self.times.append(str(int(time.mktime(dt.timetuple()))))  # converts the datetime object into the UNIX format
 
     def _pull_data(self):
         """
@@ -94,6 +94,7 @@ class WeatherScraper:
         """
         for t in self.times:
             weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (self.key, self.lat, self.lng, t)
+            print(weather_url)
             weather_response = get(weather_url)
             self.weather_responses.append(weather_response)
             self.weather_jsons.append(weather_response.json())
