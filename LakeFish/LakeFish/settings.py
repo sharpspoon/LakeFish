@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'lakefish',
         'USER': 'lakefishsa',
         'PASSWORD': 'TJKDUPVINBDOABBS',
-        'HOST': 'mysql.wardr.net',   # Or an IP Address that your DB is hosted on
+        'HOST': 'lakefish.steelcitysites.net',   # Or an IP Address that your DB is hosted on
         'PORT': '',
     }
 }
