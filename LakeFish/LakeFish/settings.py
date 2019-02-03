@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'LakeFish.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'LakeFish',
-        'USER': 'admin',
+        'NAME': 'lakefish',
+        'USER': 'lakefishsa',
         'PASSWORD': 'TJKDUPVINBDOABBS',
-        'HOST': 'sl-us-south-1-portal.51.dblayer.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '15432',
+        'HOST': 'mysql.wardr.net',   # Or an IP Address that your DB is hosted on
+        'PORT': '',
     }
 }
 
