@@ -35,7 +35,7 @@ def contact(request):
         'app/contact.html',
         {
             'title': 'Contact',
-            'message': 'Your contact page.',
+            'message': 'Xing Fang, Ph.D., P.E., D.WRE, F. EWRI, F.ASCE \n Arthur H. Feagin Chair Professor of Civil Engineering',
             'year': datetime.now().year,
         }
     )
