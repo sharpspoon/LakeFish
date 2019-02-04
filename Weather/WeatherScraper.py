@@ -11,17 +11,17 @@ from StateToAbbrev import state_to_abbrev
 
 """
     WeatherScraper.py
-    
+
     Script will pull weather data based on the location and time provided by the user.
     Achieves this by using the Dark Sky API
 
     After data is pulled it will store it in a file located in the under the data directory and under its state
     The file name will be named after the state, city and year that the data is pulled for
     i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data/AL
-    
+
     Created on 2/1/2019
     @author Jordan Sosnowski, Jack Mullins
-    
+
 """
 
 
@@ -94,7 +94,7 @@ class WeatherScraper:
         """
         for time in self.times:
             weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (self.key, self.lat, self.lng, time)
-            print(weather_url)
+            #print(weather_url)
             weather_response = get(weather_url)
             self.weather_responses.append(weather_response)
             self.weather_jsons.append(weather_response.json())
@@ -162,7 +162,7 @@ class WeatherScraper:
                 print("Matching month found.")
                 return True
             else:
-                print(f"Skipping month {date[1]}")
+                print("Skipping month %s" % str(date[1]))
                 days_to_skip = int(date[1])
 
         return False

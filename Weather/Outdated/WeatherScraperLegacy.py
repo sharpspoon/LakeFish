@@ -10,7 +10,7 @@ from geopy.geocoders import Nominatim
 from requests import get
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from Weather.StateToAbbrev import state_to_abbrev
+from .StateToAbbrev import state_to_abbrev
 """
     WeatherScraperLegacy.py
     
