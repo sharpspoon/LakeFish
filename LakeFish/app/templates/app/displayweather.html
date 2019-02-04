@@ -16,8 +16,14 @@
 {% block scripts %}
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
 <script type="text/javascript">
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+    "Sept", "Oct", "Nov", "Dec"
+  ];
   var test = "{{ file_content | safe }}"
-  console.log(test)
+  var temp = "{{ temperature | safe }}".replace(/[\[\]']+/g, '').split(',')
+  var dew_point = "{{ dew_point | safe }}".replace(/[\[\]']+/g, '').split(',')
+  var wind_speed = "{{ wind_speed | safe }}".replace(/[\[\]']+/g, '').split(',')
+  var daysTest = getDaysInMonth(1, 2016)
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -25,17 +31,46 @@
 
     // The data for our dataset
     data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: daysTest,
       datasets: [{
-        label: "My First dataset",
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-      }]
+          label: "Temperature",
+          backgroundColor: 'rgb(255, 0, 0)',
+          borderColor: 'rgb(255, 0, 0)',
+          fill: false,
+          data: temp,
+        },
+        {
+          label: "Dew Point",
+          backgroundColor: 'rgb(46, 129, 221)',
+          borderColor: 'rgb(46, 129, 221)',
+          fill: false,
+          data: dew_point,
+        },
+        {
+          label: "Wind Speed",
+          backgroundColor: 'rgb(0, 162, 66)',
+          borderColor: 'rgb(0, 162, 66)',
+          fill: false,
+          data: wind_speed,
+        }
+      ]
     },
 
     // Configuration options go here
     options: {}
   });
+
+  function getDaysInMonth(month, year) {
+    var date = new Date(year, month, 1);
+    var days = [];
+    var dayCounter = 1;
+    while (date.getMonth() == month) {
+      var day = new Date(date);
+      days.push(monthNames[day.getMonth()] + '-' + dayCounter);
+      dayCounter = dayCounter + 1;
+      date.setDate(date.getDate() + 1);
+    }
+    return days;
+  }
 </script>
 {% endblock %}

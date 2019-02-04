@@ -104,7 +104,7 @@ def displayWeather(request):
                 weatherData.append(data.split())
 
             for dailyData in weatherData:
-                temperature.append(dailyData[0])
+                temperature.append(float(dailyData[0]))
                 dewPoint.append(dailyData[1])
                 windSpeed.append(dailyData[2])
                 windBearing.append(dailyData[3])
@@ -115,7 +115,7 @@ def displayWeather(request):
 
             formattedWeatherList = [temperature, dewPoint, windSpeed, windBearing,
                                     uvIndex, cloudCover, precipIntensity, precipAccumulation]
-            #testFileContent = dailyDataList
+            # testFileContent = dailyDataList
         return render(
             request,
             'app/displayweather.html',
@@ -124,6 +124,9 @@ def displayWeather(request):
                 'message': 'Display Weather Data page.',
                 'year': datetime.now().year,
                 'file_content': formattedWeatherList,
-                'header_line': header_line
+                'header_line': header_line,
+                'temperature': temperature,
+                'dew_point': dewPoint,
+                'wind_speed': windSpeed
             }
         )
