@@ -1,200 +1,177 @@
 import calendar
-import csv
 import datetime
 import errno
 import os
+import time
 
-from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim
 from requests import get
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from state_to_abbrev import state_to_abbrev
+
+from StateToAbbrev import state_to_abbrev
+
 """
     WeatherScraper.py
     
     Script will pull weather data based on the location and time provided by the user.
+    Achieves this by using the Dark Sky API
+
     After data is pulled it will store it in a file located in the under the data directory and under its state
     The file name will be named after the state, city and year that the data is pulled for
-    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data\AL
+    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data/AL
     
-    Created on 1/20/2019
-    Edited on 1/25/2019 Data outputs neatly to file
-    Edited on 1/28/2019 Refactored code into classical approach
+    Created on 2/1/2019
     @author Jordan Sosnowski, Jack Mullins
     
 """
 
 
 class WeatherScraper:
-    def __init__(self, user_input="Auburn Alabama", month=datetime.datetime.now().month,
-                 year=datetime.datetime.now().year):
-        self.city, self.state = user_input.split(',')
-        self.city = self.city.strip()
-        self.state = self.state.strip()
+    def __init__(self, user_loc, date):
+
+        # sets up users request location
+        geolocator = Nominatim(user_agent="weatherApp")
+        location = geolocator.geocode(user_loc)
+        self.lat = str(location.latitude)
+        self.lng = str(location.longitude)
+        self.state = location.address.split(',')[2].strip()
+        self.city = location.address.split(',')[0].strip()
+
+        # Dark Sky API Key
+        self.key = "2dd9e033bfb386fa272686e32b748dda"
+
+        # sets up users date information
+        dates = [x.strip() for x in date.split('/')]
+        self.month = dates[0]
+        self.year = dates[1]
+        self.max_days = 0
+
+        # sets up data structures to hold weather info
+        self.times = []
+        self.weather_responses = []  # get(weather_url)
+        self.weather_jsons = []  # self.weather_response.json()
+        self.weather_headers = []  # self.weather_response.headers
+
+        # if user did not provide the state abbrev, abbrev it
         if len(self.state) != 2:
             self.state_abbrev = state_to_abbrev(self.state)
         else:
             self.state_abbrev = self.state
-        user_loc = self.city + "," + self.state_abbrev
-        geolocator = Nominatim(user_agent="weatherApp")
-        self.location = geolocator.geocode(user_loc)
-        # gets users location's latitude and longitude
-        self.lat = str(self.location.latitude)
-        self.lng = str(self.location.longitude)
-        self.month = month
-        self.year = year
-        self.weather_page = None
-        self.airport_code = None
-        self.max_days = None
-        self.dataset = None
+
+        city_abbrv = self.city[:4].upper()
+        year_abbrv = self.year[2:]
+
+        # sets up directory that file will end up in
+        self.directory = "./Data/" + self.state_abbrev + "/"
+        self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
+
+    def run(self):
+        if self._data_already_retrieved():
+            print("Data already retrieved.")
+        else:
+            self._generate_all_times_for_month()
+            print("Pulling Data...")
+            self._pull_data()
+            print("Formatting Data...")
+            days = self._format_data()
+            print("Outputting Data...")
+            self._output_data(days)
+
+    def _generate_all_times_for_month(self):
+        """
+            Generates UNIX Timestamp for every day for the given month of a specific year
+        """
+        month_info = calendar.monthrange(int(self.year),
+                                         int(self.month))  # contains month number[0] and month max days[1]
+        self.max_days = month_info[1]  # gets max days from current month
+        for day in range(1, self.max_days):
+            dt = datetime.datetime(int(self.year), int(self.month),
+                                   day)  # creates a datetime object for the users specific month and year
+            self.times.append(str(int(time.mktime(dt.timetuple()))))  # converts the datetime object into the UNIX format
 
     def _pull_data(self):
         """
-            First finds airport code based on location's lng and lat. Airport code is used to find the correct URL
-            to pull the historical weather data
+            Grabs the weather data of the specified location for a whole month using Dark Sky's API
         """
-
-        self._get_airport_code()
-        self._get_weather_data()
-        #self.check_airport_code()
-
-    def _get_airport_code(self):
-        """
-            Finds airport code based on lng and lat provided by geopy
-        """
-
-        airport_url = "https://airport.globefeed.com/US_Nearest_Airport_Result.asp?lat=" + self.lat + "&lng=" + self.lng
-
-        # using the requests library the html of the site is pulled and using bs4 the elements of 'td' are pulled
-        airport_page = get(airport_url)
-        airport_page.raise_for_status()
-
-        airport_parsed = BeautifulSoup(airport_page.text, features="html.parser")
-        airport_cells = airport_parsed.select('td')
-        # inside the 9th td element contains the nearest airport's code to the users provided location
-        self.airport_code = airport_cells[9].getText()
-
-    def check_airport_code(self):
-        heading = self.weather_page.find_all("h1")
-        location = heading[0].text
-        state = location.split(',')[1].strip()
-        if self.state_abbrev == state:
-            return True
-        else:
-            return False
-
-    def _get_weather_data(self):
-        """
-            Based on the airport code and month and year wunderground will provide weather data. After the data loads
-            BS4 will save the page
-        """
-
-        weather_url = "https://www.wunderground.com/history/monthly/" + self.airport_code + "/date/" + self.year + "-" \
-                      + self.month
-
-        # run selenium browser headless
-        options = Options()
-        options.headless = True
-
-        browser = webdriver.Firefox(options=options)
-        browser.get(weather_url)
-
-        # selenium was used instead of requests due to the fact that the wunderground site is javascript heavy and
-        # takes a few seconds to load which does not operate well with requests
-        try:
-            # wait = WebDriverWait(webdriver, 2)
-            weather_html = browser.page_source
-            self.weather_page = BeautifulSoup(weather_html, features='html.parser')
-
-        finally:
-            browser.quit()
+        for time in self.times:
+            weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (self.key, self.lat, self.lng, time)
+            print(weather_url)
+            weather_response = get(weather_url)
+            self.weather_responses.append(weather_response)
+            self.weather_jsons.append(weather_response.json())
+            self.weather_headers.append(weather_response.headers)
 
     def _format_data(self):
-        ##########################################################################
-        #                      Formats User Data                                 #
-        ##########################################################################
-        days = self.weather_page.find("table", {"class": "days"})
-        cells = days.findChildren("td", recursive=True)
-        data = []
-        for cell in cells:
-            if "\n" not in cell:  # ignores garbage data containing \n
-                data.append(cell.text.strip())
-        now = datetime.datetime.now()
-        self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
-        # if month and year chosen is present then the max number of days
-        # may not be available to be pulled
-        if int(self.month) == now.month and int(self.year) == now.year:
-            days = now.day
-        else:
-            days = self.max_days
-        # sets up a dictionary to hold the needed data from the weather site
-        self.dataset = [
-            {'name': data[0]},  # day
-            {'name': data[1]},  # temp
-            {'name': data[2]},  # dew
-            {'name': data[3]},  # humidity
-            {'name': data[4]},  # wind speed
-            {'name': data[5]},  # pressure
-            {'name': data[6]}]
-        data = data[8:]
-        for column in self.dataset:
+        """
+            Pulls data needed for lakefish application from the json objects provided by Dark Sky
+        """
+        days = []
+        for day in self.weather_jsons:
+            info = day['daily']['data'][0]
+            keys = ['temperatureMax', 'dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
+                    'precipIntensity', 'precipAccumulation']
+            data = []
+            for key in keys:
+                if key in info:
+                    if key == 'cloudCover':
+                        data.append(round((1 - info[key]) * 100.0, 1))
+                    elif key == 'precipAccumulation':
+                        data.append(round(info[key] * .0254, 1))  # converts inches to meters
+                    else:
+                        data.append(round(float(info[key]), 1))
+                else:
+                    data.append(0.0)
+            days.append(data)
+        return days
 
-            if column == self.dataset[0]:  # time column only has one header where as the other columns have max,avg, and min
-                section = days
-                column['data'] = data[:section]
-                data = data[section:]
-            else:
-                section = 3 * days + 3
-                unsplit_data = data[:section]
-                data = data[section:]
-                column['data'] = {unsplit_data[0]: [],
-                                  unsplit_data[1]: [],
-                                  unsplit_data[2]: []}
-                unsplit_data = unsplit_data[3:]
-                length = len(unsplit_data)
-                for n in range(0, length, 3):
-                    column['data']['Max'].append(unsplit_data[n])
-                    column['data']['Avg'].append(unsplit_data[n + 1])
-                    column['data']['Min'].append(unsplit_data[n + 2])
-
-    def _output_data(self):
-        ##########################################################################
-        #                        Outputs User Data                               #
-        ##########################################################################
-        
-        city_abbrv = self.city[:4].upper()
-        year_abbrv = self.year[2:]
-        directory = "./Data/" + self.state_abbrev + "/"
-        file = self.state_abbrev + city_abbrv + year_abbrv + ".dat"
-        filename = directory + file
-        check_for_path(filename)
-        with open(filename, 'a+', newline='') as f:
+    def _output_data(self, days):
+        """
+            Outputs the data to a .dat file with the notation of STATECITYYEAR i.e ALMOBI99
+        """
+        check_for_path(self.filename)
+        with open(self.filename, 'w+', newline='') as f:
+            self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
             header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
             f.write(header)
-            writer = csv.writer(f, delimiter='\t')
+            for day in days:
+                for value in day:
+                    if value == day[0]:
+                        f.write(str(value))
+                    else:
+                        f.write("%8s" % str(value))
+                f.write("\n")
 
-            final = zip(
-                self.dataset[1]['data']['Avg'],  # Temp
-                self.dataset[2]['data']['Avg'],  # Dew
-                self.dataset[3]['data']['Avg'],  # Hum
-                self.dataset[4]['data']['Avg'],  # Wind
-                self.dataset[5]['data']['Avg'],  # Pressure
-                self.dataset[6]['data']['Avg'],  # Precipitation
-            )
-            writer.writerows(final)
-        print("done")
+    def _data_already_retrieved(self):
+        """
+            Checks to make sure data is not already stored
+        """
+        if not os.path.isfile(self.filename):
+            print("No such file.")
+            return False
 
-    def run(self):
-        print("Pulling Data...")
-        self._pull_data()
-        print("Formatting Data...")
-        self._format_data()
-        print("Outputting Data...")
-        self._output_data()
+        with open(self.filename, "r") as datafile:
+            lines = datafile.readlines()
+
+        days_to_skip = 0
+        for line in lines:
+            if days_to_skip > 0:
+                days_to_skip = days_to_skip - 1
+                continue
+
+            date = line.split()
+            if date[0] == self.month:
+                print("Matching month found.")
+                return True
+            else:
+                print(f"Skipping month {date[1]}")
+                days_to_skip = int(date[1])
+
+        return False
 
 
 def check_for_path(filename):
+    """
+        Checks to see if path exists for new file, if not create needed directories
+    """
     if not os.path.exists(os.path.dirname(filename)):
         try:
             os.makedirs(os.path.dirname(filename))

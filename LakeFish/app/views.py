@@ -86,13 +86,36 @@ def weather(request):
 def displayWeather(request):
     if (request.method == 'POST'):
         weatherData = []
-        with open('./Weather/Data/AL/ALAUBU98.dat', newline='') as weatherFile:
+        temperature = []
+        dewPoint = []
+        windSpeed = []
+        windBearing = []
+        uvIndex = []
+        cloudCover = []
+        precipIntensity = []
+        precipAccumulation = []
+        formattedWeatherList = []
+        with open('./Weather/Data/AL/ALMOBI16.dat', newline='') as weatherFile:
             header_line = next(weatherFile)
-            weatherFileReader = csv.reader(weatherFile, delimiter='\t')
-            for data in weatherFileReader:
-                weatherData.append(data)
+            # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
+            # for data in weatherFileReader:
+            # weatherData.append(data)
+            for data in weatherFile:
+                weatherData.append(data.split())
 
-            testFileContent = weatherData
+            for dailyData in weatherData:
+                temperature.append(dailyData[0])
+                dewPoint.append(dailyData[1])
+                windSpeed.append(dailyData[2])
+                windBearing.append(dailyData[3])
+                uvIndex.append(dailyData[4])
+                cloudCover.append(dailyData[5])
+                precipIntensity.append(dailyData[6])
+                precipAccumulation.append(dailyData[7])
+
+            formattedWeatherList = [temperature, dewPoint, windSpeed, windBearing,
+                                    uvIndex, cloudCover, precipIntensity, precipAccumulation]
+            #testFileContent = dailyDataList
         return render(
             request,
             'app/displayweather.html',
@@ -100,7 +123,7 @@ def displayWeather(request):
                 'title': 'Display Weather Data',
                 'message': 'Display Weather Data page.',
                 'year': datetime.now().year,
-                'file_content': testFileContent,
+                'file_content': formattedWeatherList,
                 'header_line': header_line
             }
         )

@@ -1,6 +1,3 @@
-import os
-import errno
-import state_to_abbrev
-test = state_to_abbrev.state_to_abbrev('Alabama')
-
-print(test)
+import calendar
+max_days = calendar.monthrange(int(2019), int(5))
+print(max_days[0])
