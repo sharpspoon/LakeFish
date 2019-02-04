@@ -40,7 +40,9 @@ urlpatterns = [
 
 
 
-    url(r'^register/$', core_views.signup, name='register'),
+    url(r'^register/$',
+        core_views.signup,
+        name='register'),
 
     # url(r'^register/$',
     # django.contrib.auth.views.login,
