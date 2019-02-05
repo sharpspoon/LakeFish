@@ -3,11 +3,11 @@ import datetime
 import errno
 import os
 import time
-
+ 
 from geopy.geocoders import Nominatim
 from requests import get
 
-from StateToAbbrev import state_to_abbrev
+from Weather.StateToAbbrev import state_to_abbrev
 
 """
     WeatherScraper.py
