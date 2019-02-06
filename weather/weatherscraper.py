@@ -41,9 +41,22 @@ class WeatherScraper:
 
         # sets up users date information
         dates = [x.strip() for x in date.split('/')]
+        if len(dates) != 2:
+            dates = [x.strip() for x in date.split()]
+        if len(dates) != 2:
+            self.go_ahead = False
+            print("Error: Incorrect Data Format")
+            return
         self.month = dates[0]
         self.year = dates[1]
         self.max_days = 0
+        date = datetime.datetime.today()
+        if self.month == str(date.month) and self.year == str(date.year):
+            print("Error: User cannot enter current date")
+            self.go_ahead = False
+            return
+
+        self.go_ahead = True
 
         # sets up data structures to hold weather info
         self.times = []
@@ -65,16 +78,21 @@ class WeatherScraper:
         self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
 
     def run(self):
-        if self._data_already_retrieved():
-            print("No need to pull additional data...")
+        if self.go_ahead:
+            if self._data_already_retrieved():
+                print("No need to pull additional data...")
+            else:
+                self._generate_all_times_for_month()
+                print("Pulling data...")
+                self._pull_data()
+                print("Formatting data...")
+                days = self._format_data()
+                print("Outputting data...")
+                self._output_data(days)
+            return True
         else:
-            self._generate_all_times_for_month()
-            print("Pulling data...")
-            self._pull_data()
-            print("Formatting data...")
-            days = self._format_data()
-            print("Outputting data...")
-            self._output_data(days)
+            print("Error: Go Ahead is not cleared, Check prior error message")
+            return False
 
     def _generate_all_times_for_month(self):
         """
@@ -144,6 +162,7 @@ class WeatherScraper:
         """
             Checks to make sure data is not already stored
         """
+        test = os.path
         if not os.path.isfile(self.filename):
             print("No such file.")
             return False
@@ -151,18 +170,22 @@ class WeatherScraper:
         with open(self.filename, "r") as datafile:
             lines = datafile.readlines()
 
-        days_to_skip = 0
         file_not_done = True
-        max_days = 0
-        while(file_not_done):
+
+        while file_not_done:
+            if len(lines) == 0: # month not already pulled, go ahead will pulling data
+                print("Month not located in database...")
+                return False
             date = lines[0].split()
             max_days = int(date[1])
-            if date[0] == self.month:
+            if date[0] == self.month:   # month located in database, dont pull new data
                 print("Month located in database...")
                 return True
-            else:
-                #print("Skipping month %s" % str(date[0]))
+            elif date[0] < self.month:   # month not currently located, but could be later on in the file, continue searching
                 lines = lines[max_days:]
+            elif date[0] > self.month:
+                print("Older Months located but not prior...")
+                return False
 
         return False
 
