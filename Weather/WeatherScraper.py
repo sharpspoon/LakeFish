@@ -61,7 +61,7 @@ class WeatherScraper:
         year_abbrv = self.year[2:]
 
         # sets up directory that file will end up in
-        self.directory = "Weather/Data/" + self.state_abbrev + "/"
+        self.directory = "./Weather/Data/" + self.state_abbrev + "/"
         self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
 
     def run(self):
