@@ -10,7 +10,7 @@ from geopy.geocoders import Nominatim
 from requests import get
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from Weather.StateToAbbrev import state_to_abbrev
+from StateToAbbrev import state_to_abbrev
 """
     WeatherScraperLegacy.py
     
@@ -239,3 +239,10 @@ def check_for_path(filename):
         except OSError as exc:  # Guard against race condition
             if exc.errno != errno.EEXIST:
                 raise
+
+if __name__ == "__main__":
+    user_loc = input("Provide city and state abbreviation. ")
+    month, year = input("What month and year would you like to see? (Format MM/YYYY) ").split("/")
+
+    scraper = WeatherScraperLegacy(user_loc, month, year)
+    scraper.run()
