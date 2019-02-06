@@ -1,5 +1,7 @@
-from WeatherScraper import WeatherScraper
+
 import time
+
+from weather.weatherscraper import WeatherScraper
 
 user_loc = input("Provide city and state abbreviation. ")
 date = input("What month and year would you like to see? (Format MM/YYYY) ")

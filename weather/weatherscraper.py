@@ -7,17 +7,17 @@ import time
 from geopy.geocoders import Nominatim
 from requests import get
 
-from StateToAbbrev import state_to_abbrev
+from weather.statetoabbrev import state_to_abbrev
 
 """
-    WeatherScraper.py
+    weatherscraper.py
 
     Script will pull weather data based on the location and time provided by the user.
     Achieves this by using the Dark Sky API
 
     After data is pulled it will store it in a file located in the under the data directory and under its state
     The file name will be named after the state, city and year that the data is pulled for
-    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data/AL
+    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in data/AL
 
     Created on 2/1/2019
     @author Jordan Sosnowski, Jack Mullins
@@ -53,27 +53,27 @@ class WeatherScraper:
 
         # if user did not provide the state abbrev, abbrev it
         if len(self.state) != 2:
-            self.state_abbrev = state_to_abbrev(self.state)
+            self.state_abbrev = state_to_abbrev(self.state).lower()
         else:
-            self.state_abbrev = self.state
+            self.state_abbrev = self.state.lower()
 
-        city_abbrv = self.city[:4].upper()
+        city_abbrv = self.city[:4].lower()
         year_abbrv = self.year[2:]
 
         # sets up directory that file will end up in
-        self.directory = "./Weather/Data/" + self.state_abbrev + "/"
+        self.directory = "./data/" + self.state_abbrev + "/"
         self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
 
     def run(self):
         if self._data_already_retrieved():
-            print("Data already retrieved.")
+            print("No need to pull additional data...")
         else:
             self._generate_all_times_for_month()
-            print("Pulling Data...")
+            print("Pulling data...")
             self._pull_data()
-            print("Formatting Data...")
+            print("Formatting data...")
             days = self._format_data()
-            print("Outputting Data...")
+            print("Outputting data...")
             self._output_data(days)
 
     def _generate_all_times_for_month(self):
@@ -128,7 +128,7 @@ class WeatherScraper:
             Outputs the data to a .dat file with the notation of STATECITYYEAR i.e ALMOBI99
         """
         check_for_path(self.filename)
-        with open(self.filename, 'w+', newline='') as f:
+        with open(self.filename, 'a+', newline='') as f:
             self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
             header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
             f.write(header)
@@ -152,18 +152,17 @@ class WeatherScraper:
             lines = datafile.readlines()
 
         days_to_skip = 0
-        for line in lines:
-            if days_to_skip > 0:
-                days_to_skip = days_to_skip - 1
-                continue
-
-            date = line.split()
+        file_not_done = True
+        max_days = 0
+        while(file_not_done):
+            date = lines[0].split()
+            max_days = int(date[1])
             if date[0] == self.month:
-                print("Matching month found.")
+                print("Month located in database...")
                 return True
             else:
-                print("Skipping month %s" % str(date[1]))
-                days_to_skip = int(date[1])
+                #print("Skipping month %s" % str(date[0]))
+                lines = lines[max_days:]
 
         return False
 

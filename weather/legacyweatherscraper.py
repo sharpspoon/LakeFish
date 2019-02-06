@@ -12,12 +12,12 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from StateToAbbrev import state_to_abbrev
 """
-    WeatherScraperLegacy.py
+    legacyweatherscraper.py
     
     Script will pull weather data based on the location and time provided by the user.
     After data is pulled it will store it in a file located in the under the data directory and under its state
     The file name will be named after the state, city and year that the data is pulled for
-    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in Data/AL
+    i.e. Mobile Alabama 2019 -> "almobi19" located in data/al
     
     Created on 1/20/2019
     Edited on 1/25/2019 Data outputs neatly to file
@@ -53,7 +53,7 @@ class WeatherScraperLegacy:
         self.dataset = None
         city_abbrv = self.city[:4].upper()
         year_abbrv = self.year[2:]
-        self.directory = "./Data/" + self.state_abbrev + "/"
+        self.directory = "./data_leg/" + self.state_abbrev + "/"
         self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
 
     def _pull_data(self):
