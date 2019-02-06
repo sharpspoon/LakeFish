@@ -57,6 +57,7 @@ class WeatherScraper:
             return
 
         self.go_ahead = True
+        self.out_of_order = False
 
         # sets up data structures to hold weather info
         self.times = []
@@ -86,9 +87,9 @@ class WeatherScraper:
                 print("Pulling data...")
                 self._pull_data()
                 print("Formatting data...")
-                days = self._format_data()
+                data = self._format_data()
                 print("Outputting data...")
-                self._output_data(days)
+                self._output_data(data)
             return True
         else:
             print("Error: Go Ahead is not cleared, Check prior error message")
@@ -122,7 +123,7 @@ class WeatherScraper:
         """
             Pulls data needed for lakefish application from the json objects provided by Dark Sky
         """
-        days = []
+        weather_info = []
         for day in self.weather_jsons:
             info = day['daily']['data'][0]
             keys = ['temperatureHigh', 'dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
@@ -138,25 +139,37 @@ class WeatherScraper:
                         data.append(round(float(info[key]), 1))
                 else:
                     data.append(0.0)
-            days.append(data)
-        return days
+            weather_info.append(data)
+        return weather_info
 
-    def _output_data(self, days):
+    def _output_data(self, data):
         """
             Outputs the data to a .dat file with the notation of STATECITYYEAR i.e ALMOBI99
         """
+
         check_for_path(self.filename)
-        with open(self.filename, 'a+', newline='') as f:
+
+        if self.out_of_order:
+            with open(self.filename, 'r') as f:
+                older_month = f.readlines()
+            write_type = "w"
+        else:
+            write_type = "a+"
+
+        with open(self.filename, write_type, newline='') as f:
             self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
             header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
             f.write(header)
-            for day in days:
+            for day in data:
                 for value in day:
                     if value == day[0]:
                         f.write(str(value))
                     else:
                         f.write("%8s" % str(value))
                 f.write("\n")
+            if self.out_of_order:
+                for line in older_month:
+                    f.write(line)
 
     def _data_already_retrieved(self):
         """
@@ -169,6 +182,7 @@ class WeatherScraper:
 
         with open(self.filename, "r") as datafile:
             lines = datafile.readlines()
+        months = []
 
         file_not_done = True
 
@@ -185,6 +199,7 @@ class WeatherScraper:
                 lines = lines[max_days:]
             elif date[0] > self.month:
                 print("Older Months located but not prior...")
+                self.out_of_order = True
                 return False
 
         return False
