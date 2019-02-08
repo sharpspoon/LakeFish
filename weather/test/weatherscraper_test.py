@@ -1,5 +1,3 @@
-import os
-import sys
 import unittest
 from datetime import datetime
 
@@ -93,6 +91,8 @@ class TestWeatherScrapper(unittest.TestCase):
         self.assertEqual(scraper.state_abbrev, "tx")
         self.assertEqual(scraper.year, "2018")
 
+    # Test _output_data
+
     def test300_testOutputData_MakeSureFileContainsAllDataPoints(self):
         user_loc = "Mobile,AL"
         date = "2/1980"
@@ -149,8 +149,6 @@ class TestWeatherScrapper(unittest.TestCase):
                         month_order_right = False
 
         self.assertEqual(month_order_right, True)
-
-
 
 
 if __name__ == '__main__':
