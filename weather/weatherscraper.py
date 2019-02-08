@@ -209,8 +209,8 @@ class WeatherScraper:
                 return True
             elif date[0] < self.month:   # month not currently located, but could be later on in the file, continue searching
                 lines = lines[max_days:]
-            elif date[0] > self.month:
-                print("Older Months located but not prior...")
+            elif date[0] > self.month:  # older or earlier months are in file, but not this month
+                print("Month not located in database...")
                 self.out_of_order = True
                 return False
 
