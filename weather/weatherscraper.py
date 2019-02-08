@@ -13,6 +13,7 @@ from weather.statetoabbrev import state_to_abbrev
     weatherscraper.py
 
     Script will pull weather data based on the location and time provided by the user.
+    Script is provided latitude and longitude through the library geopy using Nominatim's API
     Achieves this by using the Dark Sky API
 
     After data is pulled it will store it in a file located in the under the data directory and under its state
@@ -152,7 +153,7 @@ class WeatherScraper:
         if self.out_of_order:
             with open(self.filename, 'r') as f:
                 file_info = f.readlines()
-            while(len(file_info) is not 0):      # sorts data in file
+            while len(file_info) is not 0:      # sorts data in file
                 date = file_info[0].split()
                 month = int(date[0])
                 max_days = int(date[1])

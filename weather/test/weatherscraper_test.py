@@ -1,5 +1,7 @@
 import unittest
 from datetime import datetime
+from os import remove
+from shutil import copyfile
 
 from weather.weatherscraper import WeatherScraper
 
@@ -121,39 +123,12 @@ class TestWeatherScrapper(unittest.TestCase):
         self.assertEqual(correct_data, True)
 
     def test310_testOutputData_CheckForMonthOrder(self):
-        user_loc = "Auburn,AL"
-        date = "4/2018"
-        scraper = WeatherScraper(user_loc, date)
-        scraper.run()
-
-        with open(scraper.filename, 'r') as f:
-            lines = f.readlines()
-        months = []
-        end_of_list = False
-        length = len(lines)
-        index = 0
-        month_order_right = True
-        while not end_of_list:
-            if length <= index:
-                end_of_list = True
-            else:
-                date = lines[index].split()
-                months.append(date[0])
-                max_days = int(date[1])
-                index += max_days
-
-                for x in range(1, len(months)):
-                    if int(months[x]) > int(months[x-1]):
-                        continue
-                    else:
-                        month_order_right = False
-
-        self.assertEqual(month_order_right, True)
-
-    def test310_testOutputData_CheckForMonthOrder(self):
+        backup = "./data/backup.dat"
         user_loc = "Auburn,AL"
         date = "4/2015"
         scraper = WeatherScraper(user_loc, date)
+        copyfile(scraper.filename, backup)
+
         scraper.run()
 
         with open(scraper.filename, 'r') as f:
@@ -179,6 +154,10 @@ class TestWeatherScrapper(unittest.TestCase):
                         month_order_right = False
 
         self.assertEqual(month_order_right, True)
+        remove(scraper.filename)
+        copyfile(backup, scraper.filename)
+        remove(backup)
+
 
 if __name__ == '__main__':
     unittest.main()
