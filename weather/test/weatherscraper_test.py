@@ -40,7 +40,7 @@ class TestWeatherScrapper(unittest.TestCase):
 
     def test130_testDataAlreadyRetrieved_PullingEarlierMonth(self):
         user_loc = "Auburn,AL"
-        date = "4/2018"
+        date = "3/2018"
         scraper = WeatherScraper(user_loc, date)
         data_existing = scraper._data_already_retrieved()
         self.assertEqual(data_existing, False)
@@ -58,7 +58,7 @@ class TestWeatherScrapper(unittest.TestCase):
         self.assertEqual(scraper.run(), False)
 
     def test210_testInit_CheckVariableCreation(self):
-        user_loc = "Dallas, TX"
+        user_loc = "Dallas,TX"
         date = "1/2018"
         scraper = WeatherScraper(user_loc, date)
         self.assertEqual(scraper.city, "Dallas")
@@ -150,6 +150,35 @@ class TestWeatherScrapper(unittest.TestCase):
 
         self.assertEqual(month_order_right, True)
 
+    def test310_testOutputData_CheckForMonthOrder(self):
+        user_loc = "Auburn,AL"
+        date = "4/2015"
+        scraper = WeatherScraper(user_loc, date)
+        scraper.run()
+
+        with open(scraper.filename, 'r') as f:
+            lines = f.readlines()
+        months = []
+        end_of_list = False
+        length = len(lines)
+        index = 0
+        month_order_right = True
+        while not end_of_list:
+            if length <= index:
+                end_of_list = True
+            else:
+                date = lines[index].split()
+                months.append(date[0])
+                max_days = int(date[1])
+                index += max_days
+
+                for x in range(1, len(months)):
+                    if int(months[x]) > int(months[x-1]):
+                        continue
+                    else:
+                        month_order_right = False
+
+        self.assertEqual(month_order_right, True)
 
 if __name__ == '__main__':
     unittest.main()

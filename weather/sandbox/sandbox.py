@@ -1,5 +1,5 @@
-import os
-import sys
+test = ['','', [1,2,3]]
 
-sys.stdout = open(os.devnull, 'w')
-print("HI")
+for t in test:
+    for a in t:
+        print(a)

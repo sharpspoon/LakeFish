@@ -29,7 +29,7 @@ class WeatherScraper:
     def __init__(self, user_loc, date):
 
         # sets up users request location
-        geolocator = Nominatim(user_agent="weatherApp")
+        geolocator = Nominatim(user_agent="test")
         location = geolocator.geocode(user_loc)
         self.lat = str(location.latitude)
         self.lng = str(location.longitude)
@@ -148,27 +148,39 @@ class WeatherScraper:
         """
 
         check_for_path(self.filename)
-
+        months = [''] * 12
         if self.out_of_order:
             with open(self.filename, 'r') as f:
-                older_month = f.readlines()
+                file_info = f.readlines()
+            while(len(file_info) is not 0):      # sorts data in file
+                date = file_info[0].split()
+                month = int(date[0])
+                max_days = int(date[1])
+                months[month] = file_info[:max_days]
+                file_info = file_info[max_days:]
             write_type = "w"
         else:
             write_type = "a+"
 
+        temp_list = []
+        self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
+        header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
+        temp_list.append(header)
+        for day in data:
+            temp_string = ""
+            for value in day:
+                if value == day[0]:
+                    temp_string += (str(value))
+                else:
+                    temp_string += ("%8s" % str(value))
+            temp_string += "\n"
+            temp_list.append(temp_string)
+
+        months[int(self.month)] = temp_list
+
         with open(self.filename, write_type, newline='') as f:
-            self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
-            header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
-            f.write(header)
-            for day in data:
-                for value in day:
-                    if value == day[0]:
-                        f.write(str(value))
-                    else:
-                        f.write("%8s" % str(value))
-                f.write("\n")
-            if self.out_of_order:
-                for line in older_month:
+            for month in months:
+                for line in month:
                     f.write(line)
 
     def _data_already_retrieved(self):
