@@ -3,11 +3,10 @@ import datetime
 import errno
 import os
 import time
- 
+
 from geopy.geocoders import Nominatim
 from requests import get
 
-from weather.statetoabbrev import state_to_abbrev
 
 """
     weatherscraper.py
@@ -18,7 +17,7 @@ from weather.statetoabbrev import state_to_abbrev
 
     After data is pulled it will store it in a file located in the under the data directory and under its state
     The file name will be named after the state, city and year that the data is pulled for
-    i.e. Mobile Alabama 2019 -> "ALMOBI19" located in data/AL
+    i.e. Mobile Alabama 2019 -> "almobi9" located in weather_data/al
 
     Created on 2/1/2019
     @author Jordan Sosnowski, Jack Mullins
@@ -76,8 +75,9 @@ class WeatherScraper:
         year_abbrv = self.year[2:]
 
         # sets up directory that file will end up in
-        self.directory = "./data/" + self.state_abbrev + "/"
-        self.filename = self.directory + self.state_abbrev + city_abbrv + year_abbrv + ".dat"
+        self.directory = "./weather_data/" + self.state_abbrev + "/"
+        self.filename = self.directory + self.state_abbrev + \
+            city_abbrv + year_abbrv + ".dat"
 
     def run(self):
         if self.go_ahead:
@@ -106,15 +106,17 @@ class WeatherScraper:
         for day in range(1, self.max_days):
             dt = datetime.datetime(int(self.year), int(self.month),
                                    day)  # creates a datetime object for the users specific month and year
-            self.times.append(str(int(time.mktime(dt.timetuple()))))  # converts the datetime object into the UNIX format
+            # converts the datetime object into the UNIX format
+            self.times.append(str(int(time.mktime(dt.timetuple()))))
 
     def _pull_data(self):
         """
             Grabs the weather data of the specified location for a whole month using Dark Sky's API
         """
         for time in self.times:
-            weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (self.key, self.lat, self.lng, time)
-            #print(weather_url)
+            weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (
+                self.key, self.lat, self.lng, time)
+            # print(weather_url)
             weather_response = get(weather_url)
             self.weather_responses.append(weather_response)
             self.weather_jsons.append(weather_response.json())
@@ -135,7 +137,8 @@ class WeatherScraper:
                     if key == 'cloudCover':
                         data.append(round((1 - info[key]) * 100.0, 1))
                     elif key == 'precipAccumulation':
-                        data.append(round(info[key] * .0254, 1))  # converts inches to meters
+                        # converts inches to meters
+                        data.append(round(info[key] * .0254, 1))
                     else:
                         data.append(round(float(info[key]), 1))
                 else:
@@ -165,7 +168,8 @@ class WeatherScraper:
 
         temp_list = []
         self.max_days = calendar.monthrange(int(self.year), int(self.month))[1]
-        header = str(self.month) + " " + str(self.max_days) + " " + str(self.year) + "\n"
+        header = str(self.month) + " " + str(self.max_days) + \
+            " " + str(self.year) + "\n"
         temp_list.append(header)
         for day in data:
             temp_string = ""
@@ -188,19 +192,17 @@ class WeatherScraper:
         """
             Checks to make sure data is not already stored
         """
-        test = os.path
         if not os.path.isfile(self.filename):
             print("No such file.")
             return False
 
         with open(self.filename, "r") as datafile:
             lines = datafile.readlines()
-        months = []
 
         file_not_done = True
 
         while file_not_done:
-            if len(lines) == 0: # month not already pulled, go ahead will pulling data
+            if len(lines) == 0:  # month not already pulled, go ahead will pulling data
                 print("Month not located in database...")
                 return False
             date = lines[0].split()
@@ -208,7 +210,8 @@ class WeatherScraper:
             if date[0] == self.month:   # month located in database, dont pull new data
                 print("Month located in database...")
                 return True
-            elif date[0] < self.month:   # month not currently located, but could be later on in the file, continue searching
+            # month not currently located, but could be later on in the file, continue searching
+            elif date[0] < self.month:
                 lines = lines[max_days:]
             elif date[0] > self.month:  # older or earlier months are in file, but not this month
                 print("Month not located in database...")
@@ -228,3 +231,60 @@ def check_for_path(filename):
         except OSError as exc:  # Guard against race condition
             if exc.errno != errno.EEXIST:
                 raise
+
+
+def state_to_abbrev(state):
+    # Utitlity script, allows a conversion between state and its abbreviation
+    us_state_abbrev = {
+        'Alabama': 'AL',
+        'Alaska': 'AK',
+        'Arizona': 'AZ',
+        'Arkansas': 'AR',
+        'California': 'CA',
+        'Colorado': 'CO',
+        'Connecticut': 'CT',
+        'Delaware': 'DE',
+        'Florida': 'FL',
+        'Georgia': 'GA',
+        'Hawaii': 'HI',
+        'Idaho': 'ID',
+        'Illinois': 'IL',
+        'Indiana': 'IN',
+        'Iowa': 'IA',
+        'Kansas': 'KS',
+        'Kentucky': 'KY',
+        'Louisiana': 'LA',
+        'Maine': 'ME',
+        'Maryland': 'MD',
+        'Massachusetts': 'MA',
+        'Michigan': 'MI',
+        'Minnesota': 'MN',
+        'Mississippi': 'MS',
+        'Missouri': 'MO',
+        'Montana': 'MT',
+        'Nebraska': 'NE',
+        'Nevada': 'NV',
+        'New Hampshire': 'NH',
+        'New Jersey': 'NJ',
+        'New Mexico': 'NM',
+        'New York': 'NY',
+        'North Carolina': 'NC',
+        'North Dakota': 'ND',
+        'Ohio': 'OH',
+        'Oklahoma': 'OK',
+        'Oregon': 'OR',
+        'Pennsylvania': 'PA',
+        'Rhode Island': 'RI',
+        'South Carolina': 'SC',
+        'South Dakota': 'SD',
+        'Tennessee': 'TN',
+        'Texas': 'TX',
+        'Utah': 'UT',
+        'Vermont': 'VT',
+        'Virginia': 'VA',
+        'Washington': 'WA',
+        'West Virginia': 'WV',
+        'Wisconsin': 'WI',
+        'Wyoming': 'WY',
+    }
+    return us_state_abbrev[state]
