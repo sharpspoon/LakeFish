@@ -1,16 +1,15 @@
-import sys, os
+import os
+import sys
+
 myPath = os.path.dirname(os.path.dirname(__file__))
-sys.path.insert(0, myPath + '/../')
-
-
+sys.path.insert(0, myPath)
 
 
 import unittest
 from datetime import datetime
-from os import remove
 from shutil import copyfile
 
-from weather.src.weatherscraper import WeatherScraper
+from weather.weatherscraper import WeatherScraper
 
 
 class TestWeatherScrapper(unittest.TestCase):
@@ -161,9 +160,9 @@ class TestWeatherScrapper(unittest.TestCase):
                         month_order_right = False
 
         self.assertEqual(month_order_right, True)
-        remove(scraper.filename)
+        os.remove(scraper.filename)
         copyfile(backup, scraper.filename)
-        remove(backup)
+        os.remove(backup)
 
 
 if __name__ == '__main__':

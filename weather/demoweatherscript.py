@@ -1,4 +1,4 @@
-from weather.src.weatherscraper import WeatherScraper
+from weather.weatherscraper import WeatherScraper
 
 user_loc = "Seattle, WA"
 date = "3/2016"

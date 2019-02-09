@@ -7,7 +7,7 @@ import time
 from geopy.geocoders import Nominatim
 from requests import get
 
-from weather.src.statetoabbrev import state_to_abbrev
+from weather.statetoabbrev import state_to_abbrev
 
 """
     weatherscraper.py
