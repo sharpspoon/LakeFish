@@ -1,9 +1,16 @@
+import sys, os
+myPath = os.path.dirname(os.path.dirname(__file__))
+sys.path.insert(0, myPath + '/../')
+
+
+
+
 import unittest
 from datetime import datetime
 from os import remove
 from shutil import copyfile
 
-from weather.weatherscraper import WeatherScraper
+from weather.src.weatherscraper import WeatherScraper
 
 
 class TestWeatherScrapper(unittest.TestCase):
