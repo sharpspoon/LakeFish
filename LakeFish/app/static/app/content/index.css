@@ -1,5 +1,5 @@
 .jumbotron {
-    background-color:#5B79E8 !important;
+    background-color:#054373 !important;
 }
 
 .equal {
@@ -17,7 +17,7 @@
 
 .homePanels {
   height: 100%;
-  background-color: #5B79E8;
+  background-color: #054373;
   color: white;
   display: flex;
 }

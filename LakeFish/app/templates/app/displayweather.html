@@ -2,12 +2,11 @@
 
 {% block content %}
 <h1>
-  Display Weather Data from File for {{ header_line }}
+  Display Historical Weather Data for {{ weatherDate }}
 </h1>
 
 <div class="panel panel-default">
   <div class='panel-body'>
-    <h2>Chart Test</h2>
     <canvas id='myChart'></canvas>
   </div>
 </div>
@@ -23,7 +22,7 @@
   var temp = "{{ temperature | safe }}".replace(/[\[\]']+/g, '').split(',')
   var dew_point = "{{ dew_point | safe }}".replace(/[\[\]']+/g, '').split(',')
   var wind_speed = "{{ wind_speed | safe }}".replace(/[\[\]']+/g, '').split(',')
-  var daysTest = getDaysInMonth(1, 2016)
+  var daysTest = getDaysInMonth(1, 28, 2016)
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -57,18 +56,36 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    display: false
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    display: true
+                }
+            }]
+        }
+    }
   });
 
-  function getDaysInMonth(month, year) {
+  function getDaysInMonth(month, numOfDays, year) {
     var date = new Date(year, month, 1);
     var days = [];
-    var dayCounter = 1;
+    var dayCounter = 0;
     while (date.getMonth() == month) {
-      var day = new Date(date);
-      days.push(monthNames[day.getMonth()] + '-' + dayCounter);
-      dayCounter = dayCounter + 1;
-      date.setDate(date.getDate() + 1);
+        if (dayCounter != numOfDays){
+            var day = new Date(date);
+            dayCounter = dayCounter + 1;
+            days.push(monthNames[day.getMonth()] + '-' + dayCounter);
+            date.setDate(date.getDate() + 1);
+        }
+        else{
+            break;
+        }
     }
     return days;
   }

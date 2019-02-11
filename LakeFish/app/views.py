@@ -96,7 +96,11 @@ def displayWeather(request):
         precipAccumulation = []
         formattedWeatherList = []
         with open('./Weather/Data/AL/ALMOBI16.dat', newline='') as weatherFile:
-            header_line = next(weatherFile)
+            header_line = next(weatherFile)  # Format: Month #ofDays Year
+            weatherMonth = int(header_line.split(' ')[0])
+            weatherYear = int(header_line.split(' ')[2])
+            weatherDate = datetime(weatherYear, weatherMonth, 1)
+            formattedDate = weatherDate.strftime("%B %Y")
             # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
             # for data in weatherFileReader:
             # weatherData.append(data)
@@ -104,7 +108,7 @@ def displayWeather(request):
                 weatherData.append(data.split())
 
             for dailyData in weatherData:
-                temperature.append(float(dailyData[0]))
+                temperature.append(dailyData[0])
                 dewPoint.append(dailyData[1])
                 windSpeed.append(dailyData[2])
                 windBearing.append(dailyData[3])
@@ -124,7 +128,7 @@ def displayWeather(request):
                 'message': 'Display Weather Data page.',
                 'year': datetime.now().year,
                 'file_content': formattedWeatherList,
-                'header_line': header_line,
+                'weatherDate': formattedDate,
                 'temperature': temperature,
                 'dew_point': dewPoint,
                 'wind_speed': windSpeed
