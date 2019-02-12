@@ -85,6 +85,8 @@ class WeatherScraper:
         # if file is already existing pull its filename
         if self.data_retrieved:
             return self.filename
+        else:
+            return "File for this specific date and location not in database..."
 
     def run(self):
         if self.go_ahead:

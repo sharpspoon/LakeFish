@@ -172,3 +172,12 @@ def test400_testGetPath_CheckForPath():
     scraper = WeatherScraper(user_loc, date)
     actual_location = scraper.get_file_path()
     assert expected_location == actual_location
+
+
+def test410_testGetPath_CheckForMonthNotInFile():
+    expected_location = "File for this specific date and location not in database..."
+    user_loc = "Salem,OR"
+    data = "10/2015"
+    scraper = WeatherScraper(user_loc, data)
+    actual_location = scraper.get_file_path()
+    assert expected_location == actual_location
