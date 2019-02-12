@@ -79,9 +79,16 @@ class WeatherScraper:
         self.filename = self.directory + self.state_abbrev + \
             city_abbrv + year_abbrv + ".dat"
 
+        self.data_retrieved = self._data_already_retrieved()
+
+    def get_file_path(self):
+        # if file is already existing pull its filename
+        if self.data_retrieved:
+            return self.filename
+
     def run(self):
         if self.go_ahead:
-            if self._data_already_retrieved():
+            if self.data_retrieved:
                 print("No need to pull additional data...")
             else:
                 self._generate_all_times_for_month()
