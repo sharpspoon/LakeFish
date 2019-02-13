@@ -1,0 +1,17 @@
+sys
+clickpkg
+PY2
+iteritems
+tempfile
+os
+StringIO
+string_types
+make_input_stream
+io
+_find_binary_reader
+contextlib
+shutil
+CliRunner
+shlex
+EchoingStdin
+Result
