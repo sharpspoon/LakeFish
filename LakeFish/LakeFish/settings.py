@@ -26,7 +26,7 @@ SECRET_KEY = '867e41a9-be94-42b1-8b04-2a31b7da30c8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sp01.eng.auburn.edu','localhost']
 
 
 # Application definition
