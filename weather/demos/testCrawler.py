@@ -4,7 +4,7 @@ import bs4
 import requests
 
 # pulls a local file and parses through it printing elements with id of author and elements with tag of p
-exampleFile = open('example.html', 'r')
+exampleFile = open('./weather/demos/example.html', 'r')
 exampleSoup = bs4.BeautifulSoup(exampleFile.read(), features="html.parser")
 elems = exampleSoup.select('#author')
 print(elems[0].getText())

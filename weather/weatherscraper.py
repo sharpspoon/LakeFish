@@ -129,9 +129,16 @@ class WeatherScraper:
         weather_info = []
         for day in self.weather_jsons:
             info = day['daily']['data'][0]
-            keys = ['temperatureHigh', 'dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
+            keys = ['dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
                     'precipIntensity', 'precipAccumulation']
             data = []
+            hours = day['hourly']['data']
+            apparent_temp = 0
+            num_of_hours = len(hours)
+            for hour in hours:
+                apparent_temp += float(hour['temperature'])
+            avg_temp = round(apparent_temp / float(num_of_hours),1) 
+            data.append(avg_temp)
             for key in keys:
                 if key in info:
                     if key == 'cloudCover':
