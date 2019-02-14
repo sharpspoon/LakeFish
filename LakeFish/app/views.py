@@ -97,61 +97,54 @@ def weather(request):
 def displayWeather(request):
     if (request.method == 'POST'):
         print(request.POST)
+
+        weatherData = []
+        temperature = []
+        dewPoint = []
+        windSpeed = []
+        windBearing = []
+        uvIndex = []
+        cloudCover = []
+        precipIntensity = []
+        precipAccumulation = []
+        formattedWeatherList = []
+        with open('./Weather/Data/AL/ALMOBI16.dat', newline='') as weatherFile:
+            header_line = next(weatherFile)  # Format: Month #ofDays Year
+            weatherMonth = int(header_line.split(' ')[0])
+            weatherYear = int(header_line.split(' ')[2])
+            weatherDate = datetime(weatherYear, weatherMonth, 1)
+            formattedDate = weatherDate.strftime("%B %Y")
+            # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
+            # for data in weatherFileReader:
+            # weatherData.append(data)
+            for data in weatherFile:
+                weatherData.append(data.split())
+
+            for dailyData in weatherData:
+                temperature.append(dailyData[0])
+                dewPoint.append(dailyData[1])
+                windSpeed.append(dailyData[2])
+                windBearing.append(dailyData[3])
+                uvIndex.append(dailyData[4])
+                cloudCover.append(dailyData[5])
+                precipIntensity.append(dailyData[6])
+                precipAccumulation.append(dailyData[7])
+
+            formattedWeatherList = [temperature, dewPoint, windSpeed,
+                                    windBearing, uvIndex, cloudCover,
+                                    precipIntensity, precipAccumulation]
+            # testFileContent = dailyDataList
         return render(
             request,
             'app/displayweather.html',
             {
                 'title': 'Display Weather Data',
                 'message': 'Display Weather Data page.',
-                'year': datetime.now().year
+                'year': datetime.now().year,
+                'file_content': formattedWeatherList,
+                'weatherDate': formattedDate,
+                'temperature': temperature,
+                'dew_point': dewPoint,
+                'wind_speed': windSpeed
             }
         )
-        # weatherData = []
-        # temperature = []
-        # dewPoint = []
-        # windSpeed = []
-        # windBearing = []
-        # uvIndex = []
-        # cloudCover = []
-        # precipIntensity = []
-        # precipAccumulation = []
-        # formattedWeatherList = []
-        # with open('./Weather/Data/AL/ALMOBI16.dat', newline='') as weatherFile:
-        #     header_line = next(weatherFile)  # Format: Month #ofDays Year
-        #     weatherMonth = int(header_line.split(' ')[0])
-        #     weatherYear = int(header_line.split(' ')[2])
-        #     weatherDate = datetime(weatherYear, weatherMonth, 1)
-        #     formattedDate = weatherDate.strftime("%B %Y")
-        #     # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
-        #     # for data in weatherFileReader:
-        #     # weatherData.append(data)
-        #     for data in weatherFile:
-        #         weatherData.append(data.split())
-        #
-        #     for dailyData in weatherData:
-        #         temperature.append(dailyData[0])
-        #         dewPoint.append(dailyData[1])
-        #         windSpeed.append(dailyData[2])
-        #         windBearing.append(dailyData[3])
-        #         uvIndex.append(dailyData[4])
-        #         cloudCover.append(dailyData[5])
-        #         precipIntensity.append(dailyData[6])
-        #         precipAccumulation.append(dailyData[7])
-        #
-        #     formattedWeatherList = [temperature, dewPoint, windSpeed, windBearing,
-        #                             uvIndex, cloudCover, precipIntensity, precipAccumulation]
-        #     # testFileContent = dailyDataList
-        # return render(
-        #     request,
-        #     'app/displayweather.html',
-        #     {
-        #         'title': 'Display Weather Data',
-        #         'message': 'Display Weather Data page.',
-        #         'year': datetime.now().year,
-        #         'file_content': formattedWeatherList,
-        #         'weatherDate': formattedDate,
-        #         'temperature': temperature,
-        #         'dew_point': dewPoint,
-        #         'wind_speed': windSpeed
-        #     }
-        # )
