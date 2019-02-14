@@ -6,38 +6,45 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
+
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
 
     username = forms.CharField(max_length=254,
-                            widget=forms.TextInput({
-                                'class': 'form-control',
-                                'placeholder': 'User name'}))
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Email'}))
     password = forms.CharField(label=_("Password"),
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
-                                   'placeholder':'Password'}))
-    #firstName = forms.CharField(max_length=254,
+                                   'placeholder': 'Password'}))
+    # firstName = forms.CharField(max_length=254,
     #                           widget=forms.TextInput({
     #                               'class': 'form-control',
     #                               'placeholder': 'First Name'}))
-    #lastName = forms.CharField(max_length=254,
+    # lastName = forms.CharField(max_length=254,
     #                           widget=forms.TextInput({
     #                               'class': 'form-control',
     #                               'placeholder': 'Last Name'}))
-    #occupation = forms.CharField(max_length=254,
+    # occupation = forms.CharField(max_length=254,
     #                           widget=forms.TextInput({
     #                               'class': 'form-control',
     #                               'placeholder': 'Occupation'}))
-    #company = forms.CharField(max_length=254,
+    # company = forms.CharField(max_length=254,
     #                           widget=forms.TextInput({
     #                               'class': 'form-control',
     #                               'placeholder': 'Company'}))
-    #email = forms.CharField(max_length=254,
+    # email = forms.CharField(max_length=254,
     #                        widget=forms.TextInput({
     #                            'class': 'form-control',
     #                            'placeholder': 'Email/Username'}))
-    #password = forms.CharField(label=_("Password"),
+    # password = forms.CharField(label=_("Password"),
     #                           widget=forms.PasswordInput({
     #                               'class': 'form-control',
     #                               'placeholder':'Password'}))
+
+
+class DisplayWeatherDataForm(forms.Form):
+    state = forms.Select()
+    city = forms.Select()
+    date = forms.DateField()

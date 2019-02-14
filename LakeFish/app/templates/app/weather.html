@@ -9,7 +9,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h3>Enter Your Location</h3>
-      <form action='displayweather' method='post'>
+      <form action='displayweather' method='post' class="form-horizontal">
         {% csrf_token %}
         <div class="form-group">
             <input type="hidden" name="country" id="countryId" value="US"/>
@@ -17,13 +17,13 @@
         <div class="form-group">
             <label for="stateID">State</label>
             <select name="state" class="states order-alpha form-control" id="stateId">
-                <option value="">Select State</option>
+                <option>Select State</option>
             </select>
         </div>
         <div class="form-group">
             <label for="cityId">City</label>
             <select name="city" class="cities order-alpha form-control" id="cityId">
-                <option value="">Select City</option>
+                <option>Select City</option>
             </select>
         </div>
         <div class="form-group">
@@ -33,7 +33,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker1'>
-                              <input type='text' class="form-control" />
+                              <input name="date" type='text' class="form-control" />
                                   <span class="input-group-addon">
                                       <span class="glyphicon glyphicon-calendar"></span>
                                   </span>
