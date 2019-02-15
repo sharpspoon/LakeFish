@@ -70,7 +70,6 @@ def test210_testInit_CheckVariableCreation():
     assert scraper.directory == "./weather_data/tx/"
     assert scraper.filename == "./weather_data/tx/txdall18.dat"
     assert scraper.go_ahead == True
-    assert scraper.key == "2dd9e033bfb386fa272686e32b748dda"
     assert scraper.lat == "32.7762719"
     assert scraper.lng == "-96.7968559"
     assert scraper.max_days == 0
@@ -88,7 +87,6 @@ def test215_testInit_CheckVariableCreation_DifferentData():
     assert scraper.directory == "./weather_data/tx/"
     assert scraper.filename == "./weather_data/tx/txdall18.dat"
     assert scraper.go_ahead == True
-    assert scraper.key == "2dd9e033bfb386fa272686e32b748dda"
     assert scraper.lat == "32.7762719"
     assert scraper.lng == "-96.7968559"
     assert scraper.max_days == 0
@@ -123,7 +121,7 @@ def test300_testOutputData_MakeSureFileContainsAllDataPoints():
             date = lines[index].split()
             months.append(date[0])
             max_days = int(date[1])
-            index += max_days
+            index += max_days + 1
 
     assert correct_data == True
 
@@ -134,7 +132,6 @@ def test310_testOutputData_CheckForMonthOrder():
     date = "4/2015"
     scraper = WeatherScraper(user_loc, date)
     copyfile(scraper.filename, backup)
-
     scraper.run()
 
     with open(scraper.filename, 'r') as f:
@@ -151,7 +148,7 @@ def test310_testOutputData_CheckForMonthOrder():
             date = lines[index].split()
             months.append(date[0])
             max_days = int(date[1])
-            index += max_days
+            index += max_days + 1
 
             for x in range(1, len(months)):
                 if int(months[x]) > int(months[x - 1]):
