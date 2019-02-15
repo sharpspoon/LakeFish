@@ -3,7 +3,7 @@ import datetime
 import errno
 import os
 import time
-
+import random
 from geopy.geocoders import Nominatim
 from requests import get
 
@@ -37,7 +37,14 @@ class WeatherScraper:
         self.city = location.address.split(',')[0].strip()
 
         # Dark Sky API Key
-        self.key = "2dd9e033bfb386fa272686e32b748dda"
+        a = random.randint(0, 2)
+        if a == 0:
+            #self.key = "2dd9e033bfb386fa272686e32b748dda"
+            self.key = "bd13ad063cdbb5d416accbd8652ef28d"
+        elif a == 1:
+            self.key = "bd13ad063cdbb5d416accbd8652ef28d"
+        elif a == 2:
+            self.key = "d05065b58ee0775eb0a72fadb7d09aa9"
 
         # sets up users date information
         dates = [x.strip() for x in date.split('/')]
@@ -85,6 +92,8 @@ class WeatherScraper:
         # if file is already existing pull its filename
         if self.data_retrieved:
             return self.filename
+        else:
+            return "File for this specific date and location not in database..."
 
     def run(self):
         if self.go_ahead:
@@ -110,7 +119,7 @@ class WeatherScraper:
         month_info = calendar.monthrange(int(self.year),
                                          int(self.month))  # contains month number[0] and month max days[1]
         self.max_days = month_info[1]  # gets max days from current month
-        for day in range(1, self.max_days):
+        for day in range(1, self.max_days + 1):
             dt = datetime.datetime(int(self.year), int(self.month),
                                    day)  # creates a datetime object for the users specific month and year
             # converts the datetime object into the UNIX format
@@ -136,9 +145,19 @@ class WeatherScraper:
         weather_info = []
         for day in self.weather_jsons:
             info = day['daily']['data'][0]
-            keys = ['temperatureHigh', 'dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
+            keys = ['dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
                     'precipIntensity', 'precipAccumulation']
             data = []
+            hours = day['hourly']['data']
+            apparent_temp = 0
+            num_of_hours = len(hours)
+            for hour in hours:
+                if "temperature" in hour:
+                    apparent_temp += float(hour['temperature'])
+                elif "apparentTemperature" in hour:
+                    apparent_temp += float(hour['apparentTemperature'])
+            avg_temp = round(apparent_temp / float(num_of_hours), 1)
+            data.append(avg_temp)
             for key in keys:
                 if key in info:
                     if key == 'cloudCover':
@@ -167,8 +186,8 @@ class WeatherScraper:
                 date = file_info[0].split()
                 month = int(date[0])
                 max_days = int(date[1])
-                months[month] = file_info[:max_days]
-                file_info = file_info[max_days:]
+                months[month] = file_info[:max_days + 1]
+                file_info = file_info[max_days + 1:]
             write_type = "w"
         else:
             write_type = "a+"
@@ -219,7 +238,7 @@ class WeatherScraper:
                 return True
             # month not currently located, but could be later on in the file, continue searching
             elif date[0] < self.month:
-                lines = lines[max_days:]
+                lines = lines[max_days + 1:]
             elif date[0] > self.month:  # older or earlier months are in file, but not this month
                 print("Month not located in database...")
                 self.out_of_order = True
