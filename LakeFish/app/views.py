@@ -13,6 +13,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
+from Weather import WeatherScraper as ws
+
 
 def home(request):
     """Renders the home page."""
@@ -96,7 +98,12 @@ def weather(request):
 
 def displayWeather(request):
     if (request.method == 'POST'):
-        print(request.POST)
+        abbrev_state = ws.state_to_abbrev(request.POST['state'])
+        user_location = request.POST['city'] + ", " + abbrev_state
+
+        wScraper = ws.WeatherScraper(user_location, request.POST['date'])
+        wScraper.run()
+        weather_file = wScraper.get_file_path()
 
         weatherData = []
         temperature = []
@@ -108,9 +115,10 @@ def displayWeather(request):
         precipIntensity = []
         precipAccumulation = []
         formattedWeatherList = []
-        with open('./Weather/Data/AL/ALMOBI16.dat', newline='') as weatherFile:
+        with open(weather_file, newline='') as weatherFile:
             header_line = next(weatherFile)  # Format: Month #ofDays Year
             weatherMonth = int(header_line.split(' ')[0])
+            numOfDays = int(header_line.split(' ')[1])
             weatherYear = int(header_line.split(' ')[2])
             weatherDate = datetime(weatherYear, weatherMonth, 1)
             formattedDate = weatherDate.strftime("%B %Y")
@@ -145,6 +153,10 @@ def displayWeather(request):
                 'weatherDate': formattedDate,
                 'temperature': temperature,
                 'dew_point': dewPoint,
-                'wind_speed': windSpeed
+                'wind_speed': windSpeed,
+                'weatherMonth': weatherMonth,
+                'numOfDays': numOfDays,
+                'weatherYear': weatherYear,
+                'user_loc': user_location
             }
         )

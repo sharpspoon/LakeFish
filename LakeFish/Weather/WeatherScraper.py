@@ -110,7 +110,7 @@ class WeatherScraper:
         month_info = calendar.monthrange(int(self.year),
                                          int(self.month))  # contains month number[0] and month max days[1]
         self.max_days = month_info[1]  # gets max days from current month
-        for day in range(1, self.max_days):
+        for day in range(1, self.max_days + 1):
             dt = datetime.datetime(int(self.year), int(self.month),
                                    day)  # creates a datetime object for the users specific month and year
             # converts the datetime object into the UNIX format

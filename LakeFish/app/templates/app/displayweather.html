@@ -1,12 +1,15 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-<h1>
-  Display Historical Weather Data for {{ weatherDate }}
-</h1>
+<!-- <h1>
+  Display Historical Weather Data for {{ user_loc }} {{ weatherDate }}
+</h1> -->
 
 <div class="panel panel-default">
   <div class='panel-body'>
+    <h3>Historical Weather Data</h3>
+    <p>Location: {{ user_loc }}</p>
+    <p>Date: {{ weatherDate }}</p>
     <canvas id='myChart'></canvas>
   </div>
 </div>
@@ -22,7 +25,10 @@
   var temp = "{{ temperature | safe }}".replace(/[\[\]']+/g, '').split(',')
   var dew_point = "{{ dew_point | safe }}".replace(/[\[\]']+/g, '').split(',')
   var wind_speed = "{{ wind_speed | safe }}".replace(/[\[\]']+/g, '').split(',')
-  var daysTest = getDaysInMonth(1, 28, 2016)
+  var weatherMonth = "{{ weatherMonth }}"
+  var numOfDays = "{{ numOfDays }}"
+  var weatherYear = "{{ weatherYear }}"
+  var daysTest = getDaysInMonth((weatherMonth - 1), numOfDays, weatherYear)
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -57,18 +63,18 @@
 
     // Configuration options go here
     options: {
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    display: false
-                }
-            }],
-            yAxes: [{
-                gridLines: {
-                    display: true
-                }
-            }]
-        }
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+            display: true
+          }
+        }]
+      }
     }
   });
 
@@ -77,15 +83,14 @@
     var days = [];
     var dayCounter = 0;
     while (date.getMonth() == month) {
-        if (dayCounter != numOfDays){
-            var day = new Date(date);
-            dayCounter = dayCounter + 1;
-            days.push(monthNames[day.getMonth()] + '-' + dayCounter);
-            date.setDate(date.getDate() + 1);
-        }
-        else{
-            break;
-        }
+      if (dayCounter != numOfDays) {
+        var day = new Date(date);
+        dayCounter = dayCounter + 1;
+        days.push(monthNames[day.getMonth()] + '-' + dayCounter);
+        date.setDate(date.getDate() + 1);
+      } else {
+        break;
+      }
     }
     return days;
   }
