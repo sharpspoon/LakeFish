@@ -3,7 +3,7 @@ Created on Feb 17, 2019
 
 @author: Tyler
 '''
-import sys, string, os
+import sys, string, os, configparser
 #os.system("C:/Documents and Settings/flow_model/flow.exe")
 
 
@@ -18,14 +18,22 @@ def createInitFile(parm={}):
     endDate = handleDates(endDate)
     location = parm['location']
     location = handleLocation(location, startDate[2])
-    fileHandler = open("D:\input.ini","w+")
-    fileHandler.write("Simulation for lake : Waconia, for user : fangxu@hal.lamar.edu\r\n")
-    fileHandler.write("%s\r\n" % location)
+    with open('INPUT.INI', 'w') as configfile:
+        configfile.write("Simulation for lake : Waconia, for user : fangxu@hal.lamar.edu\r\n")
+        configfile.write("%s\r\n" % location)
+        configfile.write("32  1\r\n")
+        configfile.write("%s  %s  %s  %s  %s  %s\r\n" % (startDate[0], startDate[1], startDate[2], endDate[0], endDate[1], endDate[2]))
+    pathFile = open("path.txt", "w")
+    pathFile.write("D:\Lake2019\\\r\n")
+    pathFile.write("D:\Lake2019\MeteorologicalData\%s\\\r\n" % location[0:2])
     return httpResponse
 
 def handleDates(date):
     newDate = [0 for _ in range(3)]
-    newDate[0] = date[:2]
+    if (date[:1] == '0'):
+        newDate[0] = date[1:2]
+    else:
+        newDate[0] = date[:2]
     newDate[1] = date[2:4]
     newDate[2] = date[4:]
     return newDate
