@@ -1,3 +1,0 @@
-C:\Users\I868538\source\repos\sharpspoon\LakeFish\LakeFish\obj\Debug\LakeFish.pyproj.CoreCompileInputs.cache
-C:\Users\I868538\source\repos\sharpspoon\LakeFish\LakeFish\bin\Microsoft.PythonTools.WebRole.dll
-C:\Users\I868538\source\repos\sharpspoon\LakeFish\LakeFish\bin\wfastcgi.py
