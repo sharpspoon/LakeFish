@@ -13,7 +13,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
-from Weather import WeatherScraper as ws
+from Weather import weatherscraper as ws
 
 
 def home(request):
