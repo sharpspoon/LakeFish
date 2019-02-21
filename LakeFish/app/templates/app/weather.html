@@ -1,0 +1,65 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="row">
+  <h1>Weather Data <i class="fas fa-cloud-sun-rain"></i></h1>
+  <br>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>Enter Your Location</h3>
+      <form action='displayweather' method='post' class="form-horizontal">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="hidden" name="country" id="countryId" value="US"/>
+        </div>
+        <div class="form-group">
+            <label for="stateID">State</label>
+            <select name="state" class="states order-alpha form-control" id="stateId">
+                <option>Select State</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cityId">City</label>
+            <select name="city" class="cities order-alpha form-control" id="cityId">
+                <option>Select City</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="datetimepicker1">Select Month and Year</label>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                              <input name="date" type='text' class="form-control" />
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value='Submit' name='submitbtn' />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="//geodata.solutions/includes/statecity.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                viewMode: 'years',
+                format: 'MM/YYYY',
+                allowInputToggle: true
+            });
+        });
+    </script>
+{% endblock %}

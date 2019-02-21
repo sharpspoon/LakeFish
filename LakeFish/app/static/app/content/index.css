@@ -1,0 +1,27 @@
+.jumbotron {
+    background-color:#054373 !important;
+}
+
+.equal {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* div[class*='col-'] {
+  flex:1 1 auto;
+  display: flex;
+} */
+
+.homePanels {
+  height: 100%;
+  background-color: #054373;
+  color: white;
+  display: flex;
+}
+
+#homeTitle, .lead{
+  color: white;
+}

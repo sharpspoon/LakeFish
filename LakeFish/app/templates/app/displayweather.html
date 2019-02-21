@@ -1,0 +1,98 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<!-- <h1>
+  Display Historical Weather Data for {{ user_loc }} {{ weatherDate }}
+</h1> -->
+
+<div class="panel panel-default">
+  <div class='panel-body'>
+    <h3>Historical Weather Data</h3>
+    <p>Location: {{ user_loc }}</p>
+    <p>Date: {{ weatherDate }}</p>
+    <canvas id='myChart'></canvas>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+<script type="text/javascript">
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+    "Sept", "Oct", "Nov", "Dec"
+  ];
+  var test = "{{ file_content | safe }}"
+  var temp = "{{ temperature | safe }}".replace(/[\[\]']+/g, '').split(',')
+  var dew_point = "{{ dew_point | safe }}".replace(/[\[\]']+/g, '').split(',')
+  var wind_speed = "{{ wind_speed | safe }}".replace(/[\[\]']+/g, '').split(',')
+  var weatherMonth = "{{ weatherMonth }}"
+  var numOfDays = "{{ numOfDays }}"
+  var weatherYear = "{{ weatherYear }}"
+  var daysTest = getDaysInMonth((weatherMonth - 1), numOfDays, weatherYear)
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: daysTest,
+      datasets: [{
+          label: "Temperature",
+          backgroundColor: 'rgb(255, 0, 0)',
+          borderColor: 'rgb(255, 0, 0)',
+          fill: false,
+          data: temp,
+        },
+        {
+          label: "Dew Point",
+          backgroundColor: 'rgb(46, 129, 221)',
+          borderColor: 'rgb(46, 129, 221)',
+          fill: false,
+          data: dew_point,
+        },
+        {
+          label: "Wind Speed",
+          backgroundColor: 'rgb(0, 162, 66)',
+          borderColor: 'rgb(0, 162, 66)',
+          fill: false,
+          data: wind_speed,
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+            display: true
+          }
+        }]
+      }
+    }
+  });
+
+  function getDaysInMonth(month, numOfDays, year) {
+    var date = new Date(year, month, 1);
+    var days = [];
+    var dayCounter = 0;
+    while (date.getMonth() == month) {
+      if (dayCounter != numOfDays) {
+        var day = new Date(date);
+        dayCounter = dayCounter + 1;
+        days.push(monthNames[day.getMonth()] + '-' + dayCounter);
+        date.setDate(date.getDate() + 1);
+      } else {
+        break;
+      }
+    }
+    return days;
+  }
+</script>
+{% endblock %}
