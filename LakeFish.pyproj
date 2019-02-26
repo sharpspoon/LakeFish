@@ -36,6 +36,18 @@
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="LakeFish\NLDAS-2\common.py" />
+    <Compile Include="LakeFish\NLDAS-2\download_calculate_GFS.py" />
+    <Compile Include="LakeFish\NLDAS-2\download_calculate_NLDAS.py" />
+    <Compile Include="LakeFish\NLDAS-2\hourly_to_daily_GFS.py" />
+    <Compile Include="LakeFish\NLDAS-2\hourly_to_daily_NLDAS.py" />
+    <Compile Include="LakeFish\NLDAS-2\pyeto\convert.py" />
+    <Compile Include="LakeFish\NLDAS-2\pyeto\fao.py" />
+    <Compile Include="LakeFish\NLDAS-2\pyeto\thornthwaite.py" />
+    <Compile Include="LakeFish\NLDAS-2\pyeto\_check.py" />
+    <Compile Include="LakeFish\NLDAS-2\pyeto\__init__.py" />
+    <Compile Include="LakeFish\NLDAS-2\query_GFS.py" />
+    <Compile Include="LakeFish\NLDAS-2\query_NLDAS.py" />
     <Compile Include="manage.py" />
     <Compile Include="LakeFish\__init__.py" />
     <Compile Include="LakeFish\settings.py" />
@@ -53,10 +65,21 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="LakeFish\" />
+    <Folder Include="LakeFish\NLDAS-2\" />
+    <Folder Include="LakeFish\NLDAS-2\.idea\" />
+    <Folder Include="LakeFish\NLDAS-2\pyeto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\register.html" />
     <None Include="au.pubxml" />
+    <Content Include="LakeFish\NLDAS-2\.gitignore" />
+    <Content Include="LakeFish\NLDAS-2\.idea\misc.xml" />
+    <Content Include="LakeFish\NLDAS-2\.idea\modules.xml" />
+    <Content Include="LakeFish\NLDAS-2\.idea\vcs.xml" />
+    <Content Include="LakeFish\NLDAS-2\.idea\web_projectbwv.iml" />
+    <Content Include="LakeFish\NLDAS-2\.netrc" />
+    <Content Include="LakeFish\NLDAS-2\.urs_cookies" />
+    <Content Include="LakeFish\NLDAS-2\requirements.txt" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
