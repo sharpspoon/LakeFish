@@ -13,6 +13,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
+import os
+
 from weather import WeatherScraper as ws
 
 
@@ -66,6 +68,12 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
+
+            try:
+                os.makedirs("userData"+"\\"+username)
+            except FileExistsError:
+                pass
+
             return redirect('home')
     else:
         form = UserCreationForm()
