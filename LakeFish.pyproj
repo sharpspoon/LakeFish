@@ -70,6 +70,7 @@
     <Folder Include="LakeFish\NLDAS-2\pyeto\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\nldas2.html" />
     <Content Include="app\templates\app\register.html" />
     <None Include="au.pubxml" />
     <Content Include="LakeFish\NLDAS-2\.gitignore" />

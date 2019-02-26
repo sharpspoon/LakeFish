@@ -58,6 +58,19 @@ def about(request):
         }
     )
 
+def nldas2(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/nldas2.html',
+        {
+            'title': 'NLDAS-2',
+            'message': 'Your application description page.',
+            'year': datetime.now().year,
+        }
+    )
+
 
 def signup(request):
     if request.method == 'POST':
