@@ -70,7 +70,7 @@ def signup(request):
             auth_login(request, user)
 
             try:
-                os.makedirs("userData"+"\\"+username)
+                os.makedirs("FortranModel\\"+username)
             except FileExistsError:
                 pass
 
