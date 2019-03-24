@@ -10,3 +10,4 @@ Weather/geckodriver.log
 Weather/.vscode/.ropeproject/objectdb
 Weather/.vscode/.ropeproject/config.py
 Weather/WeatherScraper.pyc
+*.pyc
