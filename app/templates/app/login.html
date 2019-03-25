@@ -6,77 +6,77 @@
 <div class="row" id="login-block">
     <div class='col-sm-6 col-sm-offset-3'>
         <div class="panel panel-default">
-          <div class="panel-body">
-              <div class="row">
-                  <div class="col-sm-9 col-sm-offset-3">
-                      <h2>
-                          <p id="login-title">LakeFish <i class="fas fa-fish"></i></p>
-                      </h2>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-12">
-                      <section id="loginForm">
-                          <form action="." method="post" class="form-horizontal">
-                              {% csrf_token %}
-                              <!-- <h4>Use a local account to log in.</h4> -->
-                              <!-- <hr /> -->
-                              <div class="form-group">
-                                  <div class="col-sm-8 col-sm-offset-2">
-                                      <label for="id_username">Email</label>
-                                      {{ form.username}}
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <div class="col-sm-8 col-sm-offset-2">
-                                      <label for="id_password">Password</label>
-                                      {{ form.password }}
-                                  </div>
-                              </div>
-                              <!-- <div class="form-group">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <h2>
+                            <p id="login-title">LakeFish <i class="fas fa-fish"></i></p>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <section id="loginForm">
+                            <form action="." method="post" class="form-horizontal">
+                                {% csrf_token %}
+                                <!-- <h4>Use a local account to log in.</h4> -->
+                                <!-- <hr /> -->
+                                <div class="form-group">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <label for="id_username">Email</label>
+                                        {{ form.username}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <label for="id_password">Password</label>
+                                        {{ form.password }}
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
                                   <label for="id_username" class="col-md-2 control-label">Email/Username</label>
                                   <div class="col-md-10">
                                       {{ form.username }}
                                   </div>
                               </div> -->
-                              <!-- <div class="form-group">
+                                <!-- <div class="form-group">
                                   <label for="id_password" class="col-md-2 control-label">Password</label>
                                   <div class="col-md-10">
                                       {{ form.password }}
                                   </div>
                               </div> -->
-                              <div class="form-group">
-                                  <div class="col-sm-8 col-sm-offset-2">
-                                      <input type="hidden" name="next" value="/" />
-                                      <input type="submit" value="Log in" class="btn btn-primary btn-block" />
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <div class="col-sm-9 col-sm-offset-3">
-                                      <a href="#" class="text-center">Having trouble logging in?</a>
-                                  </div>
-                              </div>
-                              <div class="strike">
-                                  <span>or</span>
-                              </div>
-                              <div class="form-group">
-                                  <div class="col-sm-7 col-sm-offset-2">
-                                      <!-- <input type="hidden" name="next" value="/" /> -->
-                                      <a href="{% url 'register' %}" class="btn btn-default btn-block">Sign Up</a>
-                                      <!-- <input type="submit" value="Sign Up" class="btn btn-secondary btn-block" /> -->
-                                  </div>
-                              </div>
-                              {% if form.errors %}
-                              <p class="validation-summary-errors">Please enter a correct user name and password.</p>
-                              {% endif %}
-                          </form>
-                      </section>
-                  </div>
-                  <div class="col-md-4">
-                      <section id="socialLoginForm"></section>
-                  </div>
-              </div>
-          </div>
+                                <div class="form-group">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <input type="hidden" name="next" value="/" />
+                                        <input type="submit" value="Log in" class="btn btn-primary btn-block" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-9 col-sm-offset-3">
+                                        <a href="#" class="text-center">Having trouble logging in?</a>
+                                    </div>
+                                </div>
+                                <div class="strike">
+                                    <span>or</span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-7 col-sm-offset-2">
+                                        <!-- <input type="hidden" name="next" value="/" /> -->
+                                        <a href="{% url 'register' %}" class="btn btn-default btn-block">Sign Up</a>
+                                        <!-- <input type="submit" value="Sign Up" class="btn btn-secondary btn-block" /> -->
+                                    </div>
+                                </div>
+                                {% if form.errors %}
+                                <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                                {% endif %}
+                            </form>
+                        </section>
+                    </div>
+                    <div class="col-md-4">
+                        <section id="socialLoginForm"></section>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -86,7 +86,7 @@
 
 {% block scripts %}
 
-    {% load staticfiles %}
+{% load staticfiles %}
 <script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
 
 {% endblock %}

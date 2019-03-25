@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -12,7 +11,8 @@
   <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'app/content/index.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'app/content/login.css' %}">
-  <script defer src="https://use.fontawesome.com/releases/v5.7.0/js/all.js" integrity="sha384-qD/MNBVMm3hVYCbRTSOW130+CWeRIKbpot9/gR1BHkd7sIct4QKhT1hOPd+2hO8K" crossorigin="anonymous">
+  <script defer src="https://use.fontawesome.com/releases/v5.7.0/js/all.js"
+    integrity="sha384-qD/MNBVMm3hVYCbRTSOW130+CWeRIKbpot9/gR1BHkd7sIct4QKhT1hOPd+2hO8K" crossorigin="anonymous">
   </script>
   <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
 </head>
@@ -33,14 +33,16 @@
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'contact' %}">Contact</a></li>
+          <!--FIXME: Only show Weather and Simulate Lake when user is logged in -->
           <li><a href="{% url 'weather' %}">Weather</a></li>
+          <li><a href="{% url 'simulate lake' %}">Simulate Lake</a></li>
         </ul>
         {% include 'app/loginpartial.html' %}
       </div>
     </div>
   </div>
 
-  <div class="container body-content">
+  <div class=" container body-content">
     {% block content %}{% endblock %}
     <hr />
     <footer>

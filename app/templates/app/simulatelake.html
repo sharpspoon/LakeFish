@@ -5,7 +5,9 @@
 <!-- focus on new lake for now-->
 <div class="row">
     <h1>Simulate New Lake <i class="fas fa-chart-area"></i></h1>
-    <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Create Lake</button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createLakeModal">
+        <i class="fas fa-plus"></i> Create Lake
+    </button>
     <br>
     <br>
     <div class='panel panel-default'>
@@ -39,10 +41,122 @@
                         <th scope="row">5</th>
                         <td>Lake Jonathan</td>
                     </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>Lake Robin</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
+<!--Create Lake Modal-->
+<div class="modal fade" id="createLakeModal" tabindex="-1" role="dialog" aria-labelledby="createLakeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="createLakeModalLabel">Create Lake Model</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#lakeinfo">Lake Information</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#weatherstation">Weather Station</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#lakegeo">Lake Geometry</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="lakeinfo" class="tab-pane fade in active">
+                        <h4>
+                            <b>Lake Information</b>
+                        </h4>
+                        <p>
+                            <i>Enter basic information for lake model.</i>
+                        </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action=".">
+                                    <!--{% csrf_token %}-->
+                                    <div class="form-group">
+                                        <label for="simTitle">Simulation Title</label>
+                                        <input placeholder="Enter simulation title." type="text" class="form-control"
+                                            id="simTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lakeName">Lake Name</label>
+                                        <input placeholder="Enter lake name." type="text" class="form-control"
+                                            id="lakeName">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" name="country" id="countryId" value="US" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stateId">U.S. State</label>
+                                        <select name="state" class="states order-alpha form-control" id="stateId">
+                                            <option value="">Select State</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="weatherstation" class="tab-pane fade">
+                        <h4>
+                            <b>Station Information</b>
+                        </h4>
+                        <p>
+                            <i>Select city and weather station near lake.</i>
+                        </p>
+                        <hr>
+                    </div>
+                    <div id="lakegeo" class="tab-pane fade">
+                        <h4>Lake Geometry</h4>
+                        <p>
+                            <i>Enter the geometric characteristics of lake model.</i>
+                        </p>
+                        <hr>
+                        <form action=".">
+                            <!--{% csrf_token %}-->
+                            <div class="form-group">
+                                <label for="surfaceArea">Surface Area</label>
+                                <input placeholder="Enter surface area value." type="text" class="form-control"
+                                    id="surfaceArea">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxDepth">Maximum Depth</label>
+                                <input placeholder="Enter maximum depth value." type="text" class="form-control"
+                                    id="maxDepth">
+                            </div>
+                            <div class="form-group">
+                                <label for="elevation">Elevation Above Sea Level</label>
+                                <input placeholder="Enter value." type="text" class="form-control"
+                                    id="elevation">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
+{% block scripts %}
+<script src="//geodata.solutions/includes/state.js"></script>
+{% endblock%}
