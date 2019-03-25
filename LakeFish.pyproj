@@ -73,7 +73,6 @@
     <Content Include="app\templates\app\nldas2.html" />
     <Content Include="app\templates\app\register.html" />
     <None Include="au.pubxml" />
-    <Content Include="LakeFish\NLDAS-2\prevWork\.gitignore" />
     <Content Include="LakeFish\NLDAS-2\prevWork\.idea\misc.xml" />
     <Content Include="LakeFish\NLDAS-2\prevWork\.idea\modules.xml" />
     <Content Include="LakeFish\NLDAS-2\prevWork\.idea\vcs.xml" />
