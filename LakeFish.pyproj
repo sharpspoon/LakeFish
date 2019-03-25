@@ -41,11 +41,11 @@
     <Compile Include="LakeFish\NLDAS-2\download_calculate_NLDAS.py" />
     <Compile Include="LakeFish\NLDAS-2\hourly_to_daily_GFS.py" />
     <Compile Include="LakeFish\NLDAS-2\hourly_to_daily_NLDAS.py" />
-    <Compile Include="LakeFish\NLDAS-2\pyeto\convert.py" />
-    <Compile Include="LakeFish\NLDAS-2\pyeto\fao.py" />
-    <Compile Include="LakeFish\NLDAS-2\pyeto\thornthwaite.py" />
-    <Compile Include="LakeFish\NLDAS-2\pyeto\_check.py" />
-    <Compile Include="LakeFish\NLDAS-2\pyeto\__init__.py" />
+    <Compile Include="LakeFish\NLDAS-2\convert.py" />
+    <Compile Include="LakeFish\NLDAS-2\fao.py" />
+    <Compile Include="LakeFish\NLDAS-2\thornthwaite.py" />
+    <Compile Include="LakeFish\NLDAS-2\_check.py" />
+    <Compile Include="LakeFish\NLDAS-2\__init__.py" />
     <Compile Include="LakeFish\NLDAS-2\query_GFS.py" />
     <Compile Include="LakeFish\NLDAS-2\query_NLDAS.py" />
     <Compile Include="manage.py" />
@@ -67,7 +67,6 @@
     <Folder Include="LakeFish\" />
     <Folder Include="LakeFish\NLDAS-2\" />
     <Folder Include="LakeFish\NLDAS-2\.idea\" />
-    <Folder Include="LakeFish\NLDAS-2\pyeto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\nldas2.html" />
