@@ -181,3 +181,14 @@ def displayWeather(request):
                 'user_loc': user_location
             }
         )
+
+def simulateLake(request):
+    return render(
+        request,
+        'app/simulatelake.html',
+        {
+            'title': 'Simulate Lake',
+            'message': 'Simulate Lake page.',
+            'year': datetime.now().year,
+        }
+    )

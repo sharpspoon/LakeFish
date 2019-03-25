@@ -1,0 +1,48 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<!--TODO: Create layout to include exisiting simulations-->
+<!-- focus on new lake for now-->
+<div class="row">
+    <h1>Simulate New Lake <i class="fas fa-chart-area"></i></h1>
+    <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Create Lake</button>
+    <br>
+    <br>
+    <div class='panel panel-default'>
+        <div class="panel-body">
+            <h2>Your Saved Lake Models</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Lake Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Lake Cameron</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Lake Jack</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Lake Tyler</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Lake Jordan</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Lake Jonathan</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
