@@ -15,8 +15,7 @@ import os
 import numpy as np
 import glob
 from netCDF4 import Dataset
-import pyeto
-from pyeto import convert
+import convert
 import common
 
 # variables in original grb file of NLDAS-2 monitor data
