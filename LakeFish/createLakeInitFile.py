@@ -6,7 +6,7 @@ Created on Feb 24, 2019
 
 def gatherPost():
     return
-    #takes in the post from the user and saves them as individual variables that can be accessed later
+    #takes in the post from the user and saves them in a dictionary that can be accessed by createInit
 def createInit(userInput):
     with open('D:/Lake2019/User/Lake_Input.ini', 'w') as configfile:
         configfile.write('201208,"Version number Year & Month Developed"\n')

@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\LakeFish"
+    "\\app",
+    "\\app\\templates\\app",
+    "\\test",
+    "\\weather",
+    "\\weather\\Demos",
+    "\\weather\\__pycache__"
   ],
+  "SelectedNode": "\\app\\templates",
   "PreviewInSolutionExplorer": false
 }

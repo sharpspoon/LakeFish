@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from app.forms import DisplayWeatherDataForm
+from app.forms import CreateInitFileForm
 from datetime import datetime
 
 from django.contrib.auth import login, authenticate
@@ -183,6 +184,7 @@ def displayWeather(request):
         )
 
 def simulateLake(request):
+    form = CreateInitFileForm()
     return render(
         request,
         'app/simulatelake.html',
@@ -190,5 +192,6 @@ def simulateLake(request):
             'title': 'Simulate Lake',
             'message': 'Simulate Lake page.',
             'year': datetime.now().year,
+            'form': form
         }
     )

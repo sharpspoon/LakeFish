@@ -48,3 +48,11 @@ class DisplayWeatherDataForm(forms.Form):
     state = forms.Select()
     city = forms.Select()
     date = forms.DateField()
+
+class CreateInitFileForm(forms.Form):
+    sim_title = forms.Select()
+    lake_name = forms.Select()
+    state = forms.Select()
+    surface_area = forms.Select()
+    max_depth = forms.Select()
+    elevation_ = forms.Select()
