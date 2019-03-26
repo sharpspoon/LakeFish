@@ -1,19 +1,14 @@
 '''
 Created on Feb 24, 2019
 
-@author: Tyler
+@author: Tyler, Cameron
 '''
 
-if __name__ == '__main__':
-    pass
-
-def createInitFile(parm={}):
-    pass
 def gatherPost():
     return
-    #takes in the post from the user and saves them as indevidual variables that can be accessed later
+    #takes in the post from the user and saves them as individual variables that can be accessed later
 def createInit(userInput):
-    with open('D:/Lake2019/User/Lake_Input2.ini', 'w') as configfile:
+    with open('D:/Lake2019/User/Lake_Input.ini', 'w') as configfile:
         configfile.write('201208,"Version number Year & Month Developed"\n')
         #Abbv Lake name
         configfile.write('%s\r\n' % userInput['LakeName'])
@@ -53,17 +48,19 @@ def createInit(userInput):
         configfile.write('%.2f,%.2f,%.2f,%.2f,%.2f,%d\r\n$\r\n\n\n' % (userInput['BTICE'], userInput['ALFICE'], userInput['GMICE'],
                           userInput['BTSNOW'], userInput['ALFSNOW'], userInput['GMSNOW']))
         # thickis - initial ice thickness, thicksn - initial snow thickness
-        configfile.write('%d,%d\r\n$\r\n\n\n' % (userInput['THICKIS'], userInput['THICKSN']))
+        configfile.write('%d,%d\r\n$\r\n' % (userInput['THICKIS'], userInput['THICKSN']))
         # Z(I), I=1, MBOT) - 10 depths per line. First line fixed value
         # Need to figure out better how these depths are calculated. Not final
+        configfile.write('%12 (Z(I),I=1,MBOT) - Z-Initial water depth, 8 depths per line\r\n')
+        configfile.write('%12 DO NOT change the first line - these small depths for predict ice formation\r\n')
         configfile.write('0.02,0,06,0.1,0.2,0.3,0.4,0.5,0.6,0.8,1\r\n')
-        configfile.write('%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f\r\n' % (userInput['ZDEPTH'][0], userInput['ZDEPTH'][1],
+        configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][0], userInput['ZDEPTH'][1],
                          userInput['ZDEPTH'][2], userInput['ZDEPTH'][3], userInput['ZDEPTH'][4], userInput['ZDEPTH'][5],
                          userInput['ZDEPTH'][6], userInput['ZDEPTH'][7], userInput['ZDEPTH'][8], userInput['ZDEPTH'][9]))
-        configfile.write('%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f\r\n' % (userInput['ZDEPTH'][10], userInput['ZDEPTH'][11],
+        configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][10], userInput['ZDEPTH'][11],
                          userInput['ZDEPTH'][12], userInput['ZDEPTH'][13], userInput['ZDEPTH'][14], userInput['ZDEPTH'][15],
                          userInput['ZDEPTH'][16], userInput['ZDEPTH'][17], userInput['ZDEPTH'][18], userInput['ZDEPTH'][19]))
-        configfile.write('%.1f,%.1f\r\n$\r\n\n' % (userInput['ZDEPTH'][20], userInput['ZDEPTH'][21]))
+        configfile.write('%s,%s\r\n$\r\n\n' % (userInput['ZDEPTH'][20], userInput['ZDEPTH'][21]))
         # T2 - initial water temp
         configfile.write('%d\r\n$\r\n\n' % userInput['T2'])
         # C2 - initial suspended solids
@@ -151,9 +148,9 @@ def handleStationName(cityName, stateName):
         stationList += [line.split()]
     for x in stationList:
         if(x[6] == stateName):
-            stateNum = x[0]
+            stateNum = int(x[0])
             if(x[7] == cityName):
-                cityNum = x[1]        
+                cityNum = int(x[1])        
     return stateNum, cityNum
 
 if __name__ == "__main__":
@@ -171,7 +168,7 @@ if __name__ == "__main__":
         'FDAY' : 31,
         'FYEAR' : 2008,
         'MBOT' : 32,
-        'ZDEPTH' : [1.25,1.5,2,2.5,3,3.5,4,5,7,9,11,14,17,20,23,26,30,34,38,42,46,50],
+        'ZDEPTH' : ['1.25','1.5','2','2.5','3','3.5','4','5','7','9','11','14','17','20','23','26','30','34','38','42','46','50'],
         'ZMAX' : 50.0,
         'ST' : 458,
         'IPROFILE' : 1,
@@ -224,4 +221,4 @@ if __name__ == "__main__":
         'FDEPTH' : [1,10,20,30,48],
         'NDAYO' : 1,
         'NYEAR' : 1}
-    createInitFile(inputDictionary)
+    createInit(inputDictionary)
