@@ -53,14 +53,21 @@ def createInit(userInput):
         # Need to figure out better how these depths are calculated. Not final
         configfile.write('%12 (Z(I),I=1,MBOT) - Z-Initial water depth, 8 depths per line\r\n')
         configfile.write('%12 DO NOT change the first line - these small depths for predict ice formation\r\n')
-        configfile.write('0.02,0,06,0.1,0.2,0.3,0.4,0.5,0.6,0.8,1\r\n')
-        configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][0], userInput['ZDEPTH'][1],
-                         userInput['ZDEPTH'][2], userInput['ZDEPTH'][3], userInput['ZDEPTH'][4], userInput['ZDEPTH'][5],
-                         userInput['ZDEPTH'][6], userInput['ZDEPTH'][7], userInput['ZDEPTH'][8], userInput['ZDEPTH'][9]))
-        configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][10], userInput['ZDEPTH'][11],
-                         userInput['ZDEPTH'][12], userInput['ZDEPTH'][13], userInput['ZDEPTH'][14], userInput['ZDEPTH'][15],
-                         userInput['ZDEPTH'][16], userInput['ZDEPTH'][17], userInput['ZDEPTH'][18], userInput['ZDEPTH'][19]))
-        configfile.write('%s,%s\r\n$\r\n\n' % (userInput['ZDEPTH'][20], userInput['ZDEPTH'][21]))
+        configfile.write('0.02,0.06,0.1,0.2,0.3,0.4,0.5,0.6,0.8,1\r\n')
+        for i in range(0, userInput['MBOT'] - 10):
+            configfile.write('%s' % userInput['ZDEPTH'][i])
+            if ((i+1)%10 == 0) | (i == userInput['MBOT'] - 11):
+                configfile.write('\r\n')
+            else:
+                configfile.write(',')
+        configfile.write('$\r\n\n')
+#         configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][0], userInput['ZDEPTH'][1],
+#                          userInput['ZDEPTH'][2], userInput['ZDEPTH'][3], userInput['ZDEPTH'][4], userInput['ZDEPTH'][5],
+#                          userInput['ZDEPTH'][6], userInput['ZDEPTH'][7], userInput['ZDEPTH'][8], userInput['ZDEPTH'][9]))
+#         configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][10], userInput['ZDEPTH'][11],
+#                          userInput['ZDEPTH'][12], userInput['ZDEPTH'][13], userInput['ZDEPTH'][14], userInput['ZDEPTH'][15],
+#                          userInput['ZDEPTH'][16], userInput['ZDEPTH'][17], userInput['ZDEPTH'][18], userInput['ZDEPTH'][19]))
+#         configfile.write('%s,%s\r\n$\r\n\n' % (userInput['ZDEPTH'][20], userInput['ZDEPTH'][21]))
         # T2 - initial water temp
         configfile.write('%d\r\n$\r\n\n' % userInput['T2'])
         # C2 - initial suspended solids
