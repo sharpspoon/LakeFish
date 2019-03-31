@@ -9,6 +9,10 @@ def jday_calc(date_string):
     year = date_string[-2:] # RIGHT(YEAR(W2),2) -> Just grabs the year number
 
     formated = year + days 
+
+    #TODO =formated-LEFT(formated,2)*1000-1+time
+    # JDAY IS NOT DONE
+
     return formated
 
 def solar_rad_cal(records):
