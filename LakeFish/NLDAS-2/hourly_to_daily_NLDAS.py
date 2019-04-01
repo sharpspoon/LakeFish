@@ -11,6 +11,7 @@
  """
 
 import Nio
+import netCDF4
 import os
 import numpy as np
 import glob
