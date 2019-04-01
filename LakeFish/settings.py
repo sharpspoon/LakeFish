@@ -24,9 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '867e41a9-be94-42b1-8b04-2a31b7da30c8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False  # Jonathan: I set debug to false in order to create custom error pages
 DEBUG = True
 
-ALLOWED_HOSTS = ['sp01.eng.auburn.edu','localhost']
+ALLOWED_HOSTS = ['sp01.eng.auburn.edu', 'localhost']
 
 
 # Application definition
@@ -77,34 +78,35 @@ WSGI_APPLICATION = 'LakeFish.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #    }
-#}
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lakefish',
         'USER': 'lakefishsa',
         'PASSWORD': 'TJKDUPVINBDOABBS',
-        'HOST': 'lakefish.steelcitysites.net',   # Or an IP Address that your DB is hosted on
+        # Or an IP Address that your DB is hosted on
+        'HOST': 'lakefish.steelcitysites.net',
         'PORT': '',
     }
 }
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.mysql', 
+#        'ENGINE': 'django.db.backends.mysql',
 #        'NAME': 'lakefish',
 #        'USER': 'lakefish',
 #        'PASSWORD': 'TjbKBmEwEBWT',
 #        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
 #        'PORT': '',
 #    }
-#}
+# }
 
 
 # Password validation

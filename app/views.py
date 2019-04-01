@@ -12,7 +12,7 @@ from datetime import datetime
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 
 import os
 
