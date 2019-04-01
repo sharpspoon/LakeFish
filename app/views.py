@@ -59,6 +59,7 @@ def about(request):
         }
     )
 
+
 def nldas2(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -183,15 +184,19 @@ def displayWeather(request):
             }
         )
 
+
 def simulateLake(request):
-    form = CreateInitFileForm()
-    return render(
-        request,
-        'app/simulatelake.html',
-        {
-            'title': 'Simulate Lake',
-            'message': 'Simulate Lake page.',
-            'year': datetime.now().year,
-            'form': form
-        }
-    )
+    if(request.method == "POST"):
+        print("This has been hit")
+        print(request.POST)
+        form = CreateInitFileForm()
+        return render(
+            request,
+            'app/simulatelake.html',
+            {
+                'title': 'Simulate Lake',
+                'message': 'Simulate Lake page.',
+                'year': datetime.now().year,
+                'form': form
+            }
+        )
