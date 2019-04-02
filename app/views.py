@@ -193,6 +193,22 @@ def displayWeather(request):
         )
 
 
+
+
+
+def displaynldas2(request):
+    form = DisplayWeatherDataForm()
+    return render(
+        request,
+        'app/displaynldas2.html',
+        {
+            'title': 'Weather Data',
+            'message': 'Weather Data page.',
+            'year': datetime.now().year,
+            'form': form
+        }
+    )
+
 def simulateLake(request):
     if(request.method == "POST"):
         print("This has been hit")

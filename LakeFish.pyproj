@@ -69,6 +69,8 @@
     <Folder Include="LakeFish\NLDAS-2\.idea\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\displayweather.html" />
+    <Content Include="app\templates\app\displaynldas2.html" />
     <Content Include="app\templates\app\nldas2.html" />
     <Content Include="app\templates\app\register.html" />
     <None Include="au.pubxml" />
