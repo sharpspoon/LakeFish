@@ -64,9 +64,6 @@ def about(request):
     )
 
 
-
-
-
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -184,6 +181,7 @@ def displayWeather(request):
             }
         )
 
+
 def nldas23(request):
     assert isinstance(request, HttpRequest)
     return render(
@@ -196,6 +194,7 @@ def nldas23(request):
         }
     )
 
+
 def nldas2(request):
     assert isinstance(request, HttpRequest)
     return render(
@@ -207,6 +206,7 @@ def nldas2(request):
             'message': 'Your application description page.'
         }
     )
+
 
 def displaynldas2(request):
     form = DisplayWeatherDataForm()
@@ -221,6 +221,7 @@ def displaynldas2(request):
         }
     )
 
+
 def simulateLake(request):
     if(request.method == "POST"):
         print("This has been hit")
@@ -234,5 +235,15 @@ def simulateLake(request):
                 'message': 'Simulate Lake page.',
                 'year': datetime.now().year,
                 'form': form
+            }
+        )
+    else:
+        return render(
+            request,
+            'app/simulatelake.html',
+            {
+                'title': 'Simulate Lake',
+                'message': 'Simulate Lake page.',
+                'year': datetime.now().year
             }
         )
