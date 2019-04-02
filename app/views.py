@@ -214,7 +214,7 @@ def displaynldas2(request):
         request,
         'app/nldas2.html',
         {
-            'title': request.POST['date'] + request.POST['date2'],
+            'dateRange': request.POST['date'] + ' - ' + request.POST['date2'],
             'message': 'Weather Data page.',
             'year': datetime.now().year,
             'form': form
