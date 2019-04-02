@@ -31,9 +31,12 @@
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'contact' %}">Contact</a></li>
-          <!--FIXME: Only show Weather and Simulate Lake when user is logged in -->
+
+          {% if user.is_authenticated %}
           <li><a href="{% url 'weather' %}">Weather</a></li>
           <li><a href="{% url 'simulate lake' %}">Simulate Lake</a></li>
+          {% endif %}
+
         </ul>
         {% include 'app/loginpartial.html' %}
       </div>
