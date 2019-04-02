@@ -15,6 +15,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, render_to_response
 
 import os
+import time
 
 from weather import WeatherScraper as ws
 
@@ -126,7 +127,9 @@ def displayWeather(request):
 
         wScraper = ws.WeatherScraper(user_location, request.POST['date'])
         wScraper.run()
-        weather_file = wScraper.get_file_path()
+
+        wScraper2 = ws.WeatherScraper(user_location, request.POST['date'])
+        weather_file = wScraper2.get_file_path()
 
         weatherData = []
         temperature = []
@@ -138,33 +141,38 @@ def displayWeather(request):
         precipIntensity = []
         precipAccumulation = []
         formattedWeatherList = []
-        with open(weather_file, newline='') as weatherFile:
-            header_line = next(weatherFile)  # Format: Month #ofDays Year
-            weatherMonth = int(header_line.split(' ')[0])
-            numOfDays = int(header_line.split(' ')[1])
-            weatherYear = int(header_line.split(' ')[2])
-            weatherDate = datetime(weatherYear, weatherMonth, 1)
-            formattedDate = weatherDate.strftime("%B %Y")
-            # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
-            # for data in weatherFileReader:
-            # weatherData.append(data)
-            for data in weatherFile:
-                weatherData.append(data.split())
 
-            for dailyData in weatherData:
-                temperature.append(dailyData[0])
-                dewPoint.append(dailyData[1])
-                windSpeed.append(dailyData[2])
-                windBearing.append(dailyData[3])
-                uvIndex.append(dailyData[4])
-                cloudCover.append(dailyData[5])
-                precipIntensity.append(dailyData[6])
-                precipAccumulation.append(dailyData[7])
+        if os.path.isfile(weather_file):
+            with open(weather_file, newline='') as weatherFile:
+                header_line = next(weatherFile)  # Format: Month #ofDays Year
+                weatherMonth = int(header_line.split(' ')[0])
+                numOfDays = int(header_line.split(' ')[1])
+                weatherYear = int(header_line.split(' ')[2])
+                weatherDate = datetime(weatherYear, weatherMonth, 1)
+                formattedDate = weatherDate.strftime("%B %Y")
+                # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
+                # for data in weatherFileReader:
+                # weatherData.append(data)
+                for data in weatherFile:
+                    weatherData.append(data.split())
 
-            formattedWeatherList = [temperature, dewPoint, windSpeed,
-                                    windBearing, uvIndex, cloudCover,
-                                    precipIntensity, precipAccumulation]
-            # testFileContent = dailyDataList
+                for dailyData in weatherData:
+                    temperature.append(dailyData[0])
+                    dewPoint.append(dailyData[1])
+                    windSpeed.append(dailyData[2])
+                    windBearing.append(dailyData[3])
+                    uvIndex.append(dailyData[4])
+                    cloudCover.append(dailyData[5])
+                    precipIntensity.append(dailyData[6])
+                    precipAccumulation.append(dailyData[7])
+
+                formattedWeatherList = [temperature, dewPoint, windSpeed,
+                                        windBearing, uvIndex, cloudCover,
+                                        precipIntensity, precipAccumulation]
+                # testFileContent = dailyDataList
+        else:
+            raise ValueError("Error")
+
         return render(
             request,
             'app/displayweather.html',
