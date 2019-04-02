@@ -16,8 +16,11 @@ from django.shortcuts import render, redirect, render_to_response
 
 import os
 import time
+import cgi
+import calendar
 
 from weather import WeatherScraper as ws
+from nldas2 import nldas
 
 
 def home(request):
@@ -61,18 +64,7 @@ def about(request):
     )
 
 
-def nldas2(request):
-    """Renders the about page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/nldas2.html',
-        {
-            'title': 'NLDAS-2',
-            'message': 'Your application description page.',
-            'year': datetime.now().year,
-        }
-    )
+
 
 
 def signup(request):
@@ -192,17 +184,37 @@ def displayWeather(request):
             }
         )
 
+def nldas23(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/nldas2.html',
+        {
+            'title': 'NLDAS-2',
+            'message': 'Your application description page.',
+            'year': datetime.now().year,
+        }
+    )
 
-
-
+def nldas2(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/nldas2.html',
+        {
+            'title': 'NLDAS-2',
+            'year': datetime.now().year,
+            'message': 'Your application description page.'
+        }
+    )
 
 def displaynldas2(request):
     form = DisplayWeatherDataForm()
     return render(
         request,
-        'app/displaynldas2.html',
+        'app/nldas2.html',
         {
-            'title': 'Weather Data',
+            'title': request.POST['date'] + request.POST['date2'],
             'message': 'Weather Data page.',
             'year': datetime.now().year,
             'form': form
