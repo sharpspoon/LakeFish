@@ -5,9 +5,76 @@ Created on Feb 24, 2019
 '''
 import subprocess
 
-def gatherPost():
-    return
-    #takes in the post from the user and saves them as individual variables that can be accessed later
+def gatherPost(userInput):
+    inputFromPost = {
+        'LakeName' : 'Carl',
+        'FutureSim' : 'N',
+        'ScenarioNum' : 2,
+        'ISTATE' : 'Minnesota',
+        'ISTATION' : 'Duluth',
+        'MONTH' : 4,
+        'ISTART' : 16,
+        'MYEAR' : 2007,
+        'FMON' : 12,
+        'FDAY' : 31,
+        'FYEAR' : 2008,
+        'MBOT' : 32,
+        'ZDEPTH' : ['1.25','1.5','2','2.5','3','3.5','4','5','7','9','11','14','17','20','23','26','30','34','38','42','46','50'],
+        'ZMAX' : 50.0,
+        'ST' : 458,
+        'IPROFILE' : 1,
+        'XK' : .37,
+        'EMCOE3' : 20,
+        'CZS' : -1.84,
+        'WSTR' : .95,
+        'WSSF' : .95,
+        'COEWIN' : 1,
+        'SNCOE' : 1,
+        'AHTBTM' : .035,
+        'SRCP' : 550,
+        'CFSNOW' : .6,
+        'CDIS0' : 2.6,
+        'CNDSNW0' : .27,
+        'CNDWI' : 11.35,
+        'BTICE' : .17,
+        'ALFICE' : .55,
+        'GMICE' : 1.6,
+        'BTSNOW' : .34,
+        'ALFSNOW' : .8,
+        'GMSNOW' : 40,
+        'THICKIS' : 0,
+        'THICKSN' : 0,
+        'T2' : 4,
+        'C2' : 0,
+        'CD2' : 0,
+        'CHLA2' : 0.00385,
+        'IPRNT4' : 1,
+        'PA2' : 0,
+        'BOD2' : 0.75,
+        'DSO2' : 10,
+        'BODK20' : .1,
+        'SB20' : .5,
+        'XKR1' : .1,
+        'POMAX' : 9.6,
+        'EMCOE2' : 2.2,
+        'EMCOE1' : 1,
+        'EMCOE4' : 1,
+        'EMCOE5' : 1,
+        'IPRNT2' : 0,
+        'IPRNT5' : 0,
+        'IPRNT6' : 0,
+        'NPRINT' : 5,
+        'INFLOW' : 0,
+        'IFIELD' : 1,
+        'ICHLA-ICHLA' : 1,
+        'I_NO_FIELD_OUT_PROFILE' : 0,
+        'NDEPTH' : 5,
+        'FDEPTH' : [1,10,20,30,48],
+        'NDAYO' : 1,
+        'NYEAR' : 1}
+    createInit(imputFromPost)
+
+    #takes in the post from the user and saves them in a dictionary that can be accessed by createInit
 def createInit(userInput):
     with open('D:/Lake2019/User/Lake_Input.ini', 'w') as configfile:
         configfile.write('201208,"Version number Year & Month Developed"\n')

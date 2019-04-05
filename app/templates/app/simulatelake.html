@@ -62,41 +62,41 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a data-toggle="tab" href="#lakeinfo">Lake Information</a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#weatherstation">Weather Station</a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#lakegeo">Lake Geometry</a>
-                    </li>
-                </ul>
+            <form action="simulatelake" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#lakeinfo">Lake Information</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#weatherstation">Weather Station</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#lakegeo">Lake Geometry</a>
+                        </li>
+                    </ul>
 
-                <div class="tab-content">
-                    <div id="lakeinfo" class="tab-pane fade in active">
-                        <h4>
-                            <b>Lake Information</b>
-                        </h4>
-                        <p>
-                            <i>Enter basic information for lake model.</i>
-                        </p>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <form action=".">
-                                    <!--{% csrf_token %}-->
+                    <div class="tab-content">
+                        <div id="lakeinfo" class="tab-pane fade in active">
+                            <h4>
+                                <b>Lake Information</b>
+                            </h4>
+                            <p>
+                                <i>Enter basic information for lake model.</i>
+                            </p>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="simTitle">Simulation Title</label>
-                                        <input placeholder="Enter simulation title." type="text" class="form-control"
-                                            id="simTitle">
+                                        <input name="sim_title" placeholder="Enter simulation title." type="text"
+                                            class="form-control" id="simTitle">
                                     </div>
                                     <div class="form-group">
                                         <label for="lakeName">Lake Name</label>
-                                        <input placeholder="Enter lake name." type="text" class="form-control"
-                                            id="lakeName">
+                                        <input name="lake_name" placeholder="Enter lake name." type="text"
+                                            class="form-control" id="lakeName">
                                     </div>
                                     <div class="form-group">
                                         <input type="hidden" name="country" id="countryId" value="US" />
@@ -107,50 +107,47 @@
                                             <option value="">Select State</option>
                                         </select>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="weatherstation" class="tab-pane fade">
-                        <h4>
-                            <b>Station Information</b>
-                        </h4>
-                        <p>
-                            <i>Select city and weather station near lake.</i>
-                        </p>
-                        <hr>
-                    </div>
-                    <div id="lakegeo" class="tab-pane fade">
-                        <h4>Lake Geometry</h4>
-                        <p>
-                            <i>Enter the geometric characteristics of lake model.</i>
-                        </p>
-                        <hr>
-                        <form action=".">
-                            <!--{% csrf_token %}-->
+                        <div id="weatherstation" class="tab-pane fade">
+                            <h4>
+                                <b>Station Information</b>
+                            </h4>
+                            <p>
+                                <i>Select city and weather station near lake.</i>
+                            </p>
+                            <hr>
+                        </div>
+                        <div id="lakegeo" class="tab-pane fade">
+                            <h4>Lake Geometry</h4>
+                            <p>
+                                <i>Enter the geometric characteristics of lake model.</i>
+                            </p>
+                            <hr>
                             <div class="form-group">
                                 <label for="surfaceArea">Surface Area</label>
-                                <input placeholder="Enter surface area value." type="text" class="form-control"
-                                    id="surfaceArea">
+                                <input name="surface_area" placeholder="Enter surface area value." type="text"
+                                    class="form-control" id="surfaceArea">
                             </div>
                             <div class="form-group">
                                 <label for="maxDepth">Maximum Depth</label>
-                                <input placeholder="Enter maximum depth value." type="text" class="form-control"
-                                    id="maxDepth">
+                                <input name="max_depth" placeholder="Enter maximum depth value." type="text"
+                                    class="form-control" id="maxDepth">
                             </div>
                             <div class="form-group">
                                 <label for="elevation">Elevation Above Sea Level</label>
-                                <input placeholder="Enter value." type="text" class="form-control"
+                                <input name="elevation_" placeholder="Enter value." type="text" class="form-control"
                                     id="elevation">
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Submit</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-success" value="Submit" name="submitbtn">
+                </div>
+            </form>
         </div>
     </div>
 </div>

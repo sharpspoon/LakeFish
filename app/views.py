@@ -3,19 +3,26 @@ Definition of views.
 """
 
 from django.shortcuts import render
+from LakeFish import createLakeInitFile
 from django.http import HttpRequest
 from django.template import RequestContext
 from app.forms import DisplayWeatherDataForm
+from app.forms import CreateInitFileForm
 from datetime import datetime
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 
 import os
+import time
+import cgi
+import calendar
 
+from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
+from nldas2 import nldas
 
 
 def home(request):
@@ -53,19 +60,6 @@ def about(request):
         'app/about.html',
         {
             'title': 'About',
-            'message': 'Your application description page.',
-            'year': datetime.now().year,
-        }
-    )
-
-def nldas2(request):
-    """Renders the about page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/nldas2.html',
-        {
-            'title': 'NLDAS-2',
             'message': 'Your application description page.',
             'year': datetime.now().year,
         }
@@ -124,7 +118,9 @@ def displayWeather(request):
 
         wScraper = ws.WeatherScraper(user_location, request.POST['date'])
         wScraper.run()
-        weather_file = wScraper.get_file_path()
+
+        wScraper2 = ws.WeatherScraper(user_location, request.POST['date'])
+        weather_file = wScraper2.get_file_path()
 
         weatherData = []
         temperature = []
@@ -136,33 +132,38 @@ def displayWeather(request):
         precipIntensity = []
         precipAccumulation = []
         formattedWeatherList = []
-        with open(weather_file, newline='') as weatherFile:
-            header_line = next(weatherFile)  # Format: Month #ofDays Year
-            weatherMonth = int(header_line.split(' ')[0])
-            numOfDays = int(header_line.split(' ')[1])
-            weatherYear = int(header_line.split(' ')[2])
-            weatherDate = datetime(weatherYear, weatherMonth, 1)
-            formattedDate = weatherDate.strftime("%B %Y")
-            # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
-            # for data in weatherFileReader:
-            # weatherData.append(data)
-            for data in weatherFile:
-                weatherData.append(data.split())
 
-            for dailyData in weatherData:
-                temperature.append(dailyData[0])
-                dewPoint.append(dailyData[1])
-                windSpeed.append(dailyData[2])
-                windBearing.append(dailyData[3])
-                uvIndex.append(dailyData[4])
-                cloudCover.append(dailyData[5])
-                precipIntensity.append(dailyData[6])
-                precipAccumulation.append(dailyData[7])
+        if os.path.isfile(weather_file):
+            with open(weather_file, newline='') as weatherFile:
+                header_line = next(weatherFile)  # Format: Month #ofDays Year
+                weatherMonth = int(header_line.split(' ')[0])
+                numOfDays = int(header_line.split(' ')[1])
+                weatherYear = int(header_line.split(' ')[2])
+                weatherDate = datetime(weatherYear, weatherMonth, 1)
+                formattedDate = weatherDate.strftime("%B %Y")
+                # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
+                # for data in weatherFileReader:
+                # weatherData.append(data)
+                for data in weatherFile:
+                    weatherData.append(data.split())
 
-            formattedWeatherList = [temperature, dewPoint, windSpeed,
-                                    windBearing, uvIndex, cloudCover,
-                                    precipIntensity, precipAccumulation]
-            # testFileContent = dailyDataList
+                for dailyData in weatherData:
+                    temperature.append(dailyData[0])
+                    dewPoint.append(dailyData[1])
+                    windSpeed.append(dailyData[2])
+                    windBearing.append(dailyData[3])
+                    uvIndex.append(dailyData[4])
+                    cloudCover.append(dailyData[5])
+                    precipIntensity.append(dailyData[6])
+                    precipAccumulation.append(dailyData[7])
+
+                formattedWeatherList = [temperature, dewPoint, windSpeed,
+                                        windBearing, uvIndex, cloudCover,
+                                        precipIntensity, precipAccumulation]
+                # testFileContent = dailyDataList
+        else:
+            raise ValueError("Error")
+
         return render(
             request,
             'app/displayweather.html',
@@ -182,13 +183,78 @@ def displayWeather(request):
             }
         )
 
-def simulateLake(request):
+
+def nldas23(request):
+    assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/simulatelake.html',
+        'app/nldas2.html',
         {
-            'title': 'Simulate Lake',
-            'message': 'Simulate Lake page.',
+            'title': 'NLDAS-2',
+            'message': 'Your application description page.',
             'year': datetime.now().year,
         }
     )
+
+
+def nldas2(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/nldas2.html',
+        {
+            'title': 'NLDAS-2',
+            'year': datetime.now().year,
+            'message': 'Your application description page.'
+        }
+    )
+
+
+def displaynldas2(request):
+    form = DisplayWeatherDataForm()
+    return render(
+        request,
+        'app/nldas2.html',
+        {
+            'dateRange': request.POST['date'] + ' - ' + request.POST['date2'],
+            'message': 'Weather Data page.',
+            'year': datetime.now().year,
+            'form': form
+        }
+    )
+
+
+def simulateLake(request):
+    if(request.method == "POST"):
+        print("This has been hit")
+        print(request.POST)
+        form = CreateInitFileForm()
+        userInput = {  
+            'sim_title': request.POST['sim_title'],
+            'LakeName': request.POST['lake_name'],
+            'state': request.POST['state'],
+            'surface_area': request.POST['surface_area'],
+            'max_depth': request.POST['max_depth'],
+            'elevation_': request.POST['elevation_']
+        }
+        createInit.gatherPost(userInput)
+        return render(
+            request,
+            'app/simulatelake.html',
+            {
+                'title': 'Simulate Lake',
+                'message': 'Simulate Lake page.',
+                'year': datetime.now().year,
+                'form': form
+            }
+        )
+    else:
+        return render(
+            request,
+            'app/simulatelake.html',
+            {
+                'title': 'Simulate Lake',
+                'message': 'Simulate Lake page.',
+                'year': datetime.now().year
+            }
+        )

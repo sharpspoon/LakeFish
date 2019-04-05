@@ -6,9 +6,83 @@
 <h3>
     North American Land Data Assimilation System (NLDAS-2)
 </h3>
+
+
+<div class="row">
+    <h4>    The Module is designed to be the driver for downloading NLDAS GRB files from
+    the web.  It will then aggregate the GRB files into daily netCDF files.</h4>
+    <br>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action='displaynldas2' method='post' class="form-horizontal">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="datetimepicker1">Starting Day, Month and Year</label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input name="date" type='text' class="order-alpha form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="datetimepicker2">Ending Day, Month and Year</label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker2'>
+                                        <input name="date2" type='text' class="order-alpha form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success" value='Submit' name='submitbtn' />
+            </form>
+        </div>
+    </div>
+</div>
+<h4>
+<p>{{ dateRange }}</p>
+</h4>
+
+<br />
+<br />
+<br />
 <h4>
     Helpful Documents
 </h4>
+<li><a href="WeatherData.pdf">Weather Data</a></li>
+{% endblock %}
 
-<a href="WeatherData.pdf">Weather Data</a>
+{% block scripts %}
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            viewMode: 'years',
+            format: 'DD/MM/YYYY',
+            allowInputToggle: true
+        });
+    });
+        $(function () {
+        $('#datetimepicker2').datetimepicker({
+            viewMode: 'years',
+            format: 'DD/MM/YYYY',
+            allowInputToggle: true
+        });
+    });
+</script>
 {% endblock %}
