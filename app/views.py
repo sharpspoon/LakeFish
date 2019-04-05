@@ -19,9 +19,13 @@ import os
 import time
 import cgi
 import calendar
+import datetime
 
 from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
+from nldas2 import common
+
+now = datetime.datetime.now()
 
 
 def home(request):
@@ -32,7 +36,7 @@ def home(request):
         'app/index.html',
         {
             'title': 'Home Page',
-            'year': datetime.now().year,
+            'year': now.year,
         }
     )
 
@@ -46,7 +50,7 @@ def contact(request):
         {
             'title': 'Contact',
             'message': 'Xing Fang, Ph.D., P.E., D.WRE, F. EWRI, F.ASCE \n Arthur H. Feagin Chair Professor of Civil Engineering',
-            'year': datetime.now().year,
+            'year': now.year,
         }
     )
 
@@ -60,7 +64,7 @@ def about(request):
         {
             'title': 'About',
             'message': 'Your application description page.',
-            'year': datetime.now().year,
+            'year': now.year,
         }
     )
 
@@ -94,7 +98,7 @@ def weather(request):
         {
             'title': 'Weather Data',
             'message': 'Weather Data page.',
-            'year': datetime.now().year,
+            'year': now.year,
             'form': form
         }
     )
@@ -191,7 +195,7 @@ def nldas23(request):
         {
             'title': 'NLDAS-2',
             'message': 'Your application description page.',
-            'year': datetime.now().year,
+            'year': now.year,
         }
     )
 
@@ -203,7 +207,7 @@ def nldas2(request):
         'app/nldas2.html',
         {
             'title': 'NLDAS-2',
-            'year': datetime.now().year,
+            'year': now.year,
             'message': 'Your application description page.'
         }
     )
@@ -212,14 +216,38 @@ def nldas2(request):
 def displaynldas2(request):
     startDate = request.POST['date']
     endDate = request.POST['date2']
+    myDate = startDate
+
+    #loop over dates from startDate to endDate
+    #while myDate <= endDate:
+        #split out the parts of the year
+        #tt = myDate.timetuple()
+        #julianday = format(tt.tm_yday, '03')
+
+        # get current path
+        #fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
+        #call wget to download files for given year/day
+        #os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianday + '/ -A grb')
+
+        #create daily averages and output netCDF file
+        #hourly_to_daily_NLDAS.hourly_to_daily_one_day(fullPath, year, julianday)
+        #myDate += timedelta(days=1)
     form = DisplayWeatherDataForm()
+    day, month, year = startDate.split("/", 2)
+    dateFormat = '%d/%m/%Y'
+    dt = datetime.datetime.strptime(startDate, dateFormat)
+    tt = dt.timetuple()
+    julianDay = tt.tm_yday
+    julianDayStr = str(julianDay)
+    fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
+    os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr + '/ -A grb')
     return render(
         request,
         'app/nldas2.html',
         {
-            'dateRange': startDate + ' - ' + endDate,
+            'dateRange': 'startDate='+startDate + ' endDate=' + endDate + ' year=' + year + ' julian=' + julianDayStr,
             'message': 'Weather Data page.',
-            'year': datetime.now().year,
+            'year': now.year,
             'form': form
         }
     )
@@ -245,7 +273,7 @@ def simulateLake(request):
             {
                 'title': 'Simulate Lake',
                 'message': 'Simulate Lake page.',
-                'year': datetime.now().year,
+                'year': now.year,
                 'form': form
             }
         )
@@ -256,6 +284,6 @@ def simulateLake(request):
             {
                 'title': 'Simulate Lake',
                 'message': 'Simulate Lake page.',
-                'year': datetime.now().year
+                'year': now.year
             }
         )
