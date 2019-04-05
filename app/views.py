@@ -3,6 +3,7 @@ Definition of views.
 """
 
 from django.shortcuts import render
+from LakeFish import createLakeInitFile
 from django.http import HttpRequest
 from django.template import RequestContext
 from app.forms import DisplayWeatherDataForm
@@ -19,6 +20,7 @@ import time
 import cgi
 import calendar
 
+from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
 from nldas2 import nldas
 
@@ -227,6 +229,15 @@ def simulateLake(request):
         print("This has been hit")
         print(request.POST)
         form = CreateInitFileForm()
+        userInput = {  
+            'sim_title': request.POST['sim_title'],
+            'LakeName': request.POST['lake_name'],
+            'state': request.POST['state'],
+            'surface_area': request.POST['surface_area'],
+            'max_depth': request.POST['max_depth'],
+            'elevation_': request.POST['elevation_']
+        }
+        createInit.gatherPost(userInput)
         return render(
             request,
             'app/simulatelake.html',
