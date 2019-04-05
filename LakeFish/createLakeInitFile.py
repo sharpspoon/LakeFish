@@ -72,7 +72,7 @@ def gatherPost(userInput):
         'FDEPTH' : [1,10,20,30,48],
         'NDAYO' : 1,
         'NYEAR' : 1}
-    createInit(imputFromPost)
+    createInit(inputFromPost)
 
     #takes in the post from the user and saves them in a dictionary that can be accessed by createInit
 def createInit(userInput):
@@ -129,13 +129,6 @@ def createInit(userInput):
             else:
                 configfile.write(',')
         configfile.write('$\r\n\n')
-#         configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][0], userInput['ZDEPTH'][1],
-#                          userInput['ZDEPTH'][2], userInput['ZDEPTH'][3], userInput['ZDEPTH'][4], userInput['ZDEPTH'][5],
-#                          userInput['ZDEPTH'][6], userInput['ZDEPTH'][7], userInput['ZDEPTH'][8], userInput['ZDEPTH'][9]))
-#         configfile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n' % (userInput['ZDEPTH'][10], userInput['ZDEPTH'][11],
-#                          userInput['ZDEPTH'][12], userInput['ZDEPTH'][13], userInput['ZDEPTH'][14], userInput['ZDEPTH'][15],
-#                          userInput['ZDEPTH'][16], userInput['ZDEPTH'][17], userInput['ZDEPTH'][18], userInput['ZDEPTH'][19]))
-#         configfile.write('%s,%s\r\n$\r\n\n' % (userInput['ZDEPTH'][20], userInput['ZDEPTH'][21]))
         # T2 - initial water temp
         configfile.write('%d\r\n$\r\n\n' % userInput['T2'])
         # C2 - initial suspended solids
@@ -186,6 +179,7 @@ def createInit(userInput):
             while(dataLine):
                 configfile.write('%s\r' % dataLine)
                 dataLine = fieldData.readline()
+        fieldData.close()
     configfile.close()
     return True
 #creates the file of init and then begins populating it line by line with the required information also using the variables we saved from GatherPost
