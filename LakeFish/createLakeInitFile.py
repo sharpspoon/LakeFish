@@ -3,6 +3,7 @@ Created on Feb 24, 2019
 
 @author: Tyler, Cameron
 '''
+import subprocess
 
 def gatherPost():
     return
@@ -113,24 +114,11 @@ def createInit(userInput):
         configfile.write('%d,%d\r\n\n\n' % (userInput['NDAYO'], userInput['NYEAR']))
         # KYEAR, NTDY - specifies the year and how many days you have field data
         # NPRNT(K) - specifies above months and dates
-        configfile.write('2008, 1\r\n 520\r\n\n')
-        # chlorophyll concentration year by year in epilimnion
-        configfile.write('0.00562\r\n\n')
-        # chlorophyll concentration year by year in hypolimnion
-        configfile.write('0.00562\r\n\n\n')
-        # NF is number of depths in measured profile, NRPFLE - which parameter you have measured
-        # Same month day year information as NPRNT shown above
-        configfile.write(' 21  2  5  20  2008  17\r\n\n')
-        # secchi disk depth for the date with measured profile
-        configfile.write(' 3\r\n\n')
-        # Profile ID, 6 for DO and 1 for Water Temp
-        configfile.write(' 6  1\r\n\n')
-        # Depth where DO or Temperatures were measured
-        configfile.write(' 0  1  2  3  4  5  6  7  8  9  10  12  14  16  18  19  21  22  23  24  24.2\r\n\n')
-        # Measured DO and Temp values by depths
-        configfile.write(' 12.06  12.16  12.14  12.16  12.14  12.12  12.1  12.06  12.07  12.08  12.06  12.03  11.94  11.92  11.82  11.85  11.6  11.39  11.36  11.32  11.31\r\n')
-        configfile.write(' 8.96  8.94  8.93  8.93  8.9  8.9  8.8  8.76  8.77  8.79  8.77  8.74  8.56  8.56  8.4  8.34  7.5  7.3  7.25  7.24  7.24')
-        # repeat day-by-day (loop from 0 to NDAYO)
+        with open('D:/Lake2019/user/Field_Data.txt') as fieldData:
+            dataLine = fieldData.readline()
+            while(dataLine):
+                configfile.write('%s\r' % dataLine)
+                dataLine = fieldData.readline()
     configfile.close()
     return True
 #creates the file of init and then begins populating it line by line with the required information also using the variables we saved from GatherPost
@@ -226,6 +214,7 @@ if __name__ == "__main__":
         'I_NO_FIELD_OUT_PROFILE' : 0,
         'NDEPTH' : 5,
         'FDEPTH' : [1,10,20,30,48],
-        'NDAYO' : 1,
-        'NYEAR' : 1}
+        'NDAYO' : 100,
+        'NYEAR' : 10}
     createInit(inputDictionary)
+    subprocess.call([r'D:\lake2019\user\RunMinlake.bat'])
