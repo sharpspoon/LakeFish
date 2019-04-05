@@ -22,7 +22,6 @@ import calendar
 
 from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
-from nldas2 import nldas
 
 
 def home(request):
@@ -211,12 +210,14 @@ def nldas2(request):
 
 
 def displaynldas2(request):
+    startDate = request.POST['date']
+    endDate = request.POST['date2']
     form = DisplayWeatherDataForm()
     return render(
         request,
         'app/nldas2.html',
         {
-            'dateRange': request.POST['date'] + ' - ' + request.POST['date2'],
+            'dateRange': startDate + ' - ' + endDate,
             'message': 'Weather Data page.',
             'year': datetime.now().year,
             'form': form
