@@ -40,7 +40,7 @@ class WeatherScraper:
         # Dark Sky API Key
         a = random.randint(0, 2)
         if a == 0:
-            #self.key = "2dd9e033bfb386fa272686e32b748dda"
+            # self.key = "2dd9e033bfb386fa272686e32b748dda"
             self.key = "bd13ad063cdbb5d416accbd8652ef28d"
         elif a == 1:
             self.key = "bd13ad063cdbb5d416accbd8652ef28d"
@@ -171,7 +171,7 @@ class WeatherScraper:
                         data.append(round(float(info[key]), 1))
                 else:
                     data.append(0.0)
-            self.solar_rad_cal(data[4], day_counter)
+            # self.solar_rad_cal(data[4], day_counter)
             weather_info.append(data)
             day_counter += 1
         return weather_info
@@ -199,12 +199,11 @@ class WeatherScraper:
         eqt = 0.17 * sin(4 * pi * (int(jday1) - 80) / 373) - \
             0.129 * sin(2 * pi * int((jday1) - 8) / 355)
         hour1 = round(24 * (jday1 - int(jday1)))  # good
-        hh = round(2 * pi / 24 * (hour1 - ((slong - phi)
-                                           * 24 / 360) + eqt - 12.0), 6)  # good
-        taud = 2 * pi * (int(jday1) - 1) / 365
-        val = round(0.006918 - 0.399912 * cos(taud) + 0.070257 * sin(taud) - 0.006758
+        hh = round(2 * pi / 24 * (hour1 - ((slong - phi) * ong - phi)**24 / 360) + eqt - 12.0, 6)  # good
+        taud=2 * pi * (int(jday1) - 1) / 365
+        val=round(0.006918 - 0.399912 * cos(taud) + 0.070257 * sin(taud) - 0.006758
                     * cos(2 * taud) + 0.000907 * sin(2 * taud) - 0.002697 * cos(3 * taud) + 0.00148 * sin(3 * taud), 7)
-        ao = asin(sin(slat * 0.01743) * sin(val) +
+        ao=asin(sin(slat * 0.01743) * sin(val) +
                   cos(slat * 0.01743) * cos(val) * cos(hh))
         ao = ao * 180 / pi
         if ao < 0:
