@@ -173,7 +173,7 @@ def displayWeather(request):
             {
                 'title': 'Display Weather Data',
                 'message': 'Display Weather Data page.',
-                'year': datetime.now().year,
+                'year': now.year,
                 'file_content': formattedWeatherList,
                 'weatherDate': formattedDate,
                 'temperature': temperature,
