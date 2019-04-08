@@ -240,12 +240,13 @@ def displaynldas2(request):
     julianDay = tt.tm_yday
     julianDayStr = str(julianDay)
     fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
+    directoryPath = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr)
     os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr + '/ -A grb')
     return render(
         request,
         'app/nldas2.html',
         {
-            'dateRange': 'startDate='+startDate + ' endDate=' + endDate + ' year=' + year + ' julian=' + julianDayStr,
+            'dateRange': 'startDate='+startDate + ' endDate=' + endDate + ' year=' + year + ' julian=' + julianDayStr + ' path=' + directoryPath,
             'message': 'Weather Data page.',
             'year': now.year,
             'form': form
