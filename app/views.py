@@ -142,7 +142,7 @@ def displayWeather(request):
                 weatherMonth = int(header_line.split(' ')[0])
                 numOfDays = int(header_line.split(' ')[1])
                 weatherYear = int(header_line.split(' ')[2])
-                weatherDate = datetime(weatherYear, weatherMonth, 1)
+                weatherDate = datetime.datetime(weatherYear, weatherMonth, 1)
                 formattedDate = weatherDate.strftime("%B %Y")
                 # weatherFileReader = csv.reader(weatherFile, delimiter='\t')
                 # for data in weatherFileReader:
