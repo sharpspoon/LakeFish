@@ -8,24 +8,24 @@
 <div class="row" id="login-block">
     <div class='col-sm-6 col-sm-offset-3'>
         <div class="panel panel-default">
-          <div class="panel-body">
-              <div class="row">
-                  <div class="col-sm-9 col-sm-offset-3">
-<h2>Sign up</h2>
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-default">Sign up</button>
-    
-</form>
-                  </div>
-              </div>
-          </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <h2>Sign up</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="fieldWrapper">
+                                {{ field.errors }}
+                                {{ field.label_tag }}: {{ field }}
+                            </div>
+                            {% endfor %}
+                            <button type="submit" class="btn btn-default">Sign up</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -57,7 +57,7 @@
 
 {% block scripts %}
 
-    {% load staticfiles %}
+{% load staticfiles %}
 <script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
 
 {% endblock %}

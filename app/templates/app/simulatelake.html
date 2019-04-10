@@ -62,7 +62,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="simulatelake" method="POST">
+            <form autocomplete="off" action="simulatelake" method="POST">
                 {% csrf_token %}
                 <div class="modal-body">
                     <ul class="nav nav-tabs">
@@ -148,165 +148,179 @@
                         <div id="advanced" class="tab-pane fade">
                             <h4>Advanced Options</h4>
                             <p>
-                                <i>Enter advanced optinos for lake.</i>
+                                <i>Enter advanced optinos for lake. Default values have been generated.</i>
                             </p>
                             <hr>
                             <div class="form-group">
-                                <label for="light_atten">Light attenuation coefficient for chlorophyll-a</label>
-                                <input name="light_atten" id="light_atten" placeholder="Enter value." type="text"
-                                    class="form-control">
+                                <label for="light_atten">Light attenuation coefficient for chlorophyll-a (L/mg)</label>
+                                <input value="20" step=".01" name="light_atten" id="light_atten"
+                                    placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="xk1">Constant XK1</label>
-                                <input name="xk1" id="xk1" placeholder="Enter value." type="text" class="form-control">
+                                <input value="-1.84" step=".01" name="xk1" id="xk1" placeholder="Enter value."
+                                    type="number" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="wind_sheltering">Wind Sheltering</label>
-                                <input name="wind_sheltering" id="wind_sheltering" placeholder="Enter value."
-                                    type="text" class="form-control">
+                                <input value="1" step=".01" name="wind_sheltering" id="wind_sheltering"
+                                    placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="snow_ice_ratio">Snow Thickness/Ice Thickness Ratio</label>
-                                <input name="snow_ice_ratio" id="snow_ice_ratio" placeholder="Enter value." type="text"
-                                    class="form-control">
+                                <input value="1" step=".01" name="snow_ice_ratio" id="snow_ice_ratio"
+                                    placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="std">Sediment Thermal Diffusivity</label>
-                                <input name="std" id="std" placeholder="Enter value." type="text" class="form-control">
+                                <label for="std">Sediment Thermal Diffusivity (m^2/day)</label>
+                                <input value="0.035" step=".001" name="std" id="std" placeholder="Enter value."
+                                    type="number" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="sediment_density">Sediment Density</label>
-                                <input name="sediment_density" id="sediment_density" placeholder="Enter value."
-                                    type="text" class="form-control">
+                                <label for="sediment_density">Sediment Density (kcal/m^3*C)</label>
+                                <input value="550" step=".01" name="sediment_density" id="sediment_density"
+                                    placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="snow_compact">Snow Compaction Factor</label>
-                                <input name="snow_compact" id="snow_compact" placeholder="Enter value." type="text"
-                                    class="form-control">
+                                <input value="0.4" step=".01" name="snow_compact" id="snow_compact"
+                                    placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="ice_conduct">Ice Conductivity</label>
-                                <input name="ice_conduct" id="ice_conduct" placeholder="Enter value." type="text"
-                                    class="form-control">
+                                <label for="ice_conduct">Ice Conductivity (W/m*C)</label>
+                                <input value="2.6" step=".01" name="ice_conduct" id="ice_conduct"
+                                    placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="snow_conduct">Snow Conductivity</label>
-                                <input type="text" name="snow_conduct" id="snow_conduct" placeholder="Enter value."
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="wcht_coefficient">Water Conductive Heat Transfer Coefficient</label>
-                                <input type="text" name="wcht_coefficient" id="wcht_coefficient"
+                                <label for="snow_conduct">Snow Conductivity (W/m*C)</label>
+                                <input value="0.27" step=".01" type="number" name="snow_conduct" id="snow_conduct"
                                     placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="wcht_coefficient">Water Conductive Heat Transfer Coefficient
+                                    (kcal/(day*C*m))</label>
+                                <input value="11.35" step=".01" type="number" name="wcht_coefficient"
+                                    id="wcht_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="max_snow_ice_thickness_ratio">Maxmimum snow and ice thickness ratio</label>
-                                <input type="text" name="max_snow_ice_thickness_ratio" id="max_snow_ice_thickness_ratio"
-                                    placeholder="Enter value." class="form-control">
+                                <input value="0.1" step=".01" type="number" name="max_snow_ice_thickness_ratio"
+                                    id="max_snow_ice_thickness_ratio" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="ice_abs_coefficient">Ice Absorption Coefficient</label>
-                                <input type="text" name="ice_abs_coefficient" id="ice_abs_coefficient"
-                                    placeholder="Enter value." class="form-control">
+                                <input value="0.17" step=".01" type="number" name="ice_abs_coefficient"
+                                    id="ice_abs_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="ice_reflect_coefficient">Ice Reflection Coefficient</label>
-                                <input type="text" name="ice_reflect_coefficient" id="ice_reflect_coefficient"
-                                    placeholder="Enter value." class="form-control">
+                                <input value="0.55" step=".01" type="number" name="ice_reflect_coefficient"
+                                    id="ice_reflect_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="ice_attn_coefficient">Ice Attenuation Coefficient</label>
-                                <input type="text" name="ice_attn_coefficient" id="ice_attn_coefficient"
-                                    placeholder="Enter value." class="form-control">
+                                <label for="ice_attn_coefficient">Ice Attenuation Coefficient (1/m)</label>
+                                <input value="1.6" step=".01" type="number" name="ice_attn_coefficient"
+                                    id="ice_attn_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="snow_abs_coefficient">Snow Absorption Coefficient</label>
-                                <input type="text" name="snow_abs_coefficient" id="snow_abs_coefficient"
-                                    placeholder="Enter value." class="form-control">
+                                <input value="0.34" step=".01" type="number" name="snow_abs_coefficient"
+                                    id="snow_abs_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="snow_reflect_coefficient">Snow Reflection Coefficient</label>
-                                <input type="text" name="snow_reflect_coefficient" id="snow_reflect_coefficient"
-                                    placeholder="Enter value." class="form-control">
+                                <input value="0.8" step=".01" type="number" name="snow_reflect_coefficient"
+                                    id="snow_reflect_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="snow_attn_coefficient">Snow Attenuation Coefficient</label>
-                                <input type="text" name="snow_attn_coefficient" id="snow_attn_coefficient"
-                                    placeholder="Enter value." class="form-control">
+                                <label for="snow_attn_coefficient">Snow Attenuation Coefficient (1/m)</label>
+                                <input value="40" step=".01" type="number" name="snow_attn_coefficient"
+                                    id="snow_attn_coefficient" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="init_ice_thickness">Initial Ice Thickness</label>
-                                <input type="text" name="init_ice_thickness" id="init_ice_thickness"
-                                    placeholder="Enter value." class="form-control">
+                                <label for="init_ice_thickness">Initial Ice Thickness (m)</label>
+                                <input value="0" step=".01" type="number" name="init_ice_thickness"
+                                    id="init_ice_thickness" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="init_snow_thickness">Initial Snow Thickness</label>
-                                <input type="text" name="init_snow_thickness" id="init_snow_thickness"
-                                    placeholder="Enter value." class="form-control">
+                                <label for="init_snow_thickness">Initial Snow Thickness (m)</label>
+                                <input value="0" step=".01" type="number" name="init_snow_thickness"
+                                    id="init_snow_thickness" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="init_water_depths_div">Initial water depths to divide lake into</label>
-                                <input type="text" name="init_water_depths_div" id="init_water_depths_div"
-                                    placeholder="Enter value." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="init_water_temps">Initial Water Temperatures</label>
-                                <input type="text" name="init_water_temps" id="init_water_temps"
-                                    placeholder="Enter value." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="init_sus_solids_conc">Initial Suspended Solids Concentrations</label>
-                                <input type="text" name="init_sus_solids_conc" id="init_sus_solids_conc"
-                                    placeholder="Enter value." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="total_diss_solids">Total Dissolved Solids</label>
-                                <input type="text" name="total_diss_solids" id="total_diss_solids"
-                                    placeholder="Enter value." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="init_phos_conc">Initial Phosphorous Concentrations</label>
-                                <input type="text" name="init_phos_conc" id="init_phos_conc" placeholder="Enter value."
+                                <label for="init_water_depths_div">Initial water depths to divide lake into (m)</label>
+                                <input value="0.025, 0.05, 0.1, 0.2, 0.6, 1, 1.5, 2" type="number"
+                                    name="init_water_depths_div" id="init_water_depths_div" placeholder="Enter value."
                                     class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="init_diss_oxy">Initial Dissolved Oxygen</label>
-                                <input type="text" name="init_diss_oxy" id="init_diss_oxy" placeholder="Enter value."
-                                    class="form-control">
+                                <label for="init_water_temps">Initial Water Temperatures (C)</label>
+                                <input value="4" type="number" name="init_water_temps" id="init_water_temps"
+                                    placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="det_decay_rate">Detrital Decay Rate</label>
-                                <input type="text" name="det_decay_rate" id="det_decay_rate" placeholder="Enter value."
-                                    class="form-control">
+                                <label for="init_sus_solids_conc">Initial Suspended Solids Concentrations (mg/L)</label>
+                                <input value="0" type="number" name="init_sus_solids_conc" id="init_sus_solids_conc"
+                                    placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="alg_resp_rater">Algal Respiration Rater</label>
-                                <input type="text" name="alg_resp_rater" id="alg_resp_rater" placeholder="Enter value."
-                                    class="form-control">
+                                <label for="total_diss_solids">Total Dissolved Solids (mg/L)</label>
+                                <input value="0" type="number" name="total_diss_solids" id="total_diss_solids"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="init_phos_conc">Initial Phosphorous Concentrations (mg/L)</label>
+                                <input value="0" type="number" name="init_phos_conc" id="init_phos_conc"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="init_diss_oxy">Initial Dissolved Oxygen (mg/L)</label>
+                                <input value="10" type="number" name="init_diss_oxy" id="init_diss_oxy"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="det_decay_rate">Detrital Decay Rate (1/day)</label>
+                                <input value="0.1" step=".01" type="number" name="det_decay_rate" id="det_decay_rate"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="alg_resp_rater">Algal Respiration Rater (1/day)</label>
+                                <input value="0.1" step=".01" type="number" name="alg_resp_rater" id="alg_resp_rater"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="max_photo_ratio">Maximum Photosynthesis Ratio</label>
+                                <input value="9.6" step=".01" type="number" name="max_photo_ratio" id="max_photo_ratio"
+                                    placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="is_outflow_file">Create Outflow File</label>
-                                <input type="text" name="is_outflow_file" id="is_outflow_file"
+                                <input value="0" type="number" name="is_outflow_file" id="is_outflow_file"
                                     placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="is_inflow_file">Create Inflow File</label>
-                                <input type="text" name="is_inflow_file" id="is_inflow_file" placeholder="Enter value."
-                                    class="form-control">
+                                <label for="is_plot_file">Create Plot File</label>
+                                <input value="0" type="number" name="is_plot_file" id="is_plot_file"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="num_depth_plots">Number of Depth Plots</label>
+                                <input value="0" type="number" name="num_depth_plots" id="num_depth_plots"
+                                    placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="tab_data_interval">Interval Between Days for Tabular Output</label>
-                                <input type="text" name="tab_data_interval" id="tab_data_interval"
+                                <input value="5" type="number" name="tab_data_interval" id="tab_data_interval"
                                     placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inflow_outflow_source">Inflow/Outflow Sources in Inflow Data</label>
-                                <input type="text" name="inflow_outflow_source" id="inflow_outflow_source"
+                                <input value="0" type="number" name="inflow_outflow_source" id="inflow_outflow_source"
                                     placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="time_series_output">Number of Depths to Output Time-Series</label>
-                                <input type="text" name="time_series_output" id="time_series_output"
+                                <input value="5" type="number" name="time_series_output" id="time_series_output"
                                     placeholder="Enter value." class="form-control">
                             </div>
                         </div>
