@@ -152,6 +152,7 @@ class WeatherScraper:
             data = []
             hours = day['hourly']['data']
             apparent_temp = 0
+            solar_rad = []
             num_of_hours = len(hours)
             for hour in hours:
                 if "temperature" in hour:
@@ -160,11 +161,13 @@ class WeatherScraper:
                     apparent_temp += float(hour['apparentTemperature'])
 
                 # calulate solar radition
-                current_solar_coverage = round((1 - hour['cloudCover']) * 100.0, 1)
+                cloud_cov = hour['cloudCover']
                 utc_time = hour['time']
-                hour = utc
-                self.solar_rad_cal(current_solar_coverage, day_counter, )
+                hour = datetime.fromtimestamp(int(utc_time)).strftime('%X').split(":")[0]
+                rad = self.solar_rad_cal(cloud_cov, day_counter, hour)
+                solar_rad.append(rad)
             avg_temp = round(apparent_temp / float(num_of_hours), 1)
+            avg_rad = round(sum(solar_rad) / len(solar_rad), 1)
             data.append(avg_temp)
             for key in keys:
                 if key in info:
@@ -177,14 +180,14 @@ class WeatherScraper:
                         data.append(round(float(info[key]), 1))
                 else:
                     data.append(0.0)
-            # self.solar_rad_cal(data[4], day_counter)
+            data.insert(4, avg_rad)
             weather_info.append(data)
             day_counter += 1
         return weather_info
 
     def jday_calc(self, day, hour):
         # Value used in calculation of solar raditaion
-        unformatted_date = self.year + self.month + day
+        unformatted_date = str(self.year) + str(self.month) + str(day)
         date = datetime.strptime(unformatted_date, "%Y%m%d")
         days = date.strftime("%j")
 
@@ -193,8 +196,8 @@ class WeatherScraper:
         return round(jday1, 2)
 
     def solar_rad_cal(self, solcov, day, hour):
-        slong = self.lng
-        slat = self.lat
+        slong = float(self.lng)
+        slat = float(self.lat)
         pi = 3.1419
         phi = 15 * round(slong / 15.0)
 
