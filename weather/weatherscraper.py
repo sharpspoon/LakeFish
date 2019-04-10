@@ -158,6 +158,12 @@ class WeatherScraper:
                     apparent_temp += float(hour['temperature'])
                 elif "apparentTemperature" in hour:
                     apparent_temp += float(hour['apparentTemperature'])
+
+                # calulate solar radition
+                current_solar_coverage = round((1 - hour['cloudCover']) * 100.0, 1)
+                utc_time = hour['time']
+                hour = utc
+                self.solar_rad_cal(current_solar_coverage, day_counter, )
             avg_temp = round(apparent_temp / float(num_of_hours), 1)
             data.append(avg_temp)
             for key in keys:
