@@ -146,47 +146,60 @@ class WeatherScraper:
         weather_info = []
         day_counter = 1
         for day in self.weather_jsons:
-            info = day['daily']['data'][0]
-            keys = ['dewPoint', 'windSpeed', 'windBearing', 'solarRad', 'cloudCover',
-                    'precipIntensity', 'precipAccumulation']
-            data = []
+            data = day['daily']['data'][0]  # gets data for current day
+            keys = ['dewPoint', 'windSpeed', 'windBearing', 'cloudCover']   # keys for data dictionary
+            output = []
             hours = day['hourly']['data']
             apparent_temp = 0
-            solar_rad = []
+            rad_sum = 0
             num_of_hours = len(hours)
+            precip_intensity = 0
+            precip_accumulation = 0
+
+            # Generates temperatures, precipitations, and radiation figures
             for hour in hours:
+
+                # Generate temperature
                 if "temperature" in hour:
                     apparent_temp += float(hour['temperature'])
                 elif "apparentTemperature" in hour:
                     apparent_temp += float(hour['apparentTemperature'])
 
+                # Generate precipitation information
+                if "precipIntensity" in hour:       # precip intensity is the amount of precipatation at a given time
+                    precip_intensity += round(hour['precipIntensity'] * 39.37, 2)   # convert meters to inches
+                if "precipAccumulation" in hour:    # precip accumulation is the amount of snowfall accumulation
+                    precip_accumulation += hour['precipAccumulation']
+
                 # calulate solar radition
                 cloud_cov = hour['cloudCover']
                 utc_time = hour['time']
                 hour = datetime.fromtimestamp(int(utc_time)).strftime('%X').split(":")[0]
-                rad = self.solar_rad_cal(cloud_cov, day_counter, hour)
-                solar_rad.append(rad)
+                rad = self._solar_rad_cal(cloud_cov, day_counter, hour)
+                rad_sum += rad  # generates solar rad sum
+
             avg_temp = round(apparent_temp / float(num_of_hours), 1)
-            avg_rad = round(sum(solar_rad) / len(solar_rad), 1)
-            data.append(avg_temp)
+            daily_rad = round(rad_sum * 0.085985, 2)
+            avg_precip = round(precip_intensity / float(num_of_hours), 2)
+            avg_accum = round(precip_accumulation / float(num_of_hours), 2)
+            output.append(avg_temp)
             for key in keys:
-                if key in info:
-                    if key == 'cloudCover':
-                        data.append(round((1 - info[key]) * 100.0, 1))
-                    elif key == 'precipAccumulation':
-                        # converts inches to meters
-                        data.append(round(info[key] * .0254, 1))
+                if key in data:
+                    if key == keys[3]:  # if key == cloudCover, then convert to solar coverage
+                        output.append(round((1 - data[key]) * 100.0, 1))
                     else:
-                        data.append(round(float(info[key]), 1))
-                else:
-                    data.append(0.0)
-            data.insert(4, avg_rad)
-            weather_info.append(data)
+                        output.append(round(float(data[key]), 1))
+                else:   # if the key for some reason is not in the dictionary have 0 for its place
+                    output.append(0.0)
+            output.insert(4, daily_rad)
+            output.append(avg_precip)
+            output.append(avg_accum)
+            weather_info.append(output)
             day_counter += 1
         return weather_info
 
-    def jday_calc(self, day, hour):
-        # Value used in calculation of solar raditaion
+    def _jday_calc(self, day, hour):
+        ''' Generates value used for solar radiation '''
         unformatted_date = str(self.year) + str(self.month) + str(day)
         date = datetime.strptime(unformatted_date, "%Y%m%d")
         days = date.strftime("%j")
@@ -195,13 +208,14 @@ class WeatherScraper:
 
         return round(jday1, 2)
 
-    def solar_rad_cal(self, solcov, day, hour):
+    def _solar_rad_cal(self, solcov, day, hour):
+        ''' Generates solar radiation '''
         slong = float(self.lng)
         slat = float(self.lat)
         pi = 3.1419
         phi = 15 * round(slong / 15.0)
 
-        jday1 = self.jday_calc(day, hour)
+        jday1 = self._jday_calc(day, hour)
         hcloud = solcov
         pi = 3.1419
         eqt = 0.17 * sin(4 * pi * (int(jday1) - 80) / 373) - 0.129 * sin(2 * pi * int((jday1) - 8) / 355)
@@ -209,12 +223,7 @@ class WeatherScraper:
         hh = round(2 * pi / 24 * (hour1 - ((slong - phi) * 24 / 360) + eqt - 12.0), 6)
         taud = 2 * pi * (int(jday1) - 1) / 365
         val = round(0.006918 - 0.399912 * cos(taud) + 0.070257 * sin(taud) - 0.006758 * cos(2 * taud) + 0.000907 * sin(2 * taud) - 0.002697 * cos(3 * taud) + 0.00148 * sin(3 * taud), 7)
-        f_sin = sin(slat * 0.01743)
-        d_sin = sin(val)
-        s_cos = cos(slat * 0.01743)
-        d_cos = cos(val)
-        h_cos = cos(hh)
-        a_asin = f_sin * d_sin + s_cos * d_cos * h_cos
+        a_asin = sin(slat * 0.01743) * sin(val) + cos(slat * 0.01743) * cos(val) * cos(hh)
         ao = asin(a_asin)
         ao = ao * 180 / pi
         if ao < 0:
@@ -269,7 +278,7 @@ class WeatherScraper:
 
     def _data_already_retrieved(self):
         """
-            Checks to make sure data is not already stored
+            Checks to make sure data being pulled is not already stored
         """
         if not os.path.isfile(self.filename):
             print("No such file.")
