@@ -202,6 +202,7 @@ def nldas23(request):
 
 
 def nldas2(request):
+    form = DisplayWeatherDataForm()
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -209,16 +210,33 @@ def nldas2(request):
         {
             'title': 'NLDAS-2',
             'year': now.year,
-            'message': 'Your application description page.'
+            'message': 'Your application description page.',
+            'form': form
         }
     )
 
 
 def displaynldas2(request):
+    dateFormat = '%d/%m/%Y'
     startDate = request.POST['date']
+    startDay, startMonth, startYear = startDate.split("/", 2)
+    startDT = datetime.datetime.strptime(startDate, dateFormat)
+    startTT = startDT.timetuple()
+    startJulianDay = startTT.tm_yday
+    startJulianDayStr = str(startJulianDay)
     endDate = request.POST['date2']
+    endDay, endMonth, endYear = endDate.split("/", 2)
+    endDT = datetime.datetime.strptime(endDate, dateFormat)
+    endTT = endDT.timetuple()
+    endJulianDay = endTT.tm_yday
+    endJulianDayStr = str(endJulianDay)
     myDate = startDate
+    state = request.POST['state']
+    city = request.POST['city']
+    form = DisplayWeatherDataForm()
+    
 
+    fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
     #loop over dates from startDate to endDate
     #while myDate <= endDate:
         #split out the parts of the year
@@ -233,26 +251,31 @@ def displaynldas2(request):
         #create daily averages and output netCDF file
         #hourly_to_daily_NLDAS.hourly_to_daily_one_day(fullPath, year, julianday)
         #myDate += timedelta(days=1)
-    form = DisplayWeatherDataForm()
-    day, month, year = startDate.split("/", 2)
-    dateFormat = '%d/%m/%Y'
-    dt = datetime.datetime.strptime(startDate, dateFormat)
-    tt = dt.timetuple()
-    julianDay = tt.tm_yday
-    julianDayStr = str(julianDay)
-    fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
-    directoryPath = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_M.002/' + year +'/NLDAS_FORA0125_M.A' + year + month+'.002.grb')
-    with open(''+directoryPath, 'rb') as stream:
-        for i, msg in enumerate(pupygrib.read(stream), 1):
-            lons, lats = msg.get_coordinates()
-            values = msg.get_values()
-            print("Message {}: {:.3f} {}".format(i, values.mean(), lons.shape))
-    os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr + '/ -A grb')
+
+    #directoryPath = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_M.002/' + year +'/NLDAS_FORA0125_M.A' + year + month+'.002.grb')
+    #with open(''+directoryPath, 'rb') as stream:
+     #   for i, msg in enumerate(pupygrib.read(stream), 1):
+      #      lons, lats = msg.get_coordinates()
+       #     values = msg.get_values()
+        #    print("Message {}: {:.3f} {}".format(i, values.mean(), lons.shape))
+    #os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr + '/ -A grb')
     return render(
         request,
         'app/nldas2.html',
         {
-            'dateRange': 'startDate='+startDate + ' endDate=' + endDate + ' year=' + year + ' month=' + month + ' julian=' + julianDayStr + ' path=' + directoryPath,
+            'vars': 'vars:',
+            'startDate': 'startDate= '+startDate,
+            'startDay': 'startDay= '+startDay,
+            'startMonth': 'startMonth= '+startMonth,
+            'startYear': 'startYear= '+startYear,
+            'startJulianDay': 'startJulianDay= '+startJulianDayStr,
+            'endDate': 'endDate= '+endDate,
+            'endDay': 'endDay= '+endDay,
+            'endMonth': 'endMonth= '+endMonth,
+            'endYear': 'endYear= '+endYear,
+            'endJulianDay': 'endJulianDay= '+endJulianDayStr,
+            'state': 'state= '+state,
+            'city': 'city= '+city,
             'message': 'Weather Data page.',
             'year': now.year,
             'form': form
