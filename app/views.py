@@ -24,6 +24,7 @@ import datetime
 from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
 from nldas2 import common
+import pupygrib
 
 now = datetime.datetime.now()
 
@@ -240,13 +241,18 @@ def displaynldas2(request):
     julianDay = tt.tm_yday
     julianDayStr = str(julianDay)
     fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
-    directoryPath = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr)
+    directoryPath = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_M.002/' + year +'/NLDAS_FORA0125_M.A' + year + month+'.002.grb')
+    with open(''+directoryPath, 'rb') as stream:
+        for i, msg in enumerate(pupygrib.read(stream), 1):
+            lons, lats = msg.get_coordinates()
+            values = msg.get_values()
+            print("Message {}: {:.3f} {}".format(i, values.mean(), lons.shape))
     os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr + '/ -A grb')
     return render(
         request,
         'app/nldas2.html',
         {
-            'dateRange': 'startDate='+startDate + ' endDate=' + endDate + ' year=' + year + ' julian=' + julianDayStr + ' path=' + directoryPath,
+            'dateRange': 'startDate='+startDate + ' endDate=' + endDate + ' year=' + year + ' month=' + month + ' julian=' + julianDayStr + ' path=' + directoryPath,
             'message': 'Weather Data page.',
             'year': now.year,
             'form': form
