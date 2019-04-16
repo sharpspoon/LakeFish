@@ -171,18 +171,18 @@
                             </p>
                             <hr>
                             <div class="form-group">
-                                <label for="surfaceArea">Surface Area</label>
-                                <input name="surface_area" placeholder="Enter surface area value." type="text"
-                                    class="form-control" id="surfaceArea">
+                                <label for="num_horiz_layers">Number of Horizontal Layers Along Depth</label>
+                                <input name="num_horiz_layers" max="80" placeholder="Enter value." type="number"
+                                    class="form-control" id="num_horiz_layers">
                             </div>
                             <div class="form-group">
                                 <label for="maxDepth">Initial Maximum Depth of Lake</label>
-                                <input name="max_depth" placeholder="Enter maximum depth value." type="text"
+                                <input name="max_depth" placeholder="Enter maximum depth value." type="number"
                                     class="form-control" id="maxDepth">
                             </div>
                             <div class="form-group">
                                 <label for="elevation">Initial Surface Elevation</label>
-                                <input name="elevation" placeholder="Enter value." type="text" class="form-control"
+                                <input name="elevation" placeholder="Enter value." type="number" class="form-control"
                                     id="elevation">
                             </div>
                             <div class="form-group">
@@ -316,8 +316,50 @@
                             </div>
                             <div class="form-group">
                                 <label for="init_water_depths_div">Initial water depths to divide lake into (m)</label>
-                                <input value="0.025" type="number" name="init_water_depths_div"
-                                    id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                <div class="row">
+                                    <div class="form-group col-xs-2">
+                                        <input value="0.025" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input value="0.05" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input value="0.1" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input value="0.2" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input value="0.6" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-2">
+                                        <input value="1.0" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input value="1.5" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input value="2.0" type="number" name="init_water_depths_div"
+                                            id="init_water_depths_div" placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input type="number" name="init_water_depths_div" id="init_water_depths_div"
+                                            placeholder="Enter value." class="form-control">
+                                    </div>
+                                    <div class="form-group col-xs-2">
+                                        <input type="number" name="init_water_depths_div" id="init_water_depths_div"
+                                            placeholder="Enter value." class="form-control">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="init_water_temps">Initial Water Temperatures (C)</label>
@@ -350,6 +392,11 @@
                                     placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="sed_oxy_demand">Sedimentary Oxygen Demand (g/m^2/day)</label>
+                                <input value="0.2" step=".01" type="number" name="sed_oxy_demand" id="sed_oxy_demand"
+                                    placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="alg_resp_rater">Algal Respiration Rater (1/day)</label>
                                 <input value="0.1" step=".01" type="number" name="alg_resp_rater" id="alg_resp_rater"
                                     placeholder="Enter value." class="form-control">
@@ -360,14 +407,44 @@
                                     placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="cal_sod_multiplier">Calibrated SOD Multiplier</label>
+                                <input value="8" step=".01" type="number" name="cal_sod_multiplier"
+                                    id="cal_sod_multiplier" placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="cal_meta_multiplier">Calibrated Metalimnion Diffusion Coefficient
+                                    Multiplier</label>
+                                <input value="0.8" step=".01" type="number" name="cal_meta_multiplier"
+                                    id="cal_meta_multiplier" placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="cal_hyp_multiplier">Calibrated Hypolimnion Diffusion Coefficient
+                                    Multiplier</label>
+                                <input value="1" step=".01" type="number" name="cal_hyp_multiplier"
+                                    id="cal_hyp_multiplier" placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="cal_chla_multiplier">Calibrated Chl-a Concentraion Mulitplier</label>
+                                <input value="1" step=".01" type="number" name="cal_chla_multiplier"
+                                    id="cal_chla_multiplier" placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="is_outflow_file">Create Outflow File</label>
-                                <input value="0" type="number" name="is_outflow_file" id="is_outflow_file"
-                                    placeholder="Enter value." class="form-control">
+                                <label class="radio-inline">
+                                    <input type="radio" name="is_outflow_file" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="is_outflow_file">No
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label for="is_plot_file">Create Plot File</label>
-                                <input value="0" type="number" name="is_plot_file" id="is_plot_file"
-                                    placeholder="Enter value." class="form-control">
+                                <label class="radio-inline">
+                                    <input type="radio" name="is_plot_file" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="is_plot_file">No
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label for="num_depth_plots">Number of Depth Plots</label>
@@ -381,13 +458,51 @@
                             </div>
                             <div class="form-group">
                                 <label for="inflow_outflow_source">Inflow/Outflow Sources in Inflow Data</label>
-                                <input value="0" type="number" name="inflow_outflow_source" id="inflow_outflow_source"
-                                    placeholder="Enter value." class="form-control">
+                                <label class="radio-inline">
+                                    <input type="radio" name="inflow_outflow_source" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inflow_outflow_source">No
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="field_data_bool">Do You Have Field Data (temperature and/or dissolved oxygen
+                                    profiles)?</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="field_data_bool" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="field_data_bool">No
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="chla_data_bool">Do You Have Chl-a Data?</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="chla_data_bool" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="chla_data_bool">No
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="output_sim_profile_bool">Output Simulated Profiles?</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="output_sim_profile_bool" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="output_sim_profile_bool">No
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label for="time_series_output">Number of Depths to Output Time-Series</label>
                                 <input value="5" type="number" name="time_series_output" id="time_series_output"
                                     placeholder="Enter value." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="depth_time_series_output">Depths to Output Time-Series for Simulated
+                                    Temperature or Dissolved Oxygen</label>
+                                <input value="5" type="number" name="depth_time_series_output"
+                                    id="depth_time_series_output" placeholder="Enter value." class="form-control">
                             </div>
                         </div>
                     </div>
@@ -410,7 +525,8 @@
         $('#start_date_timepicker').datetimepicker({
             viewMode: 'years',
             format: 'L', //Format to select DD/MM/YYYY
-            allowInputToggle: true
+            allowInputToggle: true,
+            maxDate: new Date()
         });
         $('#end_date_timepicker').datetimepicker({
             viewMode: 'years',
