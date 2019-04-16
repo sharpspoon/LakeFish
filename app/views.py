@@ -295,9 +295,12 @@ def simulateLake(request):
             'surface_area': request.POST['surface_area'],
             'max_depth': request.POST['max_depth'],
             'elevation': request.POST['elevation'],
-            'light_atten': request.POST['light_atten'],
+            'light_atten_water': request.POST['light_atten_water'],
+            'light_atten_chlor': request.POST['light_atten_chlor'],
             'xk1': request.POST['xk1'],
-            'wind_sheltering': request.POST['wind_sheltering'],
+            'wind_sheltering_fall': request.POST['wind_sheltering_fall'],
+            'wind_sheltering_summer': request.POST['wind_sheltering_summer'],
+            'temp_wind_sheltering': request.POST['temp_wind_sheltering'],
             'snow_ice_ratio': request.POST['snow_ice_ratio'],
             'std': request.POST['std'],
             'sediment_density': request.POST['sediment_density'],
@@ -330,8 +333,8 @@ def simulateLake(request):
             'inflow_outflow_source': request.POST['inflow_outflow_source'],
             'time_series_output': request.POST['time_series_output']
         }
-        #createInitPY.gatherPost(userInput)
-        createInitPY.createInit(userInput)
+        createInit.gatherPost(userInput)
+        #createInit.createInit(userInput)
         return render(
             request,
             'app/simulatelake.html',

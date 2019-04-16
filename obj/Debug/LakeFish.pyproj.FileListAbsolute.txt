@@ -1,3 +1,6 @@
 C:\Users\I868538\source\repos\sharpspoon\LakeFish\obj\Debug\LakeFish.pyproj.CoreCompileInputs.cache
 C:\Users\I868538\source\repos\sharpspoon\LakeFish\bin\Microsoft.PythonTools.WebRole.dll
 C:\Users\I868538\source\repos\sharpspoon\LakeFish\bin\wfastcgi.py
+C:\Users\Cameron\Source\Repos\sharpspoon\LakeFish\obj\Debug\LakeFish.pyproj.CoreCompileInputs.cache
+C:\Users\Cameron\Source\Repos\sharpspoon\LakeFish\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\Cameron\Source\Repos\sharpspoon\LakeFish\bin\wfastcgi.py
