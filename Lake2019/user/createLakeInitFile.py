@@ -96,8 +96,8 @@ def createInit(userInput):
         
         #write to path.txt file
         with open(os.path.join(pathHere, 'path.txt'), 'w') as pathfile:
-            pathfile.write('%s\n' % os.path.join(pathHere, '#OUTPUT', 'TEMPDO'))
-            pathfile.write('%s\\' % os.path.join(pathHere, '..', '#COMMON', 'MeteorologicalData', stateAbbv))
+            pathfile.write('%s\n' % os.path.abspath(os.path.join(pathHere, '#OUTPUT', 'TEMPDO')))
+            pathfile.write('%s\\' % os.path.abspath(os.path.join(pathHere, '..', '#COMMON', 'MeteorologicalData', stateAbbv)))
         pathfile.close()
         
         #start date, all the way to end date. rewrite this if its just
