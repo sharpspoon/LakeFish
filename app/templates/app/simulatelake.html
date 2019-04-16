@@ -102,13 +102,40 @@
                                             class="form-control" id="lakeName">
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" name="country" id="countryId" value="US" />
+                                        <label for="start_date_timepicker">Start Simulation Date</label>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='start_date_timepicker'>
+                                                            <input name="start_date_timepicker" type='text'
+                                                                class="form-control" />
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="stateId">U.S. State</label>
-                                        <select name="state" class="states order-alpha form-control" id="stateId">
-                                            <option value="">Select State</option>
-                                        </select>
+                                        <label for="end_date_timepicker">End Simulation Date</label>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='end_date_timepicker'>
+                                                            <input name="end_date_timepicker" type='text'
+                                                                class="form-control" />
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +148,21 @@
                                 <i>Select city and weather station near lake.</i>
                             </p>
                             <hr>
+                            <div class="form-group">
+                                <input type="hidden" name="country" id="countryId" value="US" />
+                            </div>
+                            <div class="form-group">
+                                <label for="stateID">State</label>
+                                <select name="state" class="states order-alpha form-control" id="stateId">
+                                    <option>Select State</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cityId">City</label>
+                                <select name="city" class="cities order-alpha form-control" id="cityId">
+                                    <option>Select City</option>
+                                </select>
+                            </div>
                         </div>
                         <div id="lakegeo" class="tab-pane fade">
                             <h4>Lake Geometry</h4>
@@ -134,26 +176,41 @@
                                     class="form-control" id="surfaceArea">
                             </div>
                             <div class="form-group">
-                                <label for="maxDepth">Maximum Depth</label>
+                                <label for="maxDepth">Initial Maximum Depth of Lake</label>
                                 <input name="max_depth" placeholder="Enter maximum depth value." type="text"
                                     class="form-control" id="maxDepth">
                             </div>
                             <div class="form-group">
-                                <label for="elevation">Elevation Above Sea Level</label>
+                                <label for="elevation">Initial Surface Elevation</label>
                                 <input name="elevation" placeholder="Enter value." type="text" class="form-control"
                                     id="elevation">
+                            </div>
+                            <div class="form-group">
+                                <label for="init_uniform_profiles">Initial Uniform Profiles?</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="init_uniform_profiles" checked>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="init_uniform_profiles">No
+                                </label>
                             </div>
                         </div>
                         <!--#TODO: Validate fields and make fields numeric-->
                         <div id="advanced" class="tab-pane fade">
                             <h4>Advanced Options</h4>
                             <p>
-                                <i>Enter advanced optinos for lake. Default values have been generated.</i>
+                                <i>Enter advanced options for lake. Default values have been generated.</i>
                             </p>
                             <hr>
                             <div class="form-group">
-                                <label for="light_atten">Light attenuation coefficient for chlorophyll-a (L/mg)</label>
-                                <input value="20" step=".01" name="light_atten" id="light_atten"
+                                <label for="light_atten_water">Light attenuation coefficient for water (L/mg)</label>
+                                <input step=".01" name="light_atten_water" id="light_atten_water"
+                                    placeholder="Enter value." type="number" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="light_atten_chlor">Light attenuation coefficient for chlorophyll-a
+                                    (L/mg)</label>
+                                <input value="20" step=".01" name="light_atten_chlor" id="light_atten_chlor"
                                     placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
@@ -162,8 +219,18 @@
                                     type="number" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="wind_sheltering">Wind Sheltering</label>
-                                <input value="1" step=".01" name="wind_sheltering" id="wind_sheltering"
+                                <label for="wind_sheltering_summer">Wind Sheltering Coefficient for Summer</label>
+                                <input step=".01" name="wind_sheltering_summer" id="wind_sheltering_summer"
+                                    placeholder="Enter value." type="number" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="wind_sheltering_fall">Wind Sheltering Coefficient for Fall</label>
+                                <input step=".01" name="wind_sheltering_fall" id="wind_sheltering_fall"
+                                    placeholder="Enter value." type="number" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="temp_wind_sheltering">Wind Sheltering</label>
+                                <input value="1" step=".01" name="temp_wind_sheltering" id="temp_wind_sheltering"
                                     placeholder="Enter value." type="number" class="form-control">
                             </div>
                             <div class="form-group">
@@ -249,9 +316,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="init_water_depths_div">Initial water depths to divide lake into (m)</label>
-                                <input value="0.025, 0.05, 0.1, 0.2, 0.6, 1, 1.5, 2" type="number"
-                                    name="init_water_depths_div" id="init_water_depths_div" placeholder="Enter value."
-                                    class="form-control">
+                                <input value="0.025" type="number" name="init_water_depths_div"
+                                    id="init_water_depths_div" placeholder="Enter value." class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="init_water_temps">Initial Water Temperatures (C)</label>
@@ -338,5 +404,27 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="//geodata.solutions/includes/state.js"></script>
+<script src="//geodata.solutions/includes/statecity.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#start_date_timepicker').datetimepicker({
+            viewMode: 'years',
+            format: 'L', //Format to select DD/MM/YYYY
+            allowInputToggle: true
+        });
+        $('#end_date_timepicker').datetimepicker({
+            viewMode: 'years',
+            format: 'L', //Format to select DD/MM/YYYY
+            allowInputToggle: true,
+            maxDate: new Date(),
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#start_date_timepicker").on("dp.change", function (e) {
+            $('#end_date_timepicker').data("DateTimePicker").minDate(e.date);
+        });
+        $("#end_date_timepicker").on("dp.change", function (e) {
+            $('#start_date_timepicker').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
 {% endblock%}
