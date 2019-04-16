@@ -1,0 +1,10 @@
+        !COMPILER-GENERATED INTERFACE MODULE: Tue Feb 19 09:05:42 2019
+        MODULE MAKEFILE__genmod
+          INTERFACE 
+            SUBROUTINE MAKEFILE(PATH,TMPFILE,FFILE)
+              CHARACTER(LEN=1) :: PATH(*)
+              CHARACTER(LEN=1) :: TMPFILE(*)
+              CHARACTER(LEN=1) :: FFILE(*)
+            END SUBROUTINE MAKEFILE
+          END INTERFACE 
+        END MODULE MAKEFILE__genmod

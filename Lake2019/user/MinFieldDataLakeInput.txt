@@ -1,0 +1,172 @@
+201208,"Version number Year & Month Developed"
+Carl
+N
+2
+$
+
+
+
+
+
+$
+
+
+30,4
+$
+
+
+
+
+
+
+4,16,2007,12,31,2008
+$
+
+
+
+
+32,50,458,1
+$
+
+
+
+
+0.37,20,-1.840
+$
+
+
+0.95,0.95
+$
+
+
+1,1
+$
+
+
+0.035,550
+$
+
+
+
+
+
+0.6,2.6,0.27,11.35,.1
+$
+
+
+
+
+
+
+0.17,0.55,1.60,0.34,0.80,40
+$
+
+
+0,0
+$
+%12 (Z(I),I=1,MBOT) - Z-Initial water depth, 8 depths per line
+%12 DO NOT change the first line - these small depths for predict ice formation
+0.02,0.06,0.1,0.2,0.3,0.4,0.5,0.6,0.8,1
+1.25,1.5,2,2.5,3,3.5,4,5,7,9
+11,14,17,20,23,26,30,34,38,42
+46,50
+$
+
+4
+$
+
+0
+$
+
+0
+$
+
+0.00385
+$
+
+1
+$
+
+0
+$
+
+0.75
+$
+
+10
+$
+
+
+
+
+0.1,0.5,0.1,9.6
+$
+
+
+
+
+2.2,1,1,1
+$
+
+
+
+0,0,0
+$
+
+
+5,0
+$
+
+
+
+1,1,0
+$
+
+5
+$
+
+1,10,20,30,48
+$
+
+
+4,1
+
+
+2008,4
+ 520  521  612  619
+%32 Next data are of Chlorophyll-a concentration (mg/l) in epilimnion and hypolimnion year by year
+%33 CHLEP(I),I=2,NDAYO+1), first input ALL field data of Chlorophyll-a concentration (mg/l) in epilimnion year by year 
+0.00562,0.00385,0.006,0.00227
+%34 (CHLHY(I),I=2,NDAYO+1), then input ALL field data of Chlorophyll-a concentration (mg/l) in hypolimnion year by year
+0.00562,0.00385,0.006,0.00227
+%35 NF, NPRFLE - NF is number of depths in measured profile, NPRFLE - which parameter you have measured profiles
+%36 Month, Day, Year are information only, should be the same sequence as NPRINT(I) given above - the day having field data
+ 21  2  5  20  2008  17 
+%37 Secchi disk depth (m) for the date with measured profile
+ 3 
+%38 Profile ID, 6 for DO and 1 for Water Temperature
+ 6  1 
+%39 Depth where DO or Temperatures were measured
+ 0  1  2  3  4  5  6  7  8  9  10  12  14  16  18  19  21  22  23  24  24.2 
+%40 Measured DO and Temperature valures by depths
+ 12.06  12.16  12.14  12.16  12.14  12.12  12.1  12.06  12.07  12.08  12.06  12.03  11.94  11.92  11.82  11.85  11.6  11.39  11.36  11.32  11.31 
+ 8.96  8.94  8.93  8.93  8.9  8.9  8.8  8.76  8.77  8.79  8.77  8.74  8.56  8.56  8.4  8.34  7.5  7.3  7.25  7.24  7.24 
+Field data are repeated in the same format above day by day
+ 20  2  5  21  2008  8 
+ 4.5 
+ 6  1 
+ 0  1  2  3  4  5  6  7  8  9  10  12  14  16  18  20  22  24  26  27.2 
+ 12.06  12.07  12.08  12.08  12.05  12.06  11.99  11.95  11.84  11.79  11.83  11.63  11.28  11.05  10.91  10.77  10.68  10.62  10.59  10.54 
+ 8.27  8.25  8.25  8.25  8.25  8.24  8.22  8.2  8.01  7.96  7.78  7.08  6.84  6.02  5.84  5.54  5.35  5.25  5.06  4.99 
+ 2  2  6  12  2008  9 
+ 4.27 
+ 6  1 
+ 0.6  4.27 
+ 9.7  9.8 
+ 14.5  14.2 
+ 29  2  6  19  2008  9 
+ 4.9 
+ 6  1 
+ 0  1  2  3  4  5  6  7  8  9  10  12  14  16  18  20  22  24  26  28  30  32  34  36  38  40  42  44  46 
+ 10.18  10.325  10.535  10.56  10.48  10.49  10.35  10.045  9.785  9.34  9.13  8.865  8.745  8.655  8.74  8.85  9.01  9.055  9.045  8.83  8.805  8.75  8.58  8.395  8.17  7.805  7.09  8.1  7.94 
+ 18.575  18.32  17.63  16.91  16.37  16.01  15.485  14.835  14.285  13.63  13.17  12.335  10.895  9.8  8.67  7.755  6.805  6.34  6.215  5.965  5.825  5.675  5.58  5.525  5.45  5.42  5.39  6.05  6.03 

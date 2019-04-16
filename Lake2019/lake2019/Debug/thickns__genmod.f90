@@ -1,0 +1,8 @@
+        !COMPILER-GENERATED INTERFACE MODULE: Tue Feb 19 09:05:42 2019
+        MODULE THICKNS__genmod
+          INTERFACE 
+            SUBROUTINE THICKNS(MBOT)
+              INTEGER(KIND=4) :: MBOT
+            END SUBROUTINE THICKNS
+          END INTERFACE 
+        END MODULE THICKNS__genmod
