@@ -90,9 +90,16 @@ def createInit(userInput):
         #TAPE8 Number - unknown for now
         configfile.write('$\n\n\n\n\n\n$\n\n\n')
         #configfile.write('$\r\nTAPE8 - weather data file name is read from station.dat file now\r\n')
-        state, city = handleStationName(userInput['ISTATION'], userInput['ISTATE'])
+        state, city, stateAbbv = handleStationName(userInput['ISTATION'], userInput['ISTATE'])
         #station state number and city number
         configfile.write('%d,%d\r\n$\r\n\n\n\n\n\n\n' % (state, city))
+        
+        #write to path.txt file
+        with open(os.path.join(pathHere, 'path.txt'), 'w') as pathfile:
+            pathfile.write('%s\n' % os.path.join(pathHere, '#OUTPUT', 'TEMPDO'))
+            pathfile.write('%s\\' % os.path.join(pathHere, '..', '#COMMON', 'MeteorologicalData', stateAbbv))
+        pathfile.close()
+        
         #start date, all the way to end date. rewrite this if its just
         # 2 dates passed in
         configfile.write('%d,%d,%d,%d,%d,%d\r\n$\n\n\n\n\n' % (userInput['MONTH'], userInput['ISTART'], 
@@ -231,14 +238,16 @@ def handleStationName(cityName, stateName):
     stationList = []
     stateNum = 0
     cityNum = 0
+    stateAbbv = ''
     for line in statFile:
         stationList += [line.split()]
     for x in stationList:
         if(x[6] == stateName):
             stateNum = int(x[0])
+            stateAbbv = x[2]
             if(x[7] == cityName):
                 cityNum = int(x[1])        
-    return stateNum, cityNum
+    return stateNum, cityNum, stateAbbv
 
 if __name__ == "__main__":
 
@@ -314,6 +323,4 @@ if __name__ == "__main__":
     pathHere = os.path.abspath(os.path.dirname(__file__))
     batFile = os.path.join(pathHere, 'RunMinlake.bat')
     p = subprocess.Popen(batFile, shell=True, stdout = subprocess.PIPE)
-    stdout, stderr = p.communicate()
-    print(p.returncode) # is 0 if success
 #    saveLake('tms0050', 'Lake1')
