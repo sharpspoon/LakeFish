@@ -1,0 +1,11 @@
+ 
+ TEMP&DO SIMULATED(1) OR TEMP SIMULATED ONLY(0):
+           1
+ Number of data pairs for Tempe and DO Below the mixed layer
+         112         112
+ Error values in report format and for sensitivity analysis
+ 
+                Temp               DO                 Depth Mix        Temp Mix            DO Mix            Temp Below        DO Below      
+ DAY  NO |  SE     R2    Slope |  SE     R2    Slope |  SE     R2    Slope |  SE     R2    Slope |  SE     R2    Slope |  SE     R2    Slope |  SE     R2    Slope |
+  9   195   1.85   0.90   1.05    1.25   0.90   0.99   10.08  -3.04   0.52    2.25   0.82   1.12    0.82   0.46   1.01    1.54   0.88   0.95    1.32   0.85   0.89
+ 

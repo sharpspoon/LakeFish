@@ -1,0 +1,9 @@
+        !COMPILER-GENERATED INTERFACE MODULE: Tue Feb 19 09:05:42 2019
+        MODULE SUBLAY__genmod
+          INTERFACE 
+            SUBROUTINE SUBLAY(IEUPH,NSLAY)
+              INTEGER(KIND=4) :: IEUPH
+              INTEGER(KIND=4) :: NSLAY
+            END SUBROUTINE SUBLAY
+          END INTERFACE 
+        END MODULE SUBLAY__genmod

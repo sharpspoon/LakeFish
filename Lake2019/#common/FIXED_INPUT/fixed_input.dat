@@ -1,0 +1,75 @@
+These parameters were originally read from old INPUT.ini - DO NOT change these parameters
+MODEL,NCLASS,IDIATOM
+4     1      0
+NITRO,ITER
+0     1
+DZLL,DZUL,BETA,EMISS
+0.02 3.5  0.4  0.97
+WCHANL,WLAKE,S,FT
+100.0  100.0  0.001 0.035
+ALPHA,BW
+18  100
+ZSLT,IZSLT
+20.0  21
+MELMON,MELDAY,ICEMON,ICEDAY
+4      15     10     15
+HKMAX,WCOEF,WCFSF
+0.50   1.0   1.0
+TSLMEAN,ETAB,T2MBOT
+7.0    2.0  4.5
+HKMXIS,WCFIS,WSIS
+0.05  0.0   0.0  
+BRR,FVCHLA(NCLASS+1)
+0.02   0.25    
+YCHO2,Y2CHO2,YCBOD,YPBOD,YNHBOD,YPZP,YZDO,YZW,YNHZP
+0.0083 0.0083 0.0083 0.0091  0    0    0    0    0 
+
+**************** Infromation on parameters ***************************************************
+MODEL   = 4,  NCLASS  = 1,  IDIATOM = 0
+MODEL  : specifies level of biological simulation (1, 2, 3)
+MODEL = 4 is for regional temperature and DO model developed by Xing Fang (1991 - 1996)
+nclass : specifies number of phytoplankton types
+idiatom: specifies number of silica limited phytoplankton groups (0 or 1)
+
+nitro  : specifies number of non-nitrogen limited phytoplankton groups (0 or 1)
+iter   : number of iteration passes through the nutrient-biological subroutines
+ 
+DZLL, DZUL : minimum, maximum layer thickness (m)
+BETA : surface adsorption fraction for solar radiation
+EMISS : emmissivity of water
+
+CHANL : Width of the inflow channel 
+WLAKE  : Maximum width of the lake perpendicular to the inflow channel
+S      : downstream slope of inflow channel
+FT     : mannings friction factor for the inflow channel
+
+ALPHA  : side slope of the outflow channel
+BW     : bottom width of the outflow channel
+
+ZSLT=Total depth of sediment (m)
+CFX  IZSLT=Number of sediment layers
+
+MELMON, MELDAY= The first month or day of ice melting.
+ICEMON, ICEDAY= The first month or day of freezing.
+
+HKMAX : maximum hypolimnetic vertical turbulent diffusion coefficient (m2/day)
+WCOEF : wind coefficient for convective heat loss, sheltering for summer
+WCFSF : wind coefficient for convective heat loss, sheltering for fall
+
+HKMXIS=0.1 maximum hypolimnetic diffusion coefficient,
+WCFIS=0.0 wind function coefficient with ice cover.
+WSIS=0.0 wind sheltering coefficient with ice cover.
+EMCOE(1) is percentage of surface area which contributes to mixing, typical 50%
+
+BRR    : benthic phosphorus release rate
+FVCHLA : setting velocity for algae
+
+YCHO2  : mass ratio of chlorophyll to oxygen in photosynthesis
+Y2CHO2 : mass ratio of chlorophyll to oxygen in algal respiration
+YCBOD  : mass ratio of chlorophyll to oxygen demand in detritus
+YPBOD  : mass ratio of phosphorus to oxygen in detritus
+YNHBOD : mass ratio of ammonium to oxygen in detritus
+YPZP   : mass of phosphorus per individual zooplankter
+YZDO   : oxygen demand per individual zooplankter in zooplankton decay
+YZW    : mass of individual zooplankter
+YNHZP  : mass of ammonium per individual zooplankter

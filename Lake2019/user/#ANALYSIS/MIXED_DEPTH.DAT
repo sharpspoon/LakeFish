@@ -1,0 +1,33 @@
+ DMAXX - Maximum temperature and DO difference within mixed layer
+ DMINN - Minimum temperature and DO difference within mixed layer
+ DIV_MAX - Maximum dividing constant (1/10th or 15th)
+ DIV_MIN - Minimum dividing constant (1/10th or 15th)
+   1.000000      0.4000000       10.00000       5.000000    
+                         1st, 2nd MIXDEPTH, AVERAGE, SIMULATED, MONTH,MDAY,MYEAR
+Field mixed layer depths:    17.00    20.00    18.50                  5   20 2008
+SIM mixed layer depths:      38.00    38.00    38.00    38.00         5   20 2008
+
+Field mixed layer depths:    11.00    13.00    12.00                  5   21 2008
+SIM mixed layer depths:      21.50    38.00    29.75    21.50         5   21 2008
+
+Field mixed layer depths:     4.27     4.27     4.27                  6   12 2008
+SIM mixed layer depths:      12.62    21.50    17.06    12.50         6   12 2008
+
+Field mixed layer depths:     2.50     8.50     5.50                  6   19 2008
+SIM mixed layer depths:       3.81    12.62     8.22     1.38         6   19 2008
+
+Field mixed layer depths:     4.27     4.27     4.27                  7   14 2008
+SIM mixed layer depths:      10.12    10.12    10.12     3.75         7   14 2008
+
+Field mixed layer depths:     6.50     6.50     6.50                  7   24 2008
+SIM mixed layer depths:       6.12     8.00     7.06     6.00         7   24 2008
+
+Field mixed layer depths:     6.50     6.50     6.50                  8    7 2008
+SIM mixed layer depths:       6.12     8.00     7.06     6.00         8    7 2008
+
+Field mixed layer depths:    15.00    13.00    14.00                  9   23 2008
+SIM mixed layer depths:      12.62    12.62    12.62    12.50         9   23 2008
+
+Field mixed layer depths:    15.00    15.00    15.00                 10    6 2008
+SIM mixed layer depths:      18.50    18.50    18.50    18.50        10    6 2008
+
