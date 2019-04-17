@@ -53,7 +53,7 @@ class CreateInitFileForm(forms.Form):
     sim_title = forms.Select()
     lake_name = forms.Select()
     state = forms.Select()
-    surface_area = forms.Select()
+    num_horiz_layers = forms.Select()
     max_depth = forms.Select()
     elevation = forms.Select()
     light_atten_water = forms.Select()

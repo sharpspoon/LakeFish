@@ -292,7 +292,7 @@ def simulateLake(request):
             'sim_title': request.POST['sim_title'],
             'LakeName': request.POST['lake_name'],
             'state': request.POST['state'],
-            'surface_area': request.POST['surface_area'],
+            'num_horiz_layers': request.POST['num_horiz_layers'],
             'max_depth': request.POST['max_depth'],
             'elevation': request.POST['elevation'],
             'light_atten_water': request.POST['light_atten_water'],
