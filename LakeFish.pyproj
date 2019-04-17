@@ -278,6 +278,7 @@
     <Content Include="app\templates\app\displaynldas2.html" />
     <Content Include="app\templates\app\nldas2.html" />
     <Content Include="app\templates\app\register.html" />
+    <Content Include="app\templates\app\simulatelake.html" />
     <Content Include="nldas2\.idea\misc.xml" />
     <Content Include="nldas2\.idea\modules.xml" />
     <Content Include="nldas2\.idea\vcs.xml" />

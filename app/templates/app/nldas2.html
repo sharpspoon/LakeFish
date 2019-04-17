@@ -15,11 +15,12 @@
     If this is your first time downloading this data, please follow these <a href="https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Download%20Data%20Files%20from%20HTTPS%20Service%20with%20wget" target="_blank">prerequisites</a> first.
     <div class="panel panel-default">
         <div class="panel-body">
-            <form action='displaynldas2' method='post' class="form-horizontal">
+            <form onsubmit="return validateForm()" action='displaynldas2' name="nldas2" method='post' class="form-horizontal">
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="hidden" name="country" id="countryId" value="US" />
                 </div>
+                <h4>all fields are required</h4>
                 <div class="form-group">
                     <label for="stateID">State</label>
                     <select name="state" class="states order-alpha form-control" id="stateId">
@@ -70,6 +71,7 @@
     </div>
 </div>
 <h4>
+<p>{{ result }}</p>
 <p>{{ vars }}</p>
 <p>{{ startDate }}</p>
 <p>{{ startDay }}</p>
@@ -93,7 +95,24 @@
 <li><a href="WeatherData.pdf">Weather Data</a></li>
 {% endblock %}
 
+
+
+
 {% block scripts %}
+<script type="text/javascript">
+    function validateForm()
+    {
+        var state=document.forms["nldas2"]["date"].value;
+        var city=document.forms["nldas2"]["date"].value;
+        var date=document.forms["nldas2"]["date"].value;
+        var date2 = document.forms["nldas2"]["date2"].value;
+        if (state == null || state == "", city == null || city == "", date == null || date == "", date2 == null || date2 == "")
+        {
+            alert("Please Fill All Required Field");
+            return false;
+        }
+    }
+</script>
 <script src="//geodata.solutions/includes/statecity.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -111,4 +130,7 @@
         });
     });
 </script>
+
+{% load staticfiles %}
+<script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
 {% endblock %}
