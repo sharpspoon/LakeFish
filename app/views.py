@@ -293,13 +293,13 @@ def displaynldas2(request):
 
 def simulateLake(request):
     # Weather Station data
-    weather_station_data_filepath = "C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\station.csv"
-    weather_station_reader = csv.DictReader(
-        open(weather_station_data_filepath))
-    weather_station_dict = []
-    for row in weather_station_reader:
-        weather_station_dict.append(row)
-    print(weather_station_dict)
+    #weather_station_data_filepath = "C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\station.csv"
+    #weather_station_reader = csv.DictReader(
+        #open(weather_station_data_filepath))
+    #weather_station_dict = []
+    #for row in weather_station_reader:
+        #weather_station_dict.append(row)
+    #print(weather_station_dict)
 
     if(request.method == "POST"):
         print("This has been hit")
@@ -308,7 +308,7 @@ def simulateLake(request):
         userInput = {
             'sim_title': request.POST['sim_title'],
             'LakeName': request.POST['lake_name'],
-            'state': request.POST['state'],
+            #'state': request.POST['state'],
             'num_horiz_layers': request.POST['num_horiz_layers'],
             'max_depth': request.POST['max_depth'],
             'elevation': request.POST['elevation'],
@@ -350,13 +350,10 @@ def simulateLake(request):
             'inflow_outflow_source': request.POST['inflow_outflow_source'],
             'time_series_output': request.POST['time_series_output']
         }
-<<<<<<< HEAD
-        createInit.gatherPost(userInput)
+        #createInit.gatherPost(userInput)
         # createInit.createInit(userInput)
-=======
         createInitF.gatherPost(userInput)
         #createInit.createInit(userInput)
->>>>>>> ab48b989aada405c903aed45ff53801d34fd260b
         return render(
             request,
             'app/simulatelake.html',
@@ -365,7 +362,7 @@ def simulateLake(request):
                 'message': 'Simulate Lake page.',
                 'year': now.year,
                 'form': form,
-                'data': weather_station_dict
+                #'data': weather_station_dict
             }
         )
     else:
@@ -376,6 +373,6 @@ def simulateLake(request):
                 'title': 'Simulate Lake',
                 'message': 'Simulate Lake page.',
                 'year': now.year,
-                'data': weather_station_dict
+                #'data': weather_station_dict
             }
         )
