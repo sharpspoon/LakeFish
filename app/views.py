@@ -20,6 +20,7 @@ import time
 import cgi
 import calendar
 import datetime
+import csv
 
 from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
@@ -244,27 +245,27 @@ def displaynldas2(request):
     dataset = open_url(dataset_url, session=session)
     datasetType = type(dataset)
     fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
-    #loop over dates from startDate to endDate
-    #while myDate <= endDate:
-        #split out the parts of the year
-        #tt = myDate.timetuple()
-        #julianday = format(tt.tm_yday, '03')
+    # loop over dates from startDate to endDate
+    # while myDate <= endDate:
+    # split out the parts of the year
+    #tt = myDate.timetuple()
+    #julianday = format(tt.tm_yday, '03')
 
-        # get current path
-        #fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
-        #call wget to download files for given year/day
-        #os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianday + '/ -A grb')
+    # get current path
+    #fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
+    # call wget to download files for given year/day
+    #os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianday + '/ -A grb')
 
-        #create daily averages and output netCDF file
-        #hourly_to_daily_NLDAS.hourly_to_daily_one_day(fullPath, year, julianday)
-        #myDate += timedelta(days=1)
+    # create daily averages and output netCDF file
+    #hourly_to_daily_NLDAS.hourly_to_daily_one_day(fullPath, year, julianday)
+    #myDate += timedelta(days=1)
 
     #directoryPath = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_M.002/' + year +'/NLDAS_FORA0125_M.A' + year + month+'.002.grb')
-    #with open(''+directoryPath, 'rb') as stream:
-     #   for i, msg in enumerate(pupygrib.read(stream), 1):
-      #      lons, lats = msg.get_coordinates()
-       #     values = msg.get_values()
-        #    print("Message {}: {:.3f} {}".format(i, values.mean(), lons.shape))
+    # with open(''+directoryPath, 'rb') as stream:
+    #   for i, msg in enumerate(pupygrib.read(stream), 1):
+    #      lons, lats = msg.get_coordinates()
+    #     values = msg.get_values()
+    #    print("Message {}: {:.3f} {}".format(i, values.mean(), lons.shape))
     #os.system('wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --auth-no-challenge=on --keep-session-cookies -np -r --content-disposition https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_H.002/' + year + '/' + julianDayStr + '/ -A grb')
     return render(
         request,
@@ -292,11 +293,20 @@ def displaynldas2(request):
 
 
 def simulateLake(request):
+    # Weather Station data
+    weather_station_data_filepath = "C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\station.csv"
+    weather_station_reader = csv.DictReader(
+        open(weather_station_data_filepath))
+    weather_station_dict = []
+    for row in weather_station_reader:
+        weather_station_dict.append(row)
+    print(weather_station_dict)
+
     if(request.method == "POST"):
         print("This has been hit")
         print(request.POST)
         form = CreateInitFileForm()
-        userInput = {  
+        userInput = {
             'sim_title': request.POST['sim_title'],
             'LakeName': request.POST['lake_name'],
             'state': request.POST['state'],
@@ -342,7 +352,7 @@ def simulateLake(request):
             'time_series_output': request.POST['time_series_output']
         }
         createInit.gatherPost(userInput)
-        #createInit.createInit(userInput)
+        # createInit.createInit(userInput)
         return render(
             request,
             'app/simulatelake.html',
@@ -350,7 +360,8 @@ def simulateLake(request):
                 'title': 'Simulate Lake',
                 'message': 'Simulate Lake page.',
                 'year': now.year,
-                'form': form
+                'form': form,
+                'data': weather_station_dict
             }
         )
     else:
@@ -360,6 +371,7 @@ def simulateLake(request):
             {
                 'title': 'Simulate Lake',
                 'message': 'Simulate Lake page.',
-                'year': now.year
+                'year': now.year,
+                'data': weather_station_dict
             }
         )
