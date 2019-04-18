@@ -25,6 +25,8 @@ from createInit import createLakeInitFile as createInit
 from weather import WeatherScraper as ws
 from nldas2 import common
 import pupygrib
+from pydap.client import open_url
+from pydap.cas.urs import setup_session
 
 now = datetime.datetime.now()
 
@@ -235,8 +237,12 @@ def displaynldas2(request):
     myDate = startDate
 
     form = DisplayWeatherDataForm()
-    
+    #dataset_url = ('https://hydro1.gesdisc.eosdis.nasa.gov/data/NLDAS/NLDAS_FORA0125_M.002/' + startYear +'/NLDAS_FORA0125_M.A' + startYear + startMonth+'.002.grb')
+    dataset_url = 'http://test.opendap.org/dap/data/nc/coads_climatology.nc'
+    session = setup_session('rcw0024', '', check_url=dataset_url)
 
+    dataset = open_url(dataset_url, session=session)
+    datasetType = type(dataset)
     fullPath = os.path.dirname(os.path.abspath(__file__)) + common.NLDASpath
     #loop over dates from startDate to endDate
     #while myDate <= endDate:
@@ -277,6 +283,7 @@ def displaynldas2(request):
             'endJulianDay': 'endJulianDay= '+endJulianDayStr,
             'state': 'state= '+state,
             'city': 'city= '+city,
+            'dataset_url': 'dataset_url= '+dataset_url,
             'message': 'Weather Data page.',
             'year': now.year,
             'form': form
