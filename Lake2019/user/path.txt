@@ -1,2 +1,2 @@
-D:\Lake2019\User\..\User\#OUTPUT\TEMPDO\
-D:\Lake2019\#COMMON\MeteorologicalData\mn\
+C:\Users\Cameron\Source\Repos\sharpspoon\LakeFish\Lake2019\user\#OUTPUT\TEMPDO
+C:\Users\Cameron\Source\Repos\sharpspoon\LakeFish\Lake2019\#COMMON\MeteorologicalData\mn\

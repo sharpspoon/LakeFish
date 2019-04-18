@@ -1,13 +1,11 @@
 {
   "ExpandedNodes": [
+    "",
     "\\app\\templates",
     "\\app\\templates\\app",
-    "\\LakeFish",
-    "\\LakeFish\\NLDAS-2",
-    "\\test",
-    "\\weather",
-    "\\weather\\Demos",
-    "\\weather\\__pycache__"
+    "\\Lake2019",
+    "\\Lake2019\\user",
+    "\\LakeFish\\__pycache__"
   ],
   "PreviewInSolutionExplorer": false
 }

@@ -9,7 +9,7 @@ import shutil
 
 def gatherPost(userInput):
     inputFromPost = {
-        'LakeName' : 'Carl',
+        'LakeName' : userInput['LakeName'],
         'FutureSim' : 'N',
         'ScenarioNum' : 2,
         'ISTATE' : 'Minnesota',
