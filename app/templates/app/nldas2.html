@@ -13,6 +13,8 @@
     the web.  It will then aggregate the GRB files into daily netCDF files.</h4>
     <br>
     If this is your first time downloading this data, please follow these <a href="https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Download%20Data%20Files%20from%20HTTPS%20Service%20with%20wget" target="_blank">prerequisites</a> first.
+    <br />
+    <a href="https://disc.gsfc.nasa.gov/datasets/NLDAS_FORA0125_M_V002/summary?keywords=NLDAs" target="_blank">Please download the subset data by clicking here - NLDAS_FORA0125_M: NLDAS Primary Forcing Data L4 Monthly 0.125 x 0.125 degree V002</a>
     <div class="panel panel-default">
         <div class="panel-body">
             <form onsubmit="return validateForm()" action='displaynldas2' name="nldas2" method='post' class="form-horizontal">
@@ -29,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="cityId">City</label>
-                    <select name="city" class="cities order-alpha form-control" id="cityId">
+                    <select name="city" class="cities order-alpha form-control limit-pop-1000" id="cityId">
                         <option>Select City</option>
                     </select>
                 </div>
