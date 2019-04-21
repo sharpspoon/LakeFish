@@ -15,6 +15,19 @@
     If this is your first time downloading this data, please follow these <a href="https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Download%20Data%20Files%20from%20HTTPS%20Service%20with%20wget" target="_blank">prerequisites</a> first.
     <br />
     <a href="https://disc.gsfc.nasa.gov/datasets/NLDAS_FORA0125_M_V002/summary?keywords=NLDAs" target="_blank">Please download the subset data by clicking here - NLDAS_FORA0125_M: NLDAS Primary Forcing Data L4 Monthly 0.125 x 0.125 degree V002</a>
+    {{ username }}
+  <form method="post" enctype="multipart/form-data" action="simple_upload">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit" name="simple_upload">Upload</button>
+  </form>
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %}
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+
     <div class="panel panel-default">
         <div class="panel-body">
             <form onsubmit="return validateForm()" action='displaynldas2' name="nldas2" method='post' class="form-horizontal">

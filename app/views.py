@@ -14,8 +14,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, render_to_response
-
 import os
+import sys
 import time
 import cgi
 import calendar
@@ -27,8 +27,13 @@ from nldas2 import common
 import pupygrib
 from pydap.client import open_url
 from pydap.cas.urs import setup_session
-
+import cgitb
+cgitb.enable()
 now = datetime.datetime.now()
+
+from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 
 def home(request):
@@ -190,18 +195,6 @@ def displayWeather(request):
         )
 
 
-def nldas23(request):
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/nldas2.html',
-        {
-            'title': 'NLDAS-2',
-            'message': 'Your application description page.',
-            'year': now.year,
-        }
-    )
-
 
 def nldas2(request):
     form = DisplayWeatherDataForm()
@@ -216,6 +209,21 @@ def nldas2(request):
             'form': form
         }
     )
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        username = str(request.user)
+        savePath = "FortranModel\\"+username+"\\"
+        myfile = request.FILES['myfile']
+        completePath = str(savePath+myfile.name)
+        #user = request.post['username']
+        fs = FileSystemStorage()
+        filename = fs.save(completePath, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'app/nldas2.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'app/nldas2.html')
 
 
 def displaynldas2(request):
