@@ -76,6 +76,10 @@ def gatherPost(userInput):
         'NYEAR' : 1}
     createInit(inputFromPost)
 
+    pathHere = os.path.abspath(os.path.dirname(__file__))
+    batFile = os.path.join(pathHere, 'RunMinlake.bat')
+    p = subprocess.Popen(batFile, shell=True, stdout = subprocess.PIPE)
+
     #takes in the post from the user and saves them in a dictionary that can be accessed by createInit
 def createInit(userInput):
     pathHere = os.path.abspath(os.path.dirname(__file__))
