@@ -211,18 +211,23 @@ def nldas2(request):
     )
 
 def simple_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        username = str(request.user)
-        savePath = "FortranModel\\"+username+"\\"
-        myfile = request.FILES['myfile']
-        completePath = str(savePath+myfile.name)
-        #user = request.post['username']
-        fs = FileSystemStorage()
-        filename = fs.save(completePath, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'app/nldas2.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
+    try:
+        if request.method == 'POST' and request.FILES['myfile']:
+            username = str(request.user)
+            savePath = "FortranModel\\"+username+"\\"
+            myfile = request.FILES['myfile']
+            completePath = str(savePath+myfile.name)
+            #user = request.post['username']
+            fs = FileSystemStorage()
+            filename = fs.save(completePath, myfile)
+            uploaded_file_url = fs.url(filename)
+            #currentFiles = os.listdir(savePath)
+            #currentFiles2 = ("\n".join(currentFiles))
+            return render(request, 'app/nldas2.html', {
+                'uploaded_file_url': myfile
+            })
+    except:
+        pass
     return render(request, 'app/nldas2.html')
 
 

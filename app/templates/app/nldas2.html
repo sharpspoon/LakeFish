@@ -15,75 +15,19 @@
     If this is your first time downloading this data, please follow these <a href="https://disc.gsfc.nasa.gov/information/howto?title=How%20to%20Download%20Data%20Files%20from%20HTTPS%20Service%20with%20wget" target="_blank">prerequisites</a> first.
     <br />
     <a href="https://disc.gsfc.nasa.gov/datasets/NLDAS_FORA0125_M_V002/summary?keywords=NLDAs" target="_blank">Please download the subset data by clicking here - NLDAS_FORA0125_M: NLDAS Primary Forcing Data L4 Monthly 0.125 x 0.125 degree V002</a>
-    {{ username }}
+    <br />
   <form method="post" enctype="multipart/form-data" action="simple_upload">
     {% csrf_token %}
-    <input type="file" name="myfile">
-    <button type="submit" name="simple_upload">Upload</button>
+    <input type="file" name="myfile" accept=".txt" class="btn btn-default">
+      <br />
+    <button type="submit" name="simple_upload" class="btn btn-default">Upload</button>
   </form>
 
   {% if uploaded_file_url %}
     <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <input type="submit" class="btn btn-success" value='Click here to being GRB download' name='grbsubmit' />
   {% endif %}
 
-  <p><a href="{% url 'home' %}">Return to home</a></p>
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form onsubmit="return validateForm()" action='displaynldas2' name="nldas2" method='post' class="form-horizontal">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="hidden" name="country" id="countryId" value="US" />
-                </div>
-                <h4>all fields are required</h4>
-                <div class="form-group">
-                    <label for="stateID">State</label>
-                    <select name="state" class="states order-alpha form-control" id="stateId">
-                        <option>Select State</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="cityId">City</label>
-                    <select name="city" class="cities order-alpha form-control limit-pop-1000" id="cityId">
-                        <option>Select City</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="datetimepicker1">Starting Day, Month and Year DD/MM/YYYY</label>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input name="date" type='text' class="order-alpha form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <label for="datetimepicker2">Ending Day, Month and Year DD/MM/YYYY</label>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker2'>
-                                        <input name="date2" type='text' class="order-alpha form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input type="submit" class="btn btn-success" value='Submit' name='submitbtn' />
-            </form>
-        </div>
-    </div>
 </div>
 <h4>
 <p>{{ result }}</p>
