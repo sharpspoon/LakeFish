@@ -309,59 +309,76 @@ def simulateLake(request):
     #weather_station_data_filepath = "C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\station.csv"
     #weather_station_reader = csv.DictReader(
         #open(weather_station_data_filepath))
-    #weather_station_dict = []
-    #for row in weather_station_reader:
-        #weather_station_dict.append(row)
-    #print(weather_station_dict)
+    pathHere = os.path.abspath(os.path.dirname(__file__))
+    weather_station_reader =  csv.DictReader(open(os.path.join(pathHere, 'static', 'app', 'station.csv')))
+    weather_station_dict = []
+    for row in weather_station_reader:
+        weather_station_dict.append(row)
+    print(weather_station_dict)
 
     if(request.method == "POST"):
         print("This has been hit")
         print(request.POST)
         form = CreateInitFileForm()
+        sDate = request.POST['start_date_timepicker']
+        sDateMonth,sDateDay,sDateYear = sDate.split('/')
+        sDateMonth = sDateMonth.lstrip("0")
+        sDateDay = sDateDay.lstrip("0")
+        sDateYear = sDateYear.lstrip("0")
+        eDate = request.POST['end_date_timepicker']
+        eDateMonth,eDateDay,eDateYear = eDate.split('/')
+        eDateMonth = eDateMonth.lstrip("0")
+        eDateDay = eDateDay.lstrip("0")
+        eDateYear = eDateYear.lstrip("0")
         userInput = {
             'sim_title': request.POST['sim_title'],
-            'LakeName': request.POST['lake_name'],
-            #'state': request.POST['state'],
-            'num_horiz_layers': request.POST['num_horiz_layers'],
-            'max_depth': request.POST['max_depth'],
-            'elevation': request.POST['elevation'],
-            'light_atten_water': request.POST['light_atten_water'],
-            'light_atten_chlor': request.POST['light_atten_chlor'],
-            'xk1': request.POST['xk1'],
-            'wind_sheltering_fall': request.POST['wind_sheltering_fall'],
-            'wind_sheltering_summer': request.POST['wind_sheltering_summer'],
-            'temp_wind_sheltering': request.POST['temp_wind_sheltering'],
-            'snow_ice_ratio': request.POST['snow_ice_ratio'],
+            'LakeName': request.POST['lake_name'], #lakename
+            'MONTH' : sDateMonth,
+            'ISTART' : sDateDay,
+            'MYEAR': sDateYear,
+            'FMON' : eDateMonth,
+            'FDAY' : eDateDay,
+            'FYEAR' : eDateYear,
+            'num_horiz_layers': request.POST['num_horiz_layers'], #MBOT
+            'max_depth': request.POST['max_depth'], #ZMAX
+            'elevation': request.POST['elevation'], #ST
+            'light_atten_water': request.POST['light_atten_water'], #xk1
+            'light_atten_chlor': request.POST['light_atten_chlor'], #xk2
+            'xk1': request.POST['xk1'], #xk1
+            'wind_sheltering_fall': request.POST['wind_sheltering_fall'],#wssf
+            'wind_sheltering_summer': request.POST['wind_sheltering_summer'],#wstr
+            'temp_wind_sheltering': request.POST['temp_wind_sheltering'],#coewin
+            'snow_ice_ratio': request.POST['snow_ice_ratio'], #sncoe maybe
             'std': request.POST['std'],
-            'sediment_density': request.POST['sediment_density'],
-            'snow_compact': request.POST['snow_compact'],
-            'ice_conduct': request.POST['ice_conduct'],
-            'snow_conduct': request.POST['snow_conduct'],
-            'wcht_coefficient': request.POST['wcht_coefficient'],
-            'max_snow_ice_thickness_ratio': request.POST['max_snow_ice_thickness_ratio'],
-            'ice_abs_coefficient': request.POST['ice_abs_coefficient'],
-            'ice_reflect_coefficient': request.POST['ice_reflect_coefficient'],
-            'ice_attn_coefficient': request.POST['ice_attn_coefficient'],
-            'snow_abs_coefficient': request.POST['snow_abs_coefficient'],
-            'snow_reflect_coefficient': request.POST['snow_reflect_coefficient'],
-            'snow_attn_coefficient': request.POST['snow_attn_coefficient'],
-            'init_ice_thickness': request.POST['init_ice_thickness'],
-            'init_snow_thickness': request.POST['init_snow_thickness'],
-            'init_water_depths_div': request.POST['init_water_depths_div'],
-            'init_water_temps': request.POST['init_water_temps'],
-            'init_sus_solids_conc': request.POST['init_sus_solids_conc'],
-            'total_diss_solids': request.POST['total_diss_solids'],
-            'init_phos_conc': request.POST['init_phos_conc'],
-            'init_diss_oxy': request.POST['init_diss_oxy'],
-            'det_decay_rate': request.POST['det_decay_rate'],
-            'alg_resp_rater': request.POST['alg_resp_rater'],
-            'max_photo_ratio': request.POST['max_photo_ratio'],
-            'is_outflow_file': request.POST['is_outflow_file'],
-            'is_plot_file': request.POST['is_plot_file'],
-            'num_depth_plots': request.POST['num_depth_plots'],
-            'tab_data_interval': request.POST['tab_data_interval'],
-            'inflow_outflow_source': request.POST['inflow_outflow_source'],
-            'time_series_output': request.POST['time_series_output']
+            'sediment_density': request.POST['sediment_density'], #srcp
+            'snow_compact': request.POST['snow_compact'], #cfsnow
+            'ice_conduct': request.POST['ice_conduct'], #cdis0
+            'snow_conduct': request.POST['snow_conduct'], #cndsnw0
+            'wcht_coefficient': request.POST['wcht_coefficient'], # cndwi - turbulent conductive heat
+            'max_snow_ice_thickness_ratio': request.POST['max_snow_ice_thickness_ratio'], #btsnow
+            'ice_abs_coefficient': request.POST['ice_abs_coefficient'], #btice
+            'ice_reflect_coefficient': request.POST['ice_reflect_coefficient'], #alfice
+            'ice_attn_coefficient': request.POST['ice_attn_coefficient'], #gmice
+            'snow_abs_coefficient': request.POST['snow_abs_coefficient'], #btsnow
+            'snow_reflect_coefficient': request.POST['snow_reflect_coefficient'], #alfsnow
+            'snow_attn_coefficient': request.POST['snow_attn_coefficient'], #gmsnow
+            'init_ice_thickness': request.POST['init_ice_thickness'], #thickis
+            'init_snow_thickness': request.POST['init_snow_thickness'], #thicksn
+            'init_water_depths_div': request.POST['init_water_depths_div'], #ZDEPTH
+            'init_water_temps': request.POST['init_water_temps'], #T2
+            'init_sus_solids_conc': request.POST['init_sus_solids_conc'], # C2
+            'total_diss_solids': request.POST['total_diss_solids'], # CD2
+            'init_phos_conc': request.POST['init_phos_conc'], # PA2
+            'init_diss_oxy': request.POST['init_diss_oxy'], # DSO2
+            'det_decay_rate': request.POST['det_decay_rate'],# BODK20
+            'alg_resp_rater': request.POST['alg_resp_rater'], # XKR1
+            'max_photo_ratio': request.POST['max_photo_ratio'], # POMAX
+            'is_outflow_file': request.POST['is_outflow_file'], #IPRNT(2)
+            'is_plot_file': request.POST['is_plot_file'], #IPRNT(5)
+            'num_depth_plots': request.POST['num_depth_plots'], #IPRNT(6)
+            'tab_data_interval': request.POST['tab_data_interval'], #NPRINT
+            'inflow_outflow_source': request.POST['inflow_outflow_source'], #INFLOW
+            'time_series_output': request.POST['time_series_output'] ## NDEPTH
         }
         #createInit.gatherPost(userInput)
         # createInit.createInit(userInput)
@@ -386,7 +403,7 @@ def simulateLake(request):
                 'title': 'Simulate Lake',
                 'message': 'Simulate Lake page.',
                 'year': now.year,
-                #'data': weather_station_dict
+                'data': weather_station_dict
             }
         )
 
