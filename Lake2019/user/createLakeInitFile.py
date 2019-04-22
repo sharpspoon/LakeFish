@@ -8,72 +8,168 @@ import os
 import shutil
 
 def gatherPost(userInput):
-    inputFromPost = {
-        'LakeName' : userInput['LakeName'],
-        'FutureSim' : 'N',
-        'ScenarioNum' : 2,
-        'ISTATE' : 'Minnesota',
-        'ISTATION' : 'Duluth',
-        'MONTH' : 4,
-        'ISTART' : 16,
-        'MYEAR' : 2007,
-        'FMON' : 12,
-        'FDAY' : 31,
-        'FYEAR' : 2008,
-        'MBOT' : 32,
-        'ZDEPTH' : ['1.25','1.5','2','2.5','3','3.5','4','5','7','9','11','14','17','20','23','26','30','34','38','42','46','50'],
-        'ZMAX' : 50.0,
-        'ST' : 458,
-        'IPROFILE' : 1,
-        'XK' : .37,
-        'EMCOE3' : 20,
-        'CZS' : -1.84,
-        'WSTR' : .95,
-        'WSSF' : .95,
-        'COEWIN' : 1,
-        'SNCOE' : 1,
-        'AHTBTM' : .035,
-        'SRCP' : 550,
-        'CFSNOW' : .6,
-        'CDIS0' : 2.6,
-        'CNDSNW0' : .27,
-        'CNDWI' : 11.35,
-        'BTICE' : .17,
-        'ALFICE' : .55,
-        'GMICE' : 1.6,
-        'BTSNOW' : .34,
-        'ALFSNOW' : .8,
-        'GMSNOW' : 40,
-        'THICKIS' : 0,
-        'THICKSN' : 0,
-        'T2' : 4,
-        'C2' : 0,
-        'CD2' : 0,
-        'CHLA2' : 0.00385,
-        'IPRNT4' : 1,
-        'PA2' : 0,
-        'BOD2' : 0.75,
-        'DSO2' : 10,
-        'BODK20' : .1,
-        'SB20' : .5,
-        'XKR1' : .1,
-        'POMAX' : 9.6,
-        'EMCOE2' : 2.2,
-        'EMCOE1' : 1,
-        'EMCOE4' : 1,
-        'EMCOE5' : 1,
-        'IPRNT2' : 0,
-        'IPRNT5' : 0,
-        'IPRNT6' : 0,
-        'NPRINT' : 5,
-        'INFLOW' : 0,
-        'IFIELD' : 1,
-        'ICHLA-ICHLA' : 1,
-        'I_NO_FIELD_OUT_PROFILE' : 0,
-        'NDEPTH' : 5,
-        'FDEPTH' : [1,10,20,30,48],
-        'NDAYO' : 1,
-        'NYEAR' : 1}
+    inputFromPost = {}
+    #if(userInput['LakeName'] == ''):
+    #    inputFromPost['LakeName'] = 'default'
+    #else:
+    #    inputFromPost['LakeName'] = userInput['LakeName']
+    inputFromPost['LakeName'] = userInput['LakeName']
+    inputFromPost['FutureSim'] = 'N'
+    inputFromPost['ScenarioNum'] = 2 
+    inputFromPost['ISTATE'] = 'Minnesota' 
+    inputFromPost['ISTATION'] = 'Duluth' 
+    inputFromPost['MONTH'] = int(userInput['MONTH'])
+    inputFromPost['ISTART'] = int(userInput['ISTART'])
+    inputFromPost['MYEAR'] = int(userInput['MYEAR'])
+    inputFromPost['FMON'] = int(userInput['FMON'])
+    inputFromPost['FDAY'] = int(userInput['FDAY'])
+    inputFromPost['FYEAR'] = int(userInput['FYEAR']) 
+    try: 
+        int(userInput['num_horiz_layers']) 
+        inputFromPost['MBOT'] = int(userInput['num_horiz_layers'])
+    except:
+        inputFromPost['MBOT'] = 0
+    #inputFromPost['MBOT'] = int(userInput['num_horiz_layers'])
+    inputFromPost['ZDEPTH'] = ['1.25','1.5','2','2.5','3','3.5','4','5','7','9','11','14','17','20','23','26','30','34','38','42','46','50']
+    try: 
+        float(userInput['max_depth'])
+        inputFromPost['ZMAX'] = float(userInput['max_depth']) 
+    except:
+        inputFromPost['ZMAX'] = 50.0
+    try: 
+        inputFromPost['ST'] = float(userInput['elevation']) 
+    except: 
+        inputFromPost['ST'] = 0
+    inputFromPost['IPROFILE'] = 1 
+    inputFromPost['XK'] = .37 
+    inputFromPost['EMCOE3'] = 20 
+    inputFromPost['CZS'] = -1.84 
+    try:        
+        inputFromPost['WSTR'] = float(userInput['wind_sheltering_summer'])
+    except:
+        inputFromPost['WSTR'] = .95
+    try:       
+        inputFromPost['WSSF'] = float(userInput['wind_sheltering_fall']) 
+    except:
+        inputFromPost['WSSF'] = .95
+    try:        
+        inputFromPost['COEWIN'] = float(userInput['temp_wind_sheltering']) 
+    except:
+        inputFromPost['COEWIN'] =1
+    try:        
+        inputFromPost['SNCOE'] = float(userInput['snow_ice_ratio']) 
+    except:
+        inputFromPost['SNCOE'] = 1
+    inputFromPost['AHTBTM'] = .035 
+    try:        
+        inputFromPost['SRCP'] = float(userInput['sediment_density']) 
+    except:
+        inputFromPost['SRCP'] = 550
+    try:        
+        inputFromPost['CFSNOW'] = float(userInput['snow_compact']) 
+    except:
+        inputFromPost['CFSNOW'] =.6
+    try:        
+        inputFromPost['CDIS0'] = float(userInput['ice_conduct']) 
+    except:
+        inputFromPost['CDIS0'] = 2.6
+    try:        
+        inputFromPost['CNDSNW0'] = float(userInput['snow_conduct']) 
+    except:
+        inputFromPost['CNDSNW0'] = .27
+    try:        
+        inputFromPost['CNDWI'] = float(userInput['wcht_coefficient']) 
+    except:
+        inputFromPost['CNDWI'] = 11.35
+    try:        
+        inputFromPost['BTICE'] = float(userInput['ice_abs_coefficient'])
+    except:
+        inputFromPost['BTICE'] = .17
+    inputFromPost['ALFICE'] = .55 
+    try:        
+        inputFromPost['GMICE'] = float(userInput['ice_attn_coefficient']) 
+    except:
+        inputFromPost['GMICE'] = 1.6
+    try:        
+        inputFromPost['BTSNOW'] = float(userInput['snow_abs_coefficient']) 
+    except:
+        inputFromPost['BTSNOW'] = .34
+    try:        
+        inputFromPost['ALFSNOW'] = float(userInput['snow_reflect_coefficient']) 
+    except:
+        inputFromPost['ALFSNOW'] = .8
+    try:        
+        inputFromPost['GMSNOW'] = float(userInput['snow_attn_coefficient']) 
+    except:
+        inputFromPost['GMSNOW'] = 40
+    try:        
+        inputFromPost['THICKIS'] = float(userInput['init_ice_thickness']) 
+    except:
+        inputFromPost['THICKIS'] = 0
+    try:        
+        inputFromPost['THICKSN'] = float(userInput['init_snow_thickness']) 
+    except:
+        inputFromPost['THICKSN'] =0
+    try:        
+        inputFromPost['T2'] = float(userInput['init_water_temps']) 
+    except:
+        inputFromPost['T2'] = 4
+    try:        
+        inputFromPost['C2'] = float(userInput['init_sus_solids_conc']) 
+    except:
+        inputFromPost['C2'] = 0
+    try:        
+        inputFromPost['CD2'] = float(userInput['total_diss_solids']) 
+    except:
+        inputFromPost['CD2'] = 0
+    inputFromPost['CHLA2'] = 0.00385 
+    inputFromPost['IPRNT4'] = 1 
+    try:        
+        inputFromPost['PA2'] = float(userInput['init_phos_conc']) 
+    except:
+        inputFromPost['PA2'] = 0
+    inputFromPost['BOD2'] = 0.75 
+    inputFromPost['DSO2'] = 10 
+    try:
+        inputFromPost['BODK20'] = float(userInput['det_decay_rate'])
+    except:
+        inputFromPost['BODK20'] = .1
+    inputFromPost['SB20'] = .5 
+    try:
+        inputFromPost['XKR1'] = float(userInput['alg_resp_rater']) 
+    except:
+        inputFromPost['XKR1'] = .1
+    try:
+        inputFromPost['POMAX'] = float(userInput['max_photo_ratio'])  
+    except:
+        inputFromPost['POMAX'] = 9.6
+    inputFromPost['EMCOE2'] = 2.2 
+    inputFromPost['EMCOE1'] = 1        
+    inputFromPost['EMCOE4'] = 1 
+    inputFromPost['EMCOE5'] = 1 
+        #inputFromPost['IPRNT2'] = int(userInput['is_outflow_file']) 
+    inputFromPost['IPRNT2'] = 0 
+    #inputFromPost['IPRNT5'] = int(userInput['is_plot_file'])  
+    inputFromPost['IPRNT5'] = 0 
+    #inputFromPost['IPRNT6'] = int(userInput['num_depth_plots'])
+    inputFromPost['IPRNT6'] = 0        
+    try:
+        inputFromPost['NPRINT'] = int(userInput['tab_data_interval']) 
+    except:
+        inputFromPost['NPRINT'] = 5
+        #inputFromPost['INFLOW'] = int(userInput['inflow_outflow_source'])
+    inputFromPost['INFLOW'] = 0 
+    inputFromPost['IFIELD'] = 1 
+    inputFromPost['ICHLA-ICHLA'] = 1 
+    inputFromPost['I_NO_FIELD_OUT_PROFILE'] = 0 
+    try:        
+        inputFromPost['NDEPTH'] = int(userInput['time_series_output'])
+    except:
+        inputFromPost['NDEPTH'] = 5
+    inputFromPost['FDEPTH'] = [1,10,20,30,48] 
+    inputFromPost['NDAYO'] = 1 
+    inputFromPost['NYEAR'] = 1 
+
     createInit(inputFromPost)
 
     pathHere = os.path.abspath(os.path.dirname(__file__))

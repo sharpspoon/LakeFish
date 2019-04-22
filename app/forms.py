@@ -52,7 +52,8 @@ class DisplayWeatherDataForm(forms.Form):
 class CreateInitFileForm(forms.Form):
     sim_title = forms.Select()
     lake_name = forms.Select()
-    state = forms.Select()
+    start_date_timepicker = forms.Select()
+    end_date_timepicker = forms.Select()
     num_horiz_layers = forms.Select()
     max_depth = forms.Select()
     elevation = forms.Select()
