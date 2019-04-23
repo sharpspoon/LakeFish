@@ -88,7 +88,7 @@ def signup(request):
             auth_login(request, user)
 
             try:
-                os.makedirs("FortranModel\\"+username)
+                os.makedirs("user-nldas-"+username)
             except FileExistsError:
                 pass
 
@@ -214,7 +214,7 @@ def simple_upload(request):
     try:
         if request.method == 'POST' and request.FILES['myfile']:
             username = str(request.user)
-            savePath = "FortranModel\\"+username+"\\"
+            savePath = "user-nldas-"+username+"//"
             myfile = request.FILES['myfile']
             completePath = str(savePath+myfile.name)
             #user = request.post['username']
