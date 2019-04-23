@@ -133,7 +133,7 @@ class WeatherScraper:
         for time in self.times:
             weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (
                 self.key, self.lat, self.lng, time)
-            # print(weather_url)
+            print(weather_url)
             weather_response = get(weather_url)
             self.weather_responses.append(weather_response)
             self.weather_jsons.append(weather_response.json())
@@ -153,8 +153,8 @@ class WeatherScraper:
             apparent_temp = 0
             rad_sum = 0
             num_of_hours = len(hours)
-            precip_intensity = 0
-            precip_accumulation = 0
+            rain_intensity = 0
+            snow_intensity = 0
 
             # Generates temperatures, precipitations, and radiation figures
             for hour in hours:
@@ -167,21 +167,24 @@ class WeatherScraper:
 
                 # Generate precipitation information
                 if "precipIntensity" in hour:       # precip intensity is the amount of precipatation at a given time
-                    precip_intensity += round(hour['precipIntensity'] * 39.37, 2)   # convert meters to inches
-                if "precipAccumulation" in hour:    # precip accumulation is the amount of snowfall accumulation
-                    precip_accumulation += hour['precipAccumulation']
+                    if "precipType" in hour:    # precip accumulation is the amount of snowfall accumulation
+                        if hour["precipType"] == "snow":
+                            snow_intensity += hour['precipIntensity']
+                        else:
+                            rain_intensity += hour['precipIntensity'] / 25.4 * 100   # convert mm to inches for rain
 
                 # calulate solar radition
-                cloud_cov = hour['cloudCover']
-                utc_time = hour['time']
-                hour = datetime.fromtimestamp(int(utc_time)).strftime('%X').split(":")[0]
-                rad = self._solar_rad_cal(cloud_cov, day_counter, hour)
-                rad_sum += rad  # generates solar rad sum
+                if 'cloudCover' in hour:
+                    cloud_cov = hour['cloudCover']
+                    utc_time = hour['time']
+                    hour = datetime.fromtimestamp(int(utc_time)).strftime('%X').split(":")[0]
+                    rad = self._solar_rad_cal(cloud_cov, day_counter, hour)
+                    rad_sum += rad  # generates solar rad sum
 
             avg_temp = round(apparent_temp / float(num_of_hours), 1)
             daily_rad = round(rad_sum * 0.085985, 2)
-            avg_precip = round(precip_intensity / float(num_of_hours), 2)
-            avg_accum = round(precip_accumulation / float(num_of_hours), 2)
+            avg_rain = round(rain_intensity / float(num_of_hours), 2)
+            avg_snow = round(snow_intensity / float(num_of_hours), 2)
             output.append(avg_temp)
             for key in keys:
                 if key in data:
@@ -192,8 +195,8 @@ class WeatherScraper:
                 else:   # if the key for some reason is not in the dictionary have 0 for its place
                     output.append(0.0)
             output.insert(4, daily_rad)
-            output.append(avg_precip)
-            output.append(avg_accum)
+            output.append(avg_rain)
+            output.append(avg_snow)
             weather_info.append(output)
             day_counter += 1
         return weather_info
@@ -269,7 +272,7 @@ class WeatherScraper:
             temp_string += "\n"
             temp_list.append(temp_string)
 
-        months[int(self.month)] = temp_list
+        months[int(self.month) - 1] = temp_list
 
         with open(self.filename, write_type, newline='') as f:
             for month in months:
