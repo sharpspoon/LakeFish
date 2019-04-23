@@ -8,6 +8,7 @@
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createLakeModal">
         <i class="fas fa-plus"></i> Create Lake
     </button>
+    <a href="{% url 'display lake simulation' %}" class="btn btn-default">View Results</a>
     <br>
     <br>
     <div class='panel panel-default'>
@@ -164,10 +165,11 @@
                                 </select>
                             </div> -->
                             <div class="form-group">
-                                <label for="state">Select Weather Station</label>
+                                <label for="state">Select State and City for the Weather Station closest to
+                                    lake.</label>
                                 <select multiple class="form-control" name="state" id="state">
                                     {% for dp in data %}
-                                    <option>{{ dp.StationName }}, {{ dp.State | upper }}</li>
+                                    <option>{{ dp.StationName }}, {{ dp.StateName | upper }}</li>
                                         {% endfor %}
                                 </select>
                             </div>
@@ -528,6 +530,7 @@
 
 {% block scripts %}
 <!-- <script src="//geodata.solutions/includes/statecity.js"></script> -->
+
 <script type="text/javascript">
     $(function () {
         $('#start_date_timepicker').datetimepicker({
@@ -541,7 +544,7 @@
             format: 'L', //Format to select DD/MM/YYYY
             allowInputToggle: true,
             maxDate: new Date(),
-            useCurrent: false //Important! See issue #1075
+            useCurrent: false
         });
         $("#start_date_timepicker").on("dp.change", function (e) {
             $('#end_date_timepicker').data("DateTimePicker").minDate(e.date);

@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^weather', app.views.weather, name='weather'),
     url(r'^displayweather', app.views.displayWeather, name='display weather'),
     url(r'^simulatelake', app.views.simulateLake, name='simulate lake'),
+    url(r'^displaylakesimulation', app.views.displayLakeSimulation,
+        name='display lake simulation'),
     url(r'^nldas2', app.views.nldas2, name='nldas2'),
     url(r'^simple_upload', app.views.simple_upload, name='simple_upload'),
     url(r'^displaynldas2', app.views.displaynldas2, name='displaynldas2'),
