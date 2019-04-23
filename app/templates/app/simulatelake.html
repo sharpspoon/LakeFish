@@ -167,7 +167,7 @@
                                 <label for="state">Select Weather Station</label>
                                 <select multiple class="form-control" name="state" id="state">
                                     {% for dp in data %}
-                                    <option>{{ dp.StationName }}, {{ dp.State | upper }}</li>
+                                    <option>{{ dp.StationName }}, {{ dp.StateName | upper }}</li>
                                         {% endfor %}
                                 </select>
                             </div>

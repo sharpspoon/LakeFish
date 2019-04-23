@@ -16,8 +16,8 @@ def gatherPost(userInput):
     inputFromPost['LakeName'] = userInput['LakeName']
     inputFromPost['FutureSim'] = 'N'
     inputFromPost['ScenarioNum'] = 2 
-    inputFromPost['ISTATE'] = 'Minnesota' 
-    inputFromPost['ISTATION'] = 'Duluth' 
+    inputFromPost['ISTATE'] = userInput['ISTATE'] 
+    inputFromPost['ISTATION'] = userInput['ISTATION']
     inputFromPost['MONTH'] = int(userInput['MONTH'])
     inputFromPost['ISTART'] = int(userInput['ISTART'])
     inputFromPost['MYEAR'] = int(userInput['MYEAR'])
@@ -171,7 +171,6 @@ def gatherPost(userInput):
     inputFromPost['NYEAR'] = 1 
 
     createInit(inputFromPost)
-
     pathHere = os.path.abspath(os.path.dirname(__file__))
     batFile = os.path.join(pathHere, 'RunMinlake.bat')
     p = subprocess.Popen(batFile, shell=True, stdout = subprocess.PIPE)

@@ -325,14 +325,27 @@ def simulateLake(request):
         sDateMonth = sDateMonth.lstrip("0")
         sDateDay = sDateDay.lstrip("0")
         sDateYear = sDateYear.lstrip("0")
-        eDate = request.POST['end_date_timepicker']
-        eDateMonth,eDateDay,eDateYear = eDate.split('/')
-        eDateMonth = eDateMonth.lstrip("0")
-        eDateDay = eDateDay.lstrip("0")
-        eDateYear = eDateYear.lstrip("0")
+        try:
+            eDate = request.POST['end_date_timepicker']
+            eDateMonth,eDateDay,eDateYear = eDate.split('/')
+            eDateMonth = eDateMonth.lstrip("0")
+            eDateDay = eDateDay.lstrip("0")
+            eDateYear = eDateYear.lstrip("0")
+        except:
+            eDateMonth = sDateMonth
+            eDateDay = sDateDay
+            eDateYear = sDateYear
+        try: 
+            stateAndStation = request.POST['state'] 
+            statePost, stationPost = stateAndStation.split(',')
+        except:
+            statePost = 'Minnesota'
+            stationPost = 'Duluth'
         userInput = {
             'sim_title': request.POST['sim_title'],
             'LakeName': request.POST['lake_name'], #lakename
+            'ISTATE': statePost,
+            'ISTATION': stationPost,
             'MONTH' : sDateMonth,
             'ISTART' : sDateDay,
             'MYEAR': sDateYear,
