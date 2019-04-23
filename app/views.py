@@ -419,3 +419,70 @@ def simulateLake(request):
                 'data': weather_station_dict
             }
         )
+
+
+def displayLakeSimulation(request):
+    temperature_file = 'C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\PMndulu08.TEP'
+    diss_oxy_file = 'C:\\Github\\LakeFish\\LakeFish\\app\static\\app\\PMndulu08.DOX'
+    userInputData = []
+    userInputDataCount = 2
+    temperatureData = []
+    diss_oxy_Data = []
+    tempCount = 2
+    dissCount = 2
+
+    with open(temperature_file, newline='') as temp_file:
+        header_line = next(temp_file)
+        simMonth = int(header_line.split(' ')[4])
+        numOfDays = int(header_line.split(' ')[9])
+        simYear = int(header_line.split(' ')[11])
+        numOfInputs = int(header_line.split(' ')[13])
+
+        simDate = datetime.datetime(simYear, simMonth, 1)
+        formattedDate = simDate.strftime("%B %Y")
+
+        #Collect the next two lines of user specified depths
+        i = 0
+        for data in temp_file:
+            userInputData.append(data.split())
+            i += 1
+            if i == userInputDataCount:
+                break
+
+        # Collect remaining data from the file
+        x = 0
+        for remainingTempData in temp_file:
+            temperatureData.append(remainingTempData.split())
+            x += 1
+            if x == tempCount:
+                break
+
+    with open(diss_oxy_file, newline='') as do_file:
+        # Skip first three lines since the data is the same
+        next(do_file)
+        next(do_file)
+        next(do_file)
+
+        z = 0
+        for remainingDOData in do_file:
+            diss_oxy_Data.append(remainingDOData.split())
+            z += 1
+            if z == dissCount:
+                break
+    return render(
+        request,
+        'app/displaylakesimulation.html',
+        {
+            'title': 'Display Lake Simulation',
+            'message': 'Display Lake Simulation page.',
+            'year': now.year,
+            'simMonth': simMonth,
+            'numOfDays': numOfDays,
+            'simYear': simYear,
+            'numOfInputs': numOfInputs,
+            'simDate': formattedDate,
+            'userInputData': userInputData,
+            'temperature_data': temperatureData,
+            'dissolved_oxygen_data': diss_oxy_Data
+        }
+    )
