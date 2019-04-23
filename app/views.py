@@ -422,8 +422,9 @@ def simulateLake(request):
 
 
 def displayLakeSimulation(request):
-    temperature_file = 'C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\PMndulu08.TEP'
-    diss_oxy_file = 'C:\\Github\\LakeFish\\LakeFish\\app\static\\app\\PMndulu08.DOX'
+    pathHere = os.path.abspath(os.path.dirname(__file__))
+    temperature_file = str(os.path.join(pathHere, 'static', 'app', 'PMndulu08.TEP'))
+    diss_oxy_file = str(os.path.join(pathHere, 'static', 'app', 'PMndulu08.DOX'))
     userInputData = []
     userInputDataCount = 2
     temperatureData = []
