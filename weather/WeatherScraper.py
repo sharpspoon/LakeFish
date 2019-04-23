@@ -1,11 +1,12 @@
 import calendar
-import datetime
 import errno
 import os
 import time
 import random
 from geopy.geocoders import Nominatim
 from requests import get
+from math import sin, asin, cos
+from datetime import date, datetime
 
 
 """
@@ -39,7 +40,7 @@ class WeatherScraper:
         # Dark Sky API Key
         a = random.randint(0, 2)
         if a == 0:
-            #self.key = "2dd9e033bfb386fa272686e32b748dda"
+            # self.key = "2dd9e033bfb386fa272686e32b748dda"
             self.key = "bd13ad063cdbb5d416accbd8652ef28d"
         elif a == 1:
             self.key = "bd13ad063cdbb5d416accbd8652ef28d"
@@ -57,7 +58,7 @@ class WeatherScraper:
         self.month = dates[0]
         self.year = dates[1]
         self.max_days = 0
-        date = datetime.datetime.today()
+        date = datetime.today()
         if self.month == str(date.month) and self.year == str(date.year):
             print("Error: User cannot enter current date")
             self.go_ahead = False
@@ -120,8 +121,8 @@ class WeatherScraper:
                                          int(self.month))  # contains month number[0] and month max days[1]
         self.max_days = month_info[1]  # gets max days from current month
         for day in range(1, self.max_days + 1):
-            dt = datetime.datetime(int(self.year), int(self.month),
-                                   day)  # creates a datetime object for the users specific month and year
+            dt = datetime(int(self.year), int(self.month),
+                          day)  # creates a datetime object for the users specific month and year
             # converts the datetime object into the UNIX format
             self.times.append(str(int(time.mktime(dt.timetuple()))))
 
@@ -132,7 +133,7 @@ class WeatherScraper:
         for time in self.times:
             weather_url = "https://api.darksky.net/forecast/%s/%s,%s,%s" % (
                 self.key, self.lat, self.lng, time)
-            # print(weather_url)
+            print(weather_url)
             weather_response = get(weather_url)
             self.weather_responses.append(weather_response)
             self.weather_jsons.append(weather_response.json())
@@ -143,34 +144,98 @@ class WeatherScraper:
             Pulls data needed for lakefish application from the json objects provided by Dark Sky
         """
         weather_info = []
+        day_counter = 1
         for day in self.weather_jsons:
-            info = day['daily']['data'][0]
-            keys = ['dewPoint', 'windSpeed', 'windBearing', 'uvIndex', 'cloudCover',
-                    'precipIntensity', 'precipAccumulation']
-            data = []
+            data = day['daily']['data'][0]  # gets data for current day
+            keys = ['dewPoint', 'windSpeed', 'windBearing', 'cloudCover']   # keys for data dictionary
+            output = []
             hours = day['hourly']['data']
             apparent_temp = 0
+            rad_sum = 0
             num_of_hours = len(hours)
+            rain_intensity = 0
+            snow_intensity = 0
+
+            # Generates temperatures, precipitations, and radiation figures
             for hour in hours:
+
+                # Generate temperature
                 if "temperature" in hour:
                     apparent_temp += float(hour['temperature'])
                 elif "apparentTemperature" in hour:
                     apparent_temp += float(hour['apparentTemperature'])
+
+                # Generate precipitation information
+                if "precipIntensity" in hour:       # precip intensity is the amount of precipatation at a given time
+                    if "precipType" in hour:    # precip accumulation is the amount of snowfall accumulation
+                        if hour["precipType"] == "snow":
+                            snow_intensity += hour['precipIntensity']
+                        else:
+                            rain_intensity += hour['precipIntensity'] / 25.4 * 100   # convert mm to inches for rain
+
+                # calulate solar radition
+                if 'cloudCover' in hour:
+                    cloud_cov = hour['cloudCover']
+                    utc_time = hour['time']
+                    hour = datetime.fromtimestamp(int(utc_time)).strftime('%X').split(":")[0]
+                    rad = self._solar_rad_cal(cloud_cov, day_counter, hour)
+                    rad_sum += rad  # generates solar rad sum
+
             avg_temp = round(apparent_temp / float(num_of_hours), 1)
-            data.append(avg_temp)
+            daily_rad = round(rad_sum * 0.085985, 2)
+            avg_rain = round(rain_intensity / float(num_of_hours), 2)
+            avg_snow = round(snow_intensity / float(num_of_hours), 2)
+            output.append(avg_temp)
             for key in keys:
-                if key in info:
-                    if key == 'cloudCover':
-                        data.append(round((1 - info[key]) * 100.0, 1))
-                    elif key == 'precipAccumulation':
-                        # converts inches to meters
-                        data.append(round(info[key] * .0254, 1))
+                if key in data:
+                    if key == keys[3]:  # if key == cloudCover, then convert to solar coverage
+                        output.append(round((1 - data[key]) * 100.0, 1))
                     else:
-                        data.append(round(float(info[key]), 1))
-                else:
-                    data.append(0.0)
-            weather_info.append(data)
+                        output.append(round(float(data[key]), 1))
+                else:   # if the key for some reason is not in the dictionary have 0 for its place
+                    output.append(0.0)
+            output.insert(4, daily_rad)
+            output.append(avg_rain)
+            output.append(avg_snow)
+            weather_info.append(output)
+            day_counter += 1
         return weather_info
+
+    def _jday_calc(self, day, hour):
+        ''' Generates value used for solar radiation '''
+        unformatted_date = str(self.year) + str(self.month) + str(day)
+        date = datetime.strptime(unformatted_date, "%Y%m%d")
+        days = date.strftime("%j")
+
+        jday1 = float(days) - 1 + (float(hour) / 24)
+
+        return round(jday1, 2)
+
+    def _solar_rad_cal(self, solcov, day, hour):
+        ''' Generates solar radiation '''
+        slong = float(self.lng)
+        slat = float(self.lat)
+        pi = 3.1419
+        phi = 15 * round(slong / 15.0)
+
+        jday1 = self._jday_calc(day, hour)
+        hcloud = solcov
+        pi = 3.1419
+        eqt = 0.17 * sin(4 * pi * (int(jday1) - 80) / 373) - 0.129 * sin(2 * pi * int((jday1) - 8) / 355)
+        hour1 = round(24 * (jday1 - int(jday1)))  # good
+        hh = round(2 * pi / 24 * (hour1 - ((slong - phi) * 24 / 360) + eqt - 12.0), 6)
+        taud = 2 * pi * (int(jday1) - 1) / 365
+        val = round(0.006918 - 0.399912 * cos(taud) + 0.070257 * sin(taud) - 0.006758 * cos(2 * taud) + 0.000907 * sin(2 * taud) - 0.002697 * cos(3 * taud) + 0.00148 * sin(3 * taud), 7)
+        a_asin = sin(slat * 0.01743) * sin(val) + cos(slat * 0.01743) * cos(val) * cos(hh)
+        ao = asin(a_asin)
+        ao = ao * 180 / pi
+        if ao < 0:
+            phis = 0
+            sro = 0
+        else:
+            phis = 24 * (2.044 * ao + 0.1296 * ao**2 - 1.941 * 0.001 * ao**3 + 7.591 * 0.000001 * ao**4) * 0.1314
+            sro = (1 - 0.65 * (hcloud)**2) * phis
+        return sro
 
     def _output_data(self, data):
         """
@@ -207,7 +272,7 @@ class WeatherScraper:
             temp_string += "\n"
             temp_list.append(temp_string)
 
-        months[int(self.month)] = temp_list
+        months[int(self.month) - 1] = temp_list
 
         with open(self.filename, write_type, newline='') as f:
             for month in months:
@@ -216,7 +281,7 @@ class WeatherScraper:
 
     def _data_already_retrieved(self):
         """
-            Checks to make sure data is not already stored
+            Checks to make sure data being pulled is not already stored
         """
         if not os.path.isfile(self.filename):
             print("No such file.")
