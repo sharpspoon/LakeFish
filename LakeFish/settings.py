@@ -27,7 +27,7 @@ SECRET_KEY = '867e41a9-be94-42b1-8b04-2a31b7da30c8'
 # DEBUG = False  # Jonathan: I set debug to false in order to create custom error pages
 DEBUG = True
 
-ALLOWED_HOSTS = ['sp01.eng.auburn.edu', 'localhost']
+ALLOWED_HOSTS = ['sp01.eng.auburn.edu', 'localhost', 'lakefish.eng.auburn.edu']
 
 
 # Application definition
@@ -85,28 +85,28 @@ WSGI_APPLICATION = 'LakeFish.wsgi.application'
 #    }
 # }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'lakefish',
+#        'USER': 'lakefishsa',
+#        'PASSWORD': 'TJKDUPVINBDOABBS',
+#        # Or an IP Address that your DB is hosted on
+#        'HOST': 'lakefish.steelcitysites.net',
+#        'PORT': '',
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lakefish',
-        'USER': 'lakefishsa',
-        'PASSWORD': 'TJKDUPVINBDOABBS',
-        # Or an IP Address that your DB is hosted on
-        'HOST': 'lakefish.steelcitysites.net',
-        'PORT': '',
+        'USER': 'lakefish',
+        'PASSWORD': 'TjbKBmEwEBWT',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
-}
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'lakefish',
-#        'USER': 'lakefish',
-#        'PASSWORD': 'TjbKBmEwEBWT',
-#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-#        'PORT': '',
-#    }
-# }
+ }
 
 
 # Password validation

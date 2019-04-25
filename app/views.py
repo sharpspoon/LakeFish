@@ -88,7 +88,7 @@ def signup(request):
             auth_login(request, user)
 
             try:
-                os.makedirs("FortranModel\\"+username)
+                os.makedirs("user-nldas-"+username)
             except FileExistsError:
                 pass
 
@@ -214,7 +214,7 @@ def simple_upload(request):
     try:
         if request.method == 'POST' and request.FILES['myfile']:
             username = str(request.user)
-            savePath = "FortranModel\\"+username+"\\"
+            savePath = "user-nldas-"+username+"//"
             myfile = request.FILES['myfile']
             completePath = str(savePath+myfile.name)
             #user = request.post['username']
@@ -306,19 +306,13 @@ def displaynldas2(request):
 
 def simulateLake(request):
     # Weather Station data
-    #weather_station_data_filepath = "C:\\Github\\LakeFish\\LakeFish\\app\\static\\app\\station.csv"
-    #weather_station_reader = csv.DictReader(
-        #open(weather_station_data_filepath))
     pathHere = os.path.abspath(os.path.dirname(__file__))
     weather_station_reader =  csv.DictReader(open(os.path.join(pathHere, 'static', 'app', 'station.csv')))
     weather_station_dict = []
     for row in weather_station_reader:
         weather_station_dict.append(row)
-    print(weather_station_dict)
 
     if(request.method == "POST"):
-        print("This has been hit")
-        print(request.POST)
         form = CreateInitFileForm()
         sDate = request.POST['start_date_timepicker']
         sDateMonth,sDateDay,sDateYear = sDate.split('/')
