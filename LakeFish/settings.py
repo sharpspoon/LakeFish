@@ -85,28 +85,28 @@ WSGI_APPLICATION = 'LakeFish.wsgi.application'
 #    }
 # }
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'lakefish',
-#        'USER': 'lakefishsa',
-#        'PASSWORD': 'TJKDUPVINBDOABBS',
-#        # Or an IP Address that your DB is hosted on
-#        'HOST': 'lakefish.steelcitysites.net',
-#        'PORT': '',
-#    }
-#}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lakefish',
-        'USER': 'lakefish',
-        'PASSWORD': 'TjbKBmEwEBWT',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'USER': 'lakefishsa',
+        'PASSWORD': 'TJKDUPVINBDOABBS',
+        # Or an IP Address that your DB is hosted on
+        'HOST': 'lakefish.steelcitysites.net',
+        'PORT': '',
     }
- }
+}
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'lakefish',
+#        'USER': 'lakefish',
+#        'PASSWORD': 'TjbKBmEwEBWT',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#    }
+# }
 
 
 # Password validation

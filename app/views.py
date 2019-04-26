@@ -88,7 +88,7 @@ def signup(request):
             auth_login(request, user)
 
             try:
-                os.makedirs("user-nldas-"+username)
+                os.makedirs("//var//project//user-nldas-"+username)
             except FileExistsError:
                 pass
 
