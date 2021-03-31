@@ -37,7 +37,7 @@ docopt==0.6.2
 future==0.17.1
 HTMLParser==0.0.2
 jinja2-time==0.2.0
-lxml==4.3.3
+lxml==4.6.3
 pager==3.3
 poyo==0.4.2
 pupygrib==0.3.0
