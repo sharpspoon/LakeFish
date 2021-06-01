@@ -24,7 +24,7 @@ requests==2.21.0
 safepickle==0.2.0
 setuptools==40.8.0
 six==1.12.0
-urllib3==1.24.1
+urllib3==1.26.5
 virtualenv==12.1.1
 Werkzeug==0.14.1
 arrow==0.13.1
