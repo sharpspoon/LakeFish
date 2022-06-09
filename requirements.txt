@@ -31,7 +31,7 @@ arrow==0.13.1
 beautifulsoup4==4.7.1
 binaryornot==0.4.4
 convert==0.1.2
-cookiecutter==1.6.0
+cookiecutter==2.1.1
 cookiejar==0.0.2
 docopt==0.6.2
 future==0.17.1
